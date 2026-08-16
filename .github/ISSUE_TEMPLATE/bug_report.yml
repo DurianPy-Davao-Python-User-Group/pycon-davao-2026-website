@@ -1,0 +1,57 @@
+name: Bug Report
+description: Report UI glitches, responsive issues, or broken integrations.
+title: "[BUG]: <Short description>"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "## 🐛 Bug Report\n\nHelp us understand and reproduce the issue you've encountered."
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we trigger or see this bug?
+      placeholder: "1. Go to '...'\n2. Click on '...'\n3. Scroll down to '...'\n4. See error/issue"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should have happened instead?
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment / Browser
+      description: Where did you encounter this bug?
+      multiple: true
+      options:
+        - Google Chrome
+        - Mozilla Firefox
+        - Safari
+        - Edge
+        - iOS Safari (Mobile)
+        - Android Chrome (Mobile)
+  - type: checkboxes
+    id: device_size
+    attributes:
+      label: Affected Device Size
+      description: Does this bug happen on specific screen sizes?
+      options:
+        - label: Mobile (<768px)
+        - label: Tablet (768px - 1024px)
+        - label: Desktop (>1024px)
+  - type: textarea
+    id: visual_evidence
+    attributes:
+      label: Screenshots / Recordings
+      description: Drag and drop or paste screenshots/videos here. Visual evidence is highly recommended for UI bugs!
