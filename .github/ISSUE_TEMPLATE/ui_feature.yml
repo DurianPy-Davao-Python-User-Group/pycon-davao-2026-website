@@ -1,7 +1,7 @@
 name: UI Implementation Task
 description: Propose or assign a new UI component, page, or styling task based on design.
-title: "[UI]: <Short description>"
-labels: ["enhancement", "ui"]
+title: '[UI]: <Short description>'
+labels: ['enhancement', 'ui']
 body:
   - type: markdown
     attributes:
@@ -11,7 +11,7 @@ body:
     attributes:
       label: Figma / Design Link
       description: Link to the Figma file, specific frame, or other design reference.
-      placeholder: "https://www.figma.com/file/..."
+      placeholder: 'https://www.figma.com/file/...'
     validations:
       required: true
   - type: textarea
@@ -19,7 +19,7 @@ body:
     attributes:
       label: Description / Objective
       description: What component, page, or interaction is being built?
-      placeholder: "Implement the Event Hero Banner section on the homepage..."
+      placeholder: 'Implement the Event Hero Banner section on the homepage...'
     validations:
       required: true
   - type: checkboxes

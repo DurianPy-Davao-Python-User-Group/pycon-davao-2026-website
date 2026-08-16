@@ -1,7 +1,7 @@
 name: Bug Report
 description: Report UI glitches, responsive issues, or broken integrations.
-title: "[BUG]: <Short description>"
-labels: ["bug"]
+title: '[BUG]: <Short description>'
+labels: ['bug']
 body:
   - type: markdown
     attributes:

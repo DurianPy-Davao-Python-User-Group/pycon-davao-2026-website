@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -54,11 +54,11 @@
 }
 
 :root {
-  --pycon-beige: #FBEFCF;
-  --pycon-teal: #04B1A4;
-  --pycon-green: #5DA144;
-  --pycon-dark-blue: #072E47;
-  --pycon-orange: #F99508;
+  --pycon-beige: #fbefcf;
+  --pycon-teal: #04b1a4;
+  --pycon-green: #5da144;
+  --pycon-dark-blue: #072e47;
+  --pycon-orange: #f99508;
 
   --background: var(--pycon-beige);
   --foreground: var(--pycon-dark-blue);
@@ -67,13 +67,13 @@
   --popover: var(--pycon-beige);
   --popover-foreground: var(--pycon-dark-blue);
   --primary: var(--pycon-teal);
-  --primary-foreground: #FFFFFF;
+  --primary-foreground: #ffffff;
   --secondary: var(--pycon-orange);
-  --secondary-foreground: #FFFFFF;
+  --secondary-foreground: #ffffff;
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: var(--pycon-green);
-  --accent-foreground: #FFFFFF;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -87,7 +87,7 @@
   --sidebar: var(--pycon-beige);
   --sidebar-foreground: var(--pycon-dark-blue);
   --sidebar-primary: var(--pycon-teal);
-  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: var(--pycon-dark-blue);
   --sidebar-border: oklch(0.922 0 0);
