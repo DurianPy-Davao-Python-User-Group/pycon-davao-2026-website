@@ -1,0 +1,40 @@
+name: CMS Integration Task
+description: Fetch and wire up data from the headless CMS to frontend components.
+title: "[CMS]: <Short description>"
+labels: ["enhancement", "cms-integration"]
+body:
+  - type: markdown
+    attributes:
+      value: "## 🔌 CMS Data Integration\n\nOutline the requirements for wiring up the frontend UI to the Payload CMS data."
+  - type: input
+    id: target_component
+    attributes:
+      label: Target Component(s)
+      description: Which UI component(s) or page(s) will receive this data?
+      placeholder: "e.g., `app/(home)/components/EventCard.tsx`"
+    validations:
+      required: true
+  - type: input
+    id: cms_endpoint
+    attributes:
+      label: CMS Endpoint / Payload Schema
+      description: What API endpoint, GraphQL query, or Payload schema provides this data?
+      placeholder: "e.g., `/api/events` or `Events` collection"
+    validations:
+      required: true
+  - type: textarea
+    id: data_mapping
+    attributes:
+      label: Data Mapping Requirements
+      description: List specific fields that need to be fetched and mapped to the UI.
+      placeholder: "- Fetch `title`, `date`, `coverImage`\n- Map `coverImage.url` to the next/image `src`"
+    validations:
+      required: true
+  - type: textarea
+    id: fallback_states
+    attributes:
+      label: Fallback / Error States
+      description: What should happen if the data is missing, null, or fetching fails?
+      placeholder: "If `coverImage` is null, use the default placeholder image."
+    validations:
+      required: true

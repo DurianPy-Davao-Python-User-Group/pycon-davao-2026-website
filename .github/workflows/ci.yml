@@ -1,0 +1,56 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+      - release/production
+
+permissions:
+  id-token: write
+  contents: read
+  security-events: write
+
+jobs:
+  validate:
+    name: Validation & Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      # - name: Load Mock Environment
+      #   run: cp .env.ci-build .env
+
+      - name: Install Project Dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Static Analysis (NPM Vulnerability Scan)
+        uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8 # v0.36.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+          # skip-files: '.env.ci-build,.env'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      - name: Lint Codebase
+        run: npm run lint
+
+      # - name: Execute Unit Tests
+      #   run: npm run test:unit
+
+      - name: Run Mock Build
+        run: npm run build

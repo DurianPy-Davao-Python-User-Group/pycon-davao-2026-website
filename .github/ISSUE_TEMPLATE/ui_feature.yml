@@ -1,0 +1,41 @@
+name: UI Implementation Task
+description: Propose or assign a new UI component, page, or styling task based on design.
+title: "[UI]: <Short description>"
+labels: ["enhancement", "ui"]
+body:
+  - type: markdown
+    attributes:
+      value: "## 🎨 UI Implementation Task\n\nProvide the necessary context and design links to implement this UI feature."
+  - type: input
+    id: design_link
+    attributes:
+      label: Figma / Design Link
+      description: Link to the Figma file, specific frame, or other design reference.
+      placeholder: "https://www.figma.com/file/..."
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description / Objective
+      description: What component, page, or interaction is being built?
+      placeholder: "Implement the Event Hero Banner section on the homepage..."
+    validations:
+      required: true
+  - type: checkboxes
+    id: responsive
+    attributes:
+      label: Responsive Design Requirements
+      description: Which screen sizes need specific attention for this implementation?
+      options:
+        - label: Mobile (Small screens, <768px)
+        - label: Tablet (Medium screens, >=768px)
+        - label: Desktop (Large screens, >=1024px)
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: List specific requirements, animations, hover states, or interactions expected.
+      placeholder: "- [ ] Button should have a hover state\n- [ ] Image should scale smoothly on resize"
+    validations:
+      required: true
