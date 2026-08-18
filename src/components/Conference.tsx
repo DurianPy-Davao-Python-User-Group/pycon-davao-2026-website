@@ -90,7 +90,7 @@ export default function Conference() {
         unoptimized
         width={0}
         height={0}
-        className="pointer-events-none absolute bottom-0 left-0 z-30 h-auto w-[220px] sm:w-[300px] md:w-[360px]"
+        className="pointer-events-none absolute bottom-0 left-0 z-30 h-auto w-[220px] sm:w-[300px] md:w-[520px]"
       />
 
       <Image
@@ -101,7 +101,7 @@ export default function Conference() {
         unoptimized
         width={0}
         height={0}
-        className="pointer-events-none absolute right-0 bottom-0 z-30 h-auto w-[200px] sm:w-[270px] md:w-[330px]"
+        className="pointer-events-none absolute right-0 bottom-0 z-30 h-auto w-[220px] sm:w-[270px] md:w-[520px]"
       />
 
       <Image
