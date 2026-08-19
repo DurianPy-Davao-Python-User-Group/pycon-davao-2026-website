@@ -38,8 +38,8 @@ const days: Day[] = [
 
 function DayCard({ day }: { day: Day }) {
   return (
-    <article className="border-secondary bg-card h-[400px] w-full max-w-[805px] rounded-[45px] border-[4px] p-6 md:h-auto md:min-h-[400px] md:max-w-none md:flex-1">
-      <p className="text-primary text-xs font-bold tracking-wide uppercase">{day.label}</p>
+    <article className="border-secondary bg-card h-auto min-h-[400px] w-full max-w-[805px] rounded-[45px] border-[3.5px] p-6 md:max-w-none md:flex-1">
+      <p className="font-heading text-primary text-xs font-bold tracking-wide">{day.label}</p>
       <h3 className="font-heading text-secondary mt-1 text-2xl font-bold">{day.title}</h3>
       <p className="text-foreground mt-1 list-disc text-sm italic">{day.date}</p>
       <ul className="text-foreground mt-4 list-disc space-y-1.5 pl-5 text-sm">
@@ -53,7 +53,7 @@ function DayCard({ day }: { day: Day }) {
 
 export default function Conference() {
   return (
-    <section className="relative flex min-h-[100dvh] w-full flex-col justify-between overflow-hidden px-6">
+    <section className="relative flex min-h-[100dvh] w-full flex-col justify-between overflow-hidden">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center overflow-hidden"
@@ -112,7 +112,6 @@ export default function Conference() {
         unoptimized
         className="pointer-events-none absolute bottom-0 left-0 z-40 h-auto w-full"
       />
-
       <div className="relative z-20 mx-auto my-auto flex w-full max-w-[807.6px] flex-col gap-6 px-4 md:flex-row md:items-stretch md:gap-4">
         {days.map((day) => (
           <DayCard key={day.label} day={day} />
