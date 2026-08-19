@@ -10,7 +10,6 @@
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sora);
-  --font-nav: var(--font-nunito-sans);
   --color-pycon-header-text: var(--pycon-header-text);
   --color-pycon-header-hover: var(--pycon-header-hover);
   --color-pycon-beige: var(--pycon-beige);
@@ -61,8 +60,8 @@
 }
 
 :root {
-  --pycon-header-text: #312541;
-  --pycon-header-hover: #d53c45;
+  --pycon-header-text: var(--pycon-dark-blue);
+  --pycon-header-hover: var(--pycon-teal);
   --pycon-beige: #fbefcf;
   --pycon-beige-light: #fff9f2;
   --pycon-beige-card: #fbeecf;
