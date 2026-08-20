@@ -11,7 +11,7 @@ import headerLogo from '@/assets/header/header-pycon-logo.svg';
 
 const PRIMARY_NAV_OPTIONS: NavOption[] = [
   { label: 'Home', href: '/' },
-  { label: 'Code of Conduct', href: '/code-of-conduct' },
+  { label: 'Code of Conduct', href: '/code-of-conduct' }
 ];
 
 const SPONSORSHIP_OPTIONS: SponsorshipOption[] = [
@@ -71,7 +71,7 @@ export default function Header() {
   }, []);
 
   const desktopOptionClass =
-    'focus-visible:outline-pycon-header-hover rounded-md text-center text-base leading-none whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-4 lg:text-lg xl:text-[22px] 2xl:text-[24px]';
+    'focus-visible:outline-pycon-header-hover rounded-md text-center text-sm leading-none whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-4 lg:text-base xl:text-lg 2xl:text-xl';
 
   return (
     <header
