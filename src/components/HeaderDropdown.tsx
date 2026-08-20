@@ -50,7 +50,7 @@ export default function HeaderDropdown({ label, options, className }: HeaderDrop
         aria-expanded={isOpen}
         aria-haspopup="true"
         className={cn(
-          'group focus-visible:outline-pycon-header-hover flex cursor-pointer items-center gap-1.5 rounded-md text-center font-sans text-base leading-none font-bold whitespace-nowrap transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 lg:text-lg xl:text-[22px] 2xl:text-[24px]',
+          'group focus-visible:outline-pycon-header-hover font-nav flex cursor-pointer items-center gap-1.5 rounded-md text-center text-sm leading-none font-bold whitespace-nowrap transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 lg:text-base xl:text-lg 2xl:text-xl',
           isOpen
             ? 'text-pycon-header-hover'
             : 'text-pycon-header-text hover:text-pycon-header-hover',
@@ -59,7 +59,7 @@ export default function HeaderDropdown({ label, options, className }: HeaderDrop
         <span>{label}</span>
         <ChevronDown
           className={cn(
-            'size-5 transition-transform duration-200 xl:size-6',
+            'size-4.5 transition-transform duration-200 xl:size-5',
             isOpen
               ? 'text-pycon-header-hover rotate-180'
               : 'text-pycon-header-text group-hover:text-pycon-header-hover',
@@ -71,7 +71,7 @@ export default function HeaderDropdown({ label, options, className }: HeaderDrop
       {/* Dropdown Panel */}
       {isOpen && (
         <div className="absolute top-full left-1/2 z-50 -translate-x-1/2 pt-2">
-          <div className="bg-pycon-beige border-pycon-header-text/15 animate-in fade-in slide-in-from-top-2 w-[260px] rounded-2xl border p-2 shadow-[0_12px_32px_0_rgba(7,46,71,0.12)] duration-150">
+          <div className="bg-pycon-beige border-pycon-header-text/15 animate-in fade-in slide-in-from-top-2 w-[240px] rounded-2xl border p-2 shadow-[0_12px_32px_0_rgba(7,46,71,0.12)] duration-150">
             <div className="flex flex-col gap-1">
               {options.map((option) => (
                 <a
@@ -79,7 +79,7 @@ export default function HeaderDropdown({ label, options, className }: HeaderDrop
                   href={option.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group/item text-pycon-header-text hover:text-pycon-header-hover flex items-center justify-between rounded-xl px-4 py-3 font-sans text-base font-bold transition-colors duration-150 xl:text-lg"
+                  className="group/item text-pycon-header-text hover:text-pycon-header-hover font-nav flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-bold transition-colors duration-150 xl:text-base"
                 >
                   <span>{option.label}</span>
                   <ExternalLink

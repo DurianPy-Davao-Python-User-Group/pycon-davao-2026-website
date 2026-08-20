@@ -51,7 +51,7 @@ export default function MobileMenu({
                 label={option.label}
                 isExternal={option.isExternal}
                 onClick={onClose}
-                className="py-2 text-xl"
+                className="py-2 text-lg"
                 activeClassName={cn(option.href !== '/' && 'text-pycon-header-hover')}
               />
             ))}
@@ -71,7 +71,7 @@ export default function MobileMenu({
                 label={option.label}
                 isExternal={option.isExternal}
                 onClick={onClose}
-                className="py-2 text-xl"
+                className="py-2 text-lg"
               />
             ))}
           </nav>
@@ -96,7 +96,7 @@ function MobileDropdownAccordion({ label, options, onClose }: MobileDropdownAcco
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         className={cn(
-          'flex w-full items-center justify-center gap-2 py-2 font-sans text-xl font-bold transition-colors duration-200',
+          'font-nav flex w-full items-center justify-center gap-2 py-2 text-lg font-bold transition-colors duration-200',
           isOpen
             ? 'text-pycon-header-hover'
             : 'text-pycon-header-text hover:text-pycon-header-hover',
@@ -130,7 +130,7 @@ function MobileDropdownAccordion({ label, options, onClose }: MobileDropdownAcco
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={onClose}
-                className="text-pycon-header-text hover:text-pycon-header-hover flex items-center justify-center gap-1.5 py-2 font-sans text-lg font-bold transition-colors duration-200"
+                className="text-pycon-header-text hover:text-pycon-header-hover font-nav flex items-center justify-center gap-1.5 py-1.5 text-base font-bold transition-colors duration-200"
               >
                 <span>{option.label}</span>
                 <ExternalLink className="size-3.5 opacity-60" aria-hidden="true" />

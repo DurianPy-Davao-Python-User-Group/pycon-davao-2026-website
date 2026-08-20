@@ -29,7 +29,7 @@ export default function HeaderOption({
   const isActive = !autoExternal && pathname === href;
 
   const combinedClasses = cn(
-    'text-pycon-header-text hover:text-pycon-header-hover font-sans font-bold transition-colors duration-200',
+    'text-pycon-header-text hover:text-pycon-header-hover font-nav font-bold transition-colors duration-200',
     className,
     isActive && activeClassName,
   );
