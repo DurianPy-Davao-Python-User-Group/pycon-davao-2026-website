@@ -7,9 +7,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-  --font-heading: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: var(--font-sora);
+  --font-nav: var(--font-sora);
+  --color-pycon-header-text: var(--pycon-header-text);
+  --color-pycon-header-hover: var(--pycon-header-hover);
   --color-pycon-beige: var(--pycon-beige);
   --color-pycon-beige-light: var(--pycon-beige-light);
   --color-pycon-beige-card: var(--pycon-beige-card);
@@ -58,9 +61,8 @@
 }
 
 :root {
-  --font-inter: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  --font-sora: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-
+  --pycon-header-text: var(--pycon-dark-blue);
+  --pycon-header-hover: var(--pycon-teal);
   --pycon-beige: #fbefcf;
   --pycon-beige-light: #fff9f2;
   --pycon-beige-card: #fbeecf;
