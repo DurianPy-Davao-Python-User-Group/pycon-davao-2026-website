@@ -2,6 +2,8 @@ import Image from 'next/image';
 import ctaBg from '@/assets/cta/mobile-bridge-bg.svg';
 import ctaBridgePattern from '@/assets/cta/cta-bridge-pattern.svg';
 import ctaCard from '@/assets/cta/cta-image.jpg';
+import tailLeft from '@/assets/cta/tail-left.svg';
+import tailRight from '@/assets/cta/tail-right.svg';
 import { Button } from '@/components/ui/button';
 
 export default function CallToAction() {
@@ -54,6 +56,29 @@ export default function CallToAction() {
           </Button>
         </div>
       </div>
+
+      {/* Decorative Tails */}
+      <Image
+        src={tailLeft}
+        alt=""
+        priority
+        unoptimized
+        width={371}
+        height={741}
+        sizes="(max-width: 768px) 37vw, (max-width: 1024px) 25vw, 18vw"
+        className="pointer-events-none absolute -left-1 bottom-58 z-40 w-[37vw] sm:bottom-55 sm:w-[30vw] md:bottom-68 md:w-[28vw] lg:bottom-70 lg:w-[30vw] xl:bottom-47 xl:w-[28vw]"
+      />
+
+      <Image
+        src={tailRight}
+        alt=""
+        priority
+        unoptimized
+        width={311}
+        height={411}
+        sizes="(max-width: 768px) 30vw, (max-width: 1024px) 22vw, 15vw"
+        className="pointer-events-none absolute -right-1 bottom-0 z-40 h-auto w-[30vw] sm:w-[25vw] md:w-[20vw] lg:-bottom-10 lg:w-[28vw] xl:-bottom-20 xl:w-[25vw]"
+      />
     </section>
   );
 }
