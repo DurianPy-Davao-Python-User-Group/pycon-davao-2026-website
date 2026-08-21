@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c60393abf11c3ab816e5963d92547e07efa3db01
 import Image from "next/image";
 import bridgePattern from "@/assets/code-of-conduct/Bridge_Pattern.svg"
 import tail from '@/assets/code-of-conduct/Tail.svg'
@@ -67,6 +70,7 @@ export default function Home() {
         </div>
       </main>
     </>
+<<<<<<< HEAD
 =======
 =======
 import Image from "next/image";
@@ -147,5 +151,7 @@ export default function Home() {
       </main>
     </>
 >>>>>>> 321fef9 (feat: implement code of conduct page with supporting visual assets)
+=======
+>>>>>>> c60393abf11c3ab816e5963d92547e07efa3db01
   );
 }
