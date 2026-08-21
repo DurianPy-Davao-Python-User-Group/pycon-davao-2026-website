@@ -51,7 +51,7 @@ export default function CallToAction() {
           <p className="text-foreground w-auto text-center text-sm sm:text-base md:text-lg lg:text-xl">
             Secure your badge and be part of Mindanao&apos;s biggest open-source celebration.
           </p>
-          <Button className="w-[200px] md:w-[300px] px-6 py-2.5 text-sm sm:px-8 sm:py-3 sm:text-base md:px-10 md:py-3.5 md:text-lg lg:text-xl font-bold rounded-full">
+          <Button className="cursor-pointer w-[200px] md:w-[300px] px-6 py-2.5 text-sm sm:px-8 sm:py-3 sm:text-base md:px-10 md:py-3.5 md:text-lg lg:text-xl font-bold rounded-full">
             Get Tickets
           </Button>
         </div>
