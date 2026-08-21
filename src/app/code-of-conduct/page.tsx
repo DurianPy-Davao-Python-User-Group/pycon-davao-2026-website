@@ -1,10 +1,21 @@
-import { Button } from '@/components/ui/button';
+import Image from "next/image";
+import bridgePattern from "@/assets/code-of-conduct/Bridge_Pattern.svg"
+import tail from '@/assets/code-of-conduct/Tail.svg'
 
 export default function Home() {
   return (
     <>
-      <main className="bg-background min-h-[100dvh] ">
-        <div className="mx-auto w-full max-w-7xl flex flex-col gap-6 p-6 sm:p-10 md:p-14 lg:p-20">
+      <main className="bg-background relative flex min-h-[100dvh] flex-col justify-between overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
+          <Image
+            src={bridgePattern}
+            alt=""
+            fill
+            className="object-cover object-center opacity-95"
+            priority
+          />
+        </div>
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col gap-6 p-6 sm:p-10 md:p-14 lg:p-20">
           <div className="font-heading leading-none">
             <h1 className="text-pycon-orange text-5xl font-extrabold tracking-tight sm:text-7xl md:text-8xl lg:text-9xl">
               CODE OF
@@ -42,7 +53,15 @@ export default function Home() {
             </p>
           </div>
         </div>
+        <div className="pointer-events-none z-10 flex w-full justify-end select-none">
+          <div className="w-48 sm:w-64 md:w-80 lg:w-[420px] xl:w-[500px]">
+            <Image
+              src={tail}
+              alt=""
+              className="h-auto w-full object-contain"
+              priority
+            />
+          </div>
+        </div>
       </main>
     </>
-  );
-}
