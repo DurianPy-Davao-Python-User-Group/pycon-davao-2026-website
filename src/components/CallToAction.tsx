@@ -1,10 +1,34 @@
 import Image from 'next/image';
+import ctaBg from '@/assets/cta/mobile-bridge-bg.svg';
+import ctaBridgePattern from '@/assets/cta/cta-bridge-pattern.svg';
 import ctaCard from '@/assets/cta/cta-image.jpg';
 import { Button } from '@/components/ui/button';
 
 export default function CallToAction() {
   return (
     <section className="to-pycon-teal relative flex h-auto min-h-[65dvh] w-full flex-col overflow-hidden bg-gradient-to-b from-transparent p-6 sm:p-10 md:min-h-[70dvh] md:p-14 lg:min-h-[80dvh] xl:min-h-[105dvh] lg:p-20">
+      {/* Mobile background */}
+      <Image
+        src={ctaBg}
+        alt=""
+        priority
+        unoptimized
+        fill
+        sizes="(max-width: 768px) 100vw, 768px"
+        className="object-cover md:hidden"
+      />
+
+      {/* Tablet and Desktop background pattern */}
+      <Image
+        src={ctaBridgePattern}
+        alt=""
+        priority
+        unoptimized
+        fill
+        sizes="100vw"
+        className="hidden object-cover md:block"
+      />
+
       {/* CTA Card Container */}
       <div className="relative mx-auto mt-auto flex h-full min-h-[300px] w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[36px] shadow-[0px_4px_39.3px_0px_#00000040] sm:min-h-[350px] sm:max-w-[520px] sm:rounded-[44px] md:min-h-[400px] md:max-w-[680px] md:rounded-[52px] lg:min-h-[460px] lg:max-w-[820px] lg:rounded-[59px] xl:max-w-[1200px]">
         <Image
