@@ -32,7 +32,7 @@ export default function CallToAction() {
       />
 
       {/* CTA Card Container */}
-      <div className="relative mx-auto mt-auto flex h-full min-h-[300px] w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[36px] shadow-[0px_4px_39.3px_0px_#00000040] sm:min-h-[350px] sm:max-w-[520px] sm:rounded-[44px] md:min-h-[400px] md:max-w-[680px] md:rounded-[52px] lg:min-h-[460px] lg:max-w-[820px] lg:rounded-[59px] xl:max-w-[1200px]">
+      <div className="relative mx-auto mt-auto flex h-full min-h-[300px] w-full max-w-[400px] items-center justify-center overflow-hidden rounded-[36px] shadow-[0px_4px_39.3px_0px_#00000040] md:min-h-[400px] md:max-w-[680px] md:rounded-[52px] lg:min-h-[460px] lg:max-w-[820px] lg:rounded-[59px] xl:max-w-[1200px]">
         <Image
           src={ctaCard}
           alt=""
@@ -65,7 +65,6 @@ export default function CallToAction() {
         unoptimized
         width={371}
         height={741}
-        sizes="(max-width: 768px) 37vw, (max-width: 1024px) 25vw, 18vw"
         className="pointer-events-none absolute -left-1 bottom-58 z-40 w-[37vw] sm:bottom-55 sm:w-[30vw] md:bottom-68 md:w-[28vw] lg:bottom-70 lg:w-[30vw] xl:bottom-47 xl:w-[28vw]"
       />
 
@@ -76,7 +75,6 @@ export default function CallToAction() {
         unoptimized
         width={311}
         height={411}
-        sizes="(max-width: 768px) 30vw, (max-width: 1024px) 22vw, 15vw"
         className="pointer-events-none absolute -right-1 bottom-0 z-40 h-auto w-[30vw] sm:w-[25vw] md:w-[20vw] lg:-bottom-10 lg:w-[28vw] xl:-bottom-20 xl:w-[25vw]"
       />
     </section>
