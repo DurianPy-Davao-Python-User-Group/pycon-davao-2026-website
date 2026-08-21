@@ -3,6 +3,7 @@ import Conference from '@/components/Conference';
 import HomeFaqSection from '@/components/sections/home-faq-section';
 import { HomeFaqSectionData } from '@/data/home-faq-section-data';
 import PyCon2025Highlights from '@/components/PyCon2025Highlights';
+import CallToAction from '@/components/CallToAction';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Conference />
       <PyCon2025Highlights />
       <HomeFaqSection data={HomeFaqSectionData} />
+      <CallToAction />
     </>
   );
 }
