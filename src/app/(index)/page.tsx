@@ -8,7 +8,6 @@ export default function Home() {
       <Hero />
       <Conference />
       <PyCon2025Highlights />
-
     </>
   );
 }

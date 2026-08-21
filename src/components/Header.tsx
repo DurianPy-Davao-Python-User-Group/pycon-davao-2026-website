@@ -11,7 +11,7 @@ import headerLogo from '@/assets/header/header-pycon-logo.svg';
 
 const PRIMARY_NAV_OPTIONS: NavOption[] = [
   { label: 'Home', href: '/' },
-  { label: 'Code of Conduct', href: '/code-of-conduct' }
+  { label: 'Code of Conduct', href: '/code-of-conduct' },
 ];
 
 const SPONSORSHIP_OPTIONS: SponsorshipOption[] = [

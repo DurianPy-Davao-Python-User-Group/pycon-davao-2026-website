@@ -84,21 +84,14 @@ export default function PyCon2025Highlights() {
   const dragStartX = useRef<number | null>(null);
 
   const cycleIndex = (offset: number) => {
-    setActiveIndex(
-      (current) =>
-        (current + offset + highlights.length) % highlights.length,
-    );
+    setActiveIndex((current) => (current + offset + highlights.length) % highlights.length);
   };
 
-  const handlePointerDown = (
-    event: React.PointerEvent<HTMLDivElement>,
-  ) => {
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     dragStartX.current = event.clientX;
   };
 
-  const handlePointerUp = (
-    event: React.PointerEvent<HTMLDivElement>,
-  ) => {
+  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
     if (dragStartX.current === null) return;
 
     const deltaX = event.clientX - dragStartX.current;
@@ -193,9 +186,7 @@ export default function PyCon2025Highlights() {
                   aria-hidden={index !== activeIndex}
                   className={[
                     'absolute inset-0',
-                    index === activeIndex
-                      ? 'opacity-100'
-                      : 'pointer-events-none opacity-0',
+                    index === activeIndex ? 'opacity-100' : 'pointer-events-none opacity-0',
                   ].join(' ')}
                 >
                   <Image
@@ -241,9 +232,7 @@ export default function PyCon2025Highlights() {
                   aria-hidden={index !== activeIndex}
                   className={[
                     'absolute inset-0',
-                    index === activeIndex
-                      ? 'opacity-100'
-                      : 'pointer-events-none opacity-0',
+                    index === activeIndex ? 'opacity-100' : 'pointer-events-none opacity-0',
                   ].join(' ')}
                 >
                   <Image
@@ -318,33 +307,31 @@ export default function PyCon2025Highlights() {
 
             <div className="mt-[12px] font-sans text-[14px] leading-[1.16] font-normal tracking-[-0.045em] sm:text-[16px] md:text-[20px] lg:mt-[15px] lg:text-[25px] lg:leading-[1.12]">
               <p>
-                PyCon Davao 2025, themed Panaghiusa (&quot;unity&quot; or
-                &quot;coming together&quot;), was the first full-scale Python
-                conference in the Davao Region. Over two days the community:
+                PyCon Davao 2025, themed Panaghiusa (&quot;unity&quot; or &quot;coming
+                together&quot;), was the first full-scale Python conference in the Davao Region.
+                Over two days the community:
               </p>
 
               <ul className="mt-[18px] list-disc space-y-[3px] pl-[22px] sm:pl-[26px] md:pl-[30px] lg:mt-[24px] lg:pl-[34px]">
                 <li>
-                  Ran an in-person conference with 16 national and international
-                  speakers across keynotes, web development, AI and data
-                  science, Python internals, open source, and community-building
-                  tracks.
+                  Ran an in-person conference with 16 national and international speakers across
+                  keynotes, web development, AI and data science, Python internals, open source, and
+                  community-building tracks.
                 </li>
 
                 <li>
-                  Capped the weekend with a dedicated Sprint Day contributing to
-                  open-source projects such as Air and pandas.
+                  Capped the weekend with a dedicated Sprint Day contributing to open-source
+                  projects such as Air and pandas.
                 </li>
 
                 <li>
-                  Celebrated community-driven innovation, knowledge sharing, and
-                  collaboration across Mindanao and beyond.
+                  Celebrated community-driven innovation, knowledge sharing, and collaboration
+                  across Mindanao and beyond.
                 </li>
               </ul>
 
               <p className="mt-[18px] font-bold tracking-[-0.055em] md:mt-[22px] lg:mt-[26px]">
-                That milestone set the stage for an even more ambitious PyCon
-                Davao 2026.
+                That milestone set the stage for an even more ambitious PyCon Davao 2026.
               </p>
             </div>
           </div>
@@ -371,8 +358,7 @@ export default function PyCon2025Highlights() {
           </div>
 
           <p className="mx-auto mt-[34px] w-[72%] max-w-[760px] text-center font-sans text-[13px] leading-[1.3] font-normal tracking-[-0.035em] text-[#072E47] italic sm:text-[15px] md:mt-[40px] md:text-[17px] lg:mt-[46px] lg:text-[20px]">
-            Numbers updated as we get closer. Lock in your seat before we hit
-            capacity.
+            Numbers updated as we get closer. Lock in your seat before we hit capacity.
           </p>
         </div>
 
