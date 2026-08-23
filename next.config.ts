@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
   images: { unoptimized: true },
+  experimental: {
+    optimizePackageImports: ['react-icons'],
+  },
 };
 
 export default nextConfig;
