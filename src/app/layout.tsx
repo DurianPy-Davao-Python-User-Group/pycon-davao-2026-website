@@ -16,9 +16,10 @@ const sora = Sora({
   display: 'swap',
 });
 
-const title = "PyCon Davao 2026"
-const ogTitle = "PyCon Davao 2026: PAGLANTAW – Envisioning the Future Through Python"
-const description = "Join Mindanao's Python community at PyCon Davao 2026! Embrace the theme 'PAGLANTAW' — look ahead, exchange ideas, and shape the future with Python."
+const title = 'PyCon Davao 2026';
+const ogTitle = 'PyCon Davao 2026: PAGLANTAW – Envisioning the Future Through Python';
+const description =
+  "Join Mindanao's Python community at PyCon Davao 2026! Embrace the theme 'PAGLANTAW' — look ahead, exchange ideas, and shape the future with Python.";
 
 export const metadata: Metadata = {
   title: { default: title, template: `%s | ${title}` },

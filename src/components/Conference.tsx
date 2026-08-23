@@ -63,7 +63,7 @@ function DayCard({ day }: { day: Day }) {
 
 export default function Conference() {
   return (
-    <section className="relative flex min-h-[100dvh] w-full flex-col overflow-hidden bg-pycon-beige p-4">
+    <section className="bg-pycon-beige relative flex min-h-[100dvh] w-full flex-col overflow-hidden p-4">
       <div aria-hidden className="pointer-events-none absolute inset-0 z-10">
         <Image
           src={mobileBg}
@@ -89,7 +89,7 @@ export default function Conference() {
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 z-20 h-[32%]"
-style={{
+        style={{
           background:
             'linear-gradient(180deg, var(--pycon-beige) 0%, rgba(251,239,207,0.9) 35%, rgba(251,239,207,0) 100%)',
         }}
@@ -117,7 +117,7 @@ style={{
         unoptimized
         width={613}
         height={427}
-        className="pointer-events-none absolute right-[42vw] bottom-0 z-40 h-auto w-[61vw] sm:right-[55vw] sm:w-[47vw] md:right-[42vw] md:w-[68vw] lg:right-[55vw] lg:w-[45vw] xl:right-[64vw] xl:w-[36vw] "
+        className="pointer-events-none absolute right-[42vw] bottom-0 z-40 h-auto w-[61vw] sm:right-[55vw] sm:w-[47vw] md:right-[42vw] md:w-[68vw] lg:right-[55vw] lg:w-[45vw] xl:right-[64vw] xl:w-[36vw]"
       />
 
       {/* Right mountain */}
@@ -131,7 +131,6 @@ style={{
         height={515}
         className="pointer-events-none absolute bottom-0 left-[48vw] z-40 h-auto w-[93vw] md:left-[42vw] md:w-[221vw] lg:left-[44vw] lg:w-[60vw] xl:left-[54vw] xl:w-[46vw]"
       />
-
 
       {/* Foreground mountain gradient */}
       <div
