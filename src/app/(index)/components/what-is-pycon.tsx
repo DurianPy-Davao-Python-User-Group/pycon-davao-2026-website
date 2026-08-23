@@ -42,7 +42,7 @@ export default function WhatIsPyCon() {
 
       <div className="relative z-10 mx-auto w-full max-w-5xl">
         <div className="max-w-4xl">
-          <p className="font-heading text-pycon-teal font-bold tracking-tight text-md sm:text-lg md:text-xl">
+          <p className="font-heading text-pycon-teal text-md font-bold tracking-tight sm:text-lg md:text-xl">
             {content.intro.eyebrow}
           </p>
           <h2
@@ -57,7 +57,7 @@ export default function WhatIsPyCon() {
         </div>
 
         <div className="mt-8 max-w-4xl sm:mt-10 md:mt-12">
-          <p className="font-heading text-pycon-teal font-bold tracking-tight text-md sm:text-lg md:text-xl">
+          <p className="font-heading text-pycon-teal text-md font-bold tracking-tight sm:text-lg md:text-xl">
             {content.davao.eyebrow}
           </p>
           <h3 className="font-heading text-pycon-orange mt-2 max-w-3xl text-2xl leading-tight font-bold sm:text-3xl md:text-4xl">
