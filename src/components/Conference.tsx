@@ -63,7 +63,7 @@ function DayCard({ day }: { day: Day }) {
 
 export default function Conference() {
   return (
-    <section className="bg-pycon-beige relative flex min-h-[100dvh] w-full flex-col overflow-hidden p-4">
+    <section className="bg-pycon-beige relative flex min-h-[100dvh] w-full flex-col overflow-hidden px-4 py-12 sm:py-16 md:py-20">
       <div aria-hidden className="pointer-events-none absolute inset-0 z-10">
         <Image
           src={mobileBg}
@@ -95,8 +95,8 @@ export default function Conference() {
         }}
       />
 
-      <div className="relative mx-auto my-auto flex w-full max-w-[950px] flex-col items-center gap-6 px-4">
-        <h3 className="font-heading text-secondary relative z-30 hidden -translate-y-14 text-2xl font-bold lg:block lg:text-4xl">
+      <div className="relative mx-auto flex w-full max-w-[950px] flex-col items-center gap-6 px-4">
+        <h3 className="font-heading text-secondary relative z-30 text-center text-2xl font-bold lg:block lg:text-4xl">
           Conference at a Glance
         </h3>
 

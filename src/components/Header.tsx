@@ -76,7 +76,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="bg-pycon-beige sticky top-0 z-50 w-full rounded-b-[20px] shadow-[0_8px_30px_rgba(7,46,71,0.08),0_2px_8px_rgba(7,46,71,0.04)] transition-all duration-300"
+      className="bg-pycon-beige sticky top-0 z-60 w-full rounded-b-[20px] shadow-[0_8px_30px_rgba(7,46,71,0.08),0_2px_8px_rgba(7,46,71,0.04)] transition-all duration-300"
     >
       <div className="flex h-[70px] w-full items-center justify-between px-6 sm:h-[82px] sm:px-10 md:h-[92px] lg:justify-start lg:gap-14 xl:gap-20 2xl:gap-24">
         {/* Logo */}
