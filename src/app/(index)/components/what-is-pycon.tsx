@@ -37,17 +37,17 @@ export default function WhatIsPyCon() {
         src={tealSnakeBody}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute -top-14 right-0 z-0 w-[220px] max-w-none translate-x-16 -rotate-12 sm:-top-20 sm:w-[300px] sm:translate-x-12 sm:-rotate-6 md:-top-28 md:w-[330px] md:translate-x-8 md:-rotate-3 lg:w-[350px] lg:translate-x-0 lg:rotate-0 xl:w-[400px]"
+        className="pointer-events-none absolute -top-14 right-0 z-0 w-[170px] max-w-none translate-x-12 -rotate-40 sm:-top-20 sm:w-[200px] sm:translate-x-12 sm:-rotate-6 md:-top-28 md:w-[220px] md:translate-x-8 md:-rotate-3 lg:w-[280px] lg:translate-x-0 lg:rotate-0 xl:w-[300px]"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl">
         <div className="max-w-4xl">
-          <p className="font-heading text-pycon-teal text-xs font-bold tracking-tight sm:text-sm">
+          <p className="font-heading text-pycon-teal font-bold tracking-tight text-md sm:text-lg md:text-xl">
             {content.intro.eyebrow}
           </p>
           <h2
             id="what-is-pycon-heading"
-            className="font-heading text-pycon-orange mt-2 max-w-3xl text-2xl leading-tight font-bold sm:text-xl md:text-4xl"
+            className="font-heading text-pycon-orange mt-2 max-w-3xl text-2xl leading-tight font-bold sm:text-3xl md:text-4xl"
           >
             {content.intro.title}
           </h2>
@@ -57,7 +57,7 @@ export default function WhatIsPyCon() {
         </div>
 
         <div className="mt-8 max-w-4xl sm:mt-10 md:mt-12">
-          <p className="font-heading text-pycon-teal text-xs font-bold tracking-tight sm:text-sm">
+          <p className="font-heading text-pycon-teal font-bold tracking-tight text-md sm:text-lg md:text-xl">
             {content.davao.eyebrow}
           </p>
           <h3 className="font-heading text-pycon-orange mt-2 max-w-3xl text-2xl leading-tight font-bold sm:text-3xl md:text-4xl">
@@ -84,7 +84,7 @@ export default function WhatIsPyCon() {
           ))}
         </ul>
       </div>
-      <p className="font-heading text-pycon-teal mx-auto mt-8 max-w-5xl text-center text-sm leading-snug font-bold sm:mt-10 sm:text-base md:mt-12 md:text-lg">
+      <p className="font-heading text-pycon-teal mx-auto mt-8 max-w-5xl text-center text-sm leading-snug font-bold sm:mt-10 sm:text-base md:mt-12 md:text-xl">
         {content.footer}
       </p>
     </section>
