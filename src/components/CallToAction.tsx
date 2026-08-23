@@ -4,6 +4,7 @@ import ctaBridgePattern from '@/assets/cta/cta-bridge-pattern.svg';
 import ctaCard from '@/assets/cta/cta-image.jpg';
 import tailLeft from '@/assets/cta/left-tail.svg';
 import tailRight from '@/assets/cta/right-tail.svg';
+import mascot from '@/assets/cta/pycon-mascot.svg';
 import { Button } from '@/components/ui/button';
 
 export default function CallToAction() {
@@ -76,6 +77,17 @@ export default function CallToAction() {
         width={311}
         height={411}
         className="pointer-events-none absolute -right-22 -bottom-4 z-40 w-[48vw] drop-shadow-[0px_4px_39.3px_#00000040] md:w-[35vw] lg:-right-30 lg:-bottom-18 lg:w-[40vw] xl:-bottom-20 xl:w-[30vw]"
+      />
+
+      {/*Mascot Image*/}
+      <Image
+        src={mascot}
+        alt="PyCon Mascot"
+        priority
+        unoptimized
+        width={200}
+        height={200}
+        className="pointer-events-none absolute bottom-0 left-0 z-40 hidden lg:block lg:w-[30vw] xl:w-[22vw]"
       />
     </section>
   );
