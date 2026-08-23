@@ -1,10 +1,5 @@
 import Image from 'next/image';
-import {
-  FaFacebookF,
-  FaGithub,
-  FaInstagram,
-  FaLinkedinIn,
-} from 'react-icons/fa';
+import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 import footerFrame from '@/assets/hero/footer-frame.svg';
 import footerInfoPattern from '@/assets/hero/footer-info-pattern.svg';
@@ -60,8 +55,7 @@ export default function Footer() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={{
-            background:
-              'linear-gradient(to bottom, rgba(251,239,207,0) 34.62%, #FBEFCF 100%)',
+            background: 'linear-gradient(to bottom, rgba(251,239,207,0) 34.62%, #FBEFCF 100%)',
           }}
         />
 
@@ -78,14 +72,10 @@ export default function Footer() {
             </h2>
 
             <p className="mt-6 font-sans text-[14px] leading-[1.6] font-medium text-[#FDDEB2] sm:text-[15px] md:text-[17px] lg:mt-[28px] lg:text-[19px] lg:leading-[30px]">
-              If you believe someone is violating the Code of Conduct or if you
-              have any other concerns, please reach out to a member of the PyCon
-              Davao 2025 Code of Conduct workgroup immediately. You can contact
-              them via email at{' '}
-              <a
-                href="mailto:contact@durianpy.org"
-                className="transition-opacity hover:opacity-75"
-              >
+              If you believe someone is violating the Code of Conduct or if you have any other
+              concerns, please reach out to a member of the PyCon Davao 2025 Code of Conduct
+              workgroup immediately. You can contact them via email at{' '}
+              <a href="mailto:contact@durianpy.org" className="transition-opacity hover:opacity-75">
                 contact@durianpy.org
               </a>
               .
@@ -104,9 +94,8 @@ export default function Footer() {
             </h2>
 
             <p className="mt-6 font-sans text-[14px] leading-[1.6] font-medium text-[#FDDEB2] sm:text-[15px] md:text-[17px] lg:mt-[28px] lg:text-[19px] lg:leading-[30px]">
-              This Code of Conduct is adapted from the PyCon US 2015 Code of
-              Conduct and is licensed under a Creative Commons Attribution 3.0
-              Unported License.
+              This Code of Conduct is adapted from the PyCon US 2015 Code of Conduct and is licensed
+              under a Creative Commons Attribution 3.0 Unported License.
             </p>
           </article>
         </div>
@@ -153,10 +142,7 @@ export default function Footer() {
                   aria-label={label}
                   className="flex h-[34px] w-[34px] items-center justify-center rounded-full bg-[#372544] text-[#FBEFCF] transition-all duration-200 hover:-translate-y-0.5 hover:scale-105 hover:opacity-85 focus-visible:ring-2 focus-visible:ring-[#372544] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FBEFCF] focus-visible:outline-none sm:h-9 sm:w-9"
                 >
-                  <Icon
-                    aria-hidden="true"
-                    className="h-[16px] w-[16px] sm:h-[17px] sm:w-[17px]"
-                  />
+                  <Icon aria-hidden="true" className="h-[16px] w-[16px] sm:h-[17px] sm:w-[17px]" />
                 </a>
               ))}
             </div>
