@@ -10,7 +10,7 @@ export default function Home() {
       <Hero />
       <Conference />
       <PyCon2025Highlights />
-      <HomeFaqSection title="Frequently Asked Questions" data={HomeFaqSectionData} />
+      <HomeFaqSection data={HomeFaqSectionData} />
     </>
   );
 }
