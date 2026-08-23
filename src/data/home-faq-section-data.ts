@@ -4,12 +4,10 @@ export interface HomeFaqItem {
 }
 
 export interface HomeFaqSectionData {
-  title: string;
   data: HomeFaqItem[];
 }
 
 export const homeFaqSectionData: HomeFaqSectionData = {
-  title: 'Frequently Asked Questions',
   data: [
     {
       question: 'What is PyCon Davao 2026?',

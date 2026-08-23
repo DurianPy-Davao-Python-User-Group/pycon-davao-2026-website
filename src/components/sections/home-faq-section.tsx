@@ -7,16 +7,15 @@ import {
 import type { HomeFaqItem } from '@/data/home-faq-section-data';
 
 interface HomeFaqSectionProps {
-  title: string;
   data: HomeFaqItem[];
 }
 
-const HomeFaqSection = ({ title, data }: HomeFaqSectionProps) => {
+const HomeFaqSection = ({ data }: HomeFaqSectionProps) => {
   return (
     <section className="bg-pycon-beige px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <h2 className="font-heading text-pycon-orange mb-14 text-4xl font-bold sm:text-5xl">
-          {title}
+          Frequently Asked Questions
         </h2>
 
         <Accordion className="grid items-start gap-x-10 gap-y-3 md:grid-cols-2">
