@@ -8,7 +8,7 @@ import type { HomeFaqItem } from '@/data/home-faq-section-data';
 
 interface HomeFaqSectionProps {
   title: string;
-  data: Array<string | HomeFaqItem>;
+  data: HomeFaqItem[];
 }
 
 const HomeFaqSection = ({ title, data }: HomeFaqSectionProps) => {
