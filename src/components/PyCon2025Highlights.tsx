@@ -161,7 +161,7 @@ export default function PyCon2025Highlights() {
               type="button"
               aria-label="Previous 2025 highlight"
               onClick={() => cycleIndex(-1)}
-              className="absolute top-1/2 left-[2px] z-20 flex h-[121px] w-[58px] -translate-y-1/2 items-center justify-center border-0 bg-transparent p-0 outline-none"
+              className="cursor-pointer absolute top-1/2 left-[2px] z-20 flex h-[121px] w-[58px] -translate-y-1/2 items-center justify-center border-0 bg-transparent p-0 outline-none"
             >
               <ArrowGlyph direction="left" />
             </button>
@@ -205,7 +205,7 @@ export default function PyCon2025Highlights() {
               type="button"
               aria-label="Next 2025 highlight"
               onClick={() => cycleIndex(1)}
-              className="absolute top-1/2 right-[2px] z-20 flex h-[121px] w-[58px] -translate-y-1/2 items-center justify-center border-0 bg-transparent p-0 outline-none"
+              className="cursor-pointer absolute top-1/2 right-[2px] z-20 flex h-[121px] w-[58px] -translate-y-1/2 items-center justify-center border-0 bg-transparent p-0 outline-none"
             >
               <ArrowGlyph direction="right" />
             </button>
@@ -246,26 +246,26 @@ export default function PyCon2025Highlights() {
                 </div>
               ))}
             </div>
+          </div>
 
-            <div className="mt-[27px] flex items-center justify-center gap-[12px]">
-              {highlights.map((highlight, index) => {
-                const isActive = index === activeIndex;
+          <div className="mt-[27px] flex items-center justify-center gap-3">
+            {highlights.map((highlight, index) => {
+              const isActive = index === activeIndex;
 
-                return (
-                  <button
-                    key={highlight.id}
-                    type="button"
-                    aria-label={`Show highlight ${highlight.id}`}
-                    aria-current={isActive ? 'true' : undefined}
-                    onClick={() => setActiveIndex(index)}
-                    className={[
-                      'h-[12px] w-[12px] rounded-full border-0 p-0',
-                      isActive ? 'bg-[#F99508]' : 'bg-[#f6d394]',
-                    ].join(' ')}
-                  />
-                );
-              })}
-            </div>
+              return (
+                <button
+                  key={highlight.id}
+                  type="button"
+                  aria-label={`Show highlight ${highlight.id}`}
+                  aria-current={isActive ? 'true' : undefined}
+                  onClick={() => setActiveIndex(index)}
+                  className={[
+                    'size-3 rounded-full border-0 p-0 cursor-pointer',
+                    isActive ? 'bg-[#F99508]' : 'bg-[#f6d394]',
+                  ].join(' ')}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
