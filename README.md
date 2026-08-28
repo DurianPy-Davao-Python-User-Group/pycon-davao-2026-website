@@ -30,6 +30,18 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You can start editing the page by modifying `src/app/page.tsx` (or `app/page.tsx`). The page auto-updates as you edit the file.
 
+### Ticket registration links
+
+Add the three ticket registration destinations to `.env.local` when developing locally, and configure the same variables in the production environment:
+
+```env
+KODIGO_REGISTRATION_URL=https://example.com/register/kodigo
+CODER_KASOSYO_REGISTRATION_URL=https://example.com/register/coder-kasosyo
+KUMPANYA_REGISTRATION_URL=https://example.com/register/kumpanya
+```
+
+Coder and Kasosyo intentionally share one registration link.
+
 ## Contributing
 
 We welcome contributions from the community! To ensure a smooth collaboration process and to maintain code quality, please see our [Development Workflow](CONTRIBUTING.md) to understand how to pick up issues, create branches, and submit Pull Requests.
