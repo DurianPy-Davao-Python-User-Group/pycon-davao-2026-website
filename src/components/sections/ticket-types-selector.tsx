@@ -110,7 +110,7 @@ export default function TicketTypesSelector({
                 className={cn(
                   'font-heading min-h-64 cursor-pointer rounded-xl p-6 text-left shadow-sm transition-[transform,box-shadow] duration-200 outline-none hover:-translate-y-1 hover:shadow-lg focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-teal-600 md:min-h-72',
                   ticket.className,
-                  selected && 'z-10 scale-[1.045] shadow-xl ring-4 ring-white/90',
+                  selected && 'z-10 scale-[1.045] shadow-xl',
                 )}
               >
                 <span className="block text-center text-xl font-extrabold uppercase">
