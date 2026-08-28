@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import leaf6 from '@/assets/hero/leaf6.svg';
 import leafRight from '@/assets/hero/leafRight.svg';
@@ -10,6 +10,15 @@ import image1 from '@/assets/highlights-2025/1.webp';
 import image2 from '@/assets/highlights-2025/2.webp';
 import image3 from '@/assets/highlights-2025/3.webp';
 import image4 from '@/assets/highlights-2025/4.webp';
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from '@/components/ui/carousel';
 
 const highlights = [
   {
@@ -80,32 +89,24 @@ function Divider() {
 }
 
 export default function PyCon2025Highlights() {
+  const [api, setApi] = useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = useState(0);
-  const dragStartX = useRef<number | null>(null);
 
-  const cycleIndex = (offset: number) => {
-    setActiveIndex((current) => (current + offset + highlights.length) % highlights.length);
-  };
+  const onSelect = useCallback(() => {
+    if (!api) return;
+    setActiveIndex(api.selectedScrollSnap());
+  }, [api]);
 
-  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    dragStartX.current = event.clientX;
-  };
-
-  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (dragStartX.current === null) return;
-
-    const deltaX = event.clientX - dragStartX.current;
-
-    if (Math.abs(deltaX) >= 45) {
-      cycleIndex(deltaX < 0 ? 1 : -1);
-    }
-
-    dragStartX.current = null;
-  };
-
-  const resetPointer = () => {
-    dragStartX.current = null;
-  };
+  useEffect(() => {
+    if (!api) return;
+    onSelect();
+    api.on('select', onSelect);
+    api.on('reInit', onSelect);
+    return () => {
+      api.off('select', onSelect);
+      api.off('reInit', onSelect);
+    };
+  }, [api, onSelect]);
 
   return (
     <section className="relative isolate w-full overflow-hidden bg-[#f7efd1]">
@@ -156,98 +157,50 @@ export default function PyCon2025Highlights() {
             </h2>
           </header>
 
-          <div className="relative z-10 mx-auto mt-[38px] hidden w-full max-w-[1240px] items-center justify-center lg:flex">
-            <button
-              type="button"
-              aria-label="Previous 2025 highlight"
-              onClick={() => cycleIndex(-1)}
-              className="cursor-pointer absolute top-1/2 left-[2px] z-20 flex h-[121px] w-[58px] -translate-y-1/2 items-center justify-center border-0 bg-transparent p-0 outline-none"
+          {/* Carousel – single responsive instance for all breakpoints */}
+          <Carousel
+            opts={{ loop: true }}
+            setApi={setApi}
+            className="relative z-10 mx-auto mt-[38px] w-[71.6667%] md:mt-[42px] md:w-[72%] lg:mt-[38px] lg:w-full lg:max-w-[1240px]"
+          >
+            {/* Desktop arrow buttons – hidden on mobile */}
+            <CarouselPrevious
+              variant="ghost"
+              size="icon"
+              className="hidden cursor-pointer border-0 bg-transparent p-0 shadow-none hover:bg-transparent lg:absolute lg:top-1/2 lg:left-[2px] lg:z-20 lg:flex lg:h-[121px] lg:w-[58px] lg:-translate-y-1/2 lg:items-center lg:justify-center lg:rounded-none"
             >
               <ArrowGlyph direction="left" />
-            </button>
+            </CarouselPrevious>
 
-            <div
-              className="relative h-[476px] w-[850px] overflow-hidden rounded-[50px] border-[3px] border-[#F99508] bg-[#d9d9d9]"
-              onPointerDown={handlePointerDown}
-              onPointerUp={handlePointerUp}
-              onPointerCancel={resetPointer}
-              onPointerLeave={resetPointer}
-              onDragStart={(event) => event.preventDefault()}
-              onContextMenu={(event) => event.preventDefault()}
-              style={{
-                touchAction: 'pan-y',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-              }}
-            >
-              {highlights.map((highlight, index) => (
-                <div
-                  key={highlight.id}
-                  aria-hidden={index !== activeIndex}
-                  className={[
-                    'absolute inset-0',
-                    index === activeIndex ? 'opacity-100' : 'pointer-events-none opacity-0',
-                  ].join(' ')}
-                >
-                  <Image
-                    src={highlight.src}
-                    alt={highlight.alt}
-                    fill
-                    draggable={false}
-                    priority={index === 0}
-                    className="pointer-events-none object-cover select-none"
-                  />
-                </div>
-              ))}
+            <div className="overflow-hidden rounded-[5.185vw] border-[3px] border-[#F99508] bg-[#d9d9d9] md:rounded-[32px] lg:mx-auto lg:max-w-[850px] lg:rounded-[50px]">
+              <CarouselContent className="-ml-0">
+                {highlights.map((highlight, index) => (
+                  <CarouselItem key={highlight.id} className="pl-0">
+                    <div className="relative aspect-[774/435] w-full lg:aspect-auto lg:h-[476px]">
+                      <Image
+                        src={highlight.src}
+                        alt={highlight.alt}
+                        fill
+                        draggable={false}
+                        priority={index === 0}
+                        className="pointer-events-none object-cover select-none"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
             </div>
 
-            <button
-              type="button"
-              aria-label="Next 2025 highlight"
-              onClick={() => cycleIndex(1)}
-              className="cursor-pointer absolute top-1/2 right-[2px] z-20 flex h-[121px] w-[58px] -translate-y-1/2 items-center justify-center border-0 bg-transparent p-0 outline-none"
+            <CarouselNext
+              variant="ghost"
+              size="icon"
+              className="hidden cursor-pointer border-0 bg-transparent p-0 shadow-none hover:bg-transparent lg:absolute lg:top-1/2 lg:right-[2px] lg:z-20 lg:flex lg:h-[121px] lg:w-[58px] lg:-translate-y-1/2 lg:items-center lg:justify-center lg:rounded-none"
             >
               <ArrowGlyph direction="right" />
-            </button>
-          </div>
+            </CarouselNext>
+          </Carousel>
 
-          <div className="relative z-10 mx-auto mt-[38px] w-[71.6667%] md:mt-[42px] md:w-[72%] lg:hidden">
-            <div
-              className="relative aspect-[774/435] w-full overflow-hidden rounded-[5.185vw] bg-[#d9d9d9] md:rounded-[32px]"
-              onPointerDown={handlePointerDown}
-              onPointerUp={handlePointerUp}
-              onPointerCancel={resetPointer}
-              onPointerLeave={resetPointer}
-              onDragStart={(event) => event.preventDefault()}
-              onContextMenu={(event) => event.preventDefault()}
-              style={{
-                touchAction: 'pan-y',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-              }}
-            >
-              {highlights.map((highlight, index) => (
-                <div
-                  key={highlight.id}
-                  aria-hidden={index !== activeIndex}
-                  className={[
-                    'absolute inset-0',
-                    index === activeIndex ? 'opacity-100' : 'pointer-events-none opacity-0',
-                  ].join(' ')}
-                >
-                  <Image
-                    src={highlight.src}
-                    alt={highlight.alt}
-                    fill
-                    draggable={false}
-                    priority={index === 0}
-                    className="pointer-events-none object-cover select-none"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
+          {/* Dot indicators synced with Embla API */}
           <div className="mt-[27px] flex items-center justify-center gap-3">
             {highlights.map((highlight, index) => {
               const isActive = index === activeIndex;
@@ -258,9 +211,9 @@ export default function PyCon2025Highlights() {
                   type="button"
                   aria-label={`Show highlight ${highlight.id}`}
                   aria-current={isActive ? 'true' : undefined}
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => api?.scrollTo(index)}
                   className={[
-                    'size-3 rounded-full border-0 p-0 cursor-pointer',
+                    'size-3 cursor-pointer rounded-full border-0 p-0',
                     isActive ? 'bg-[#F99508]' : 'bg-[#f6d394]',
                   ].join(' ')}
                 />
