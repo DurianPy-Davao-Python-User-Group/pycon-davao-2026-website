@@ -2,12 +2,10 @@ import Image from 'next/image';
 import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 import footerFrame from '@/assets/hero/footer-frame.svg';
-import footerInfoPattern from '@/assets/hero/footer-info-pattern.svg';
-import footerMntn from '@/assets/hero/footer-mntn.svg';
-import footerRattle from '@/assets/hero/footer-rattle.svg';
-import footerTail from '@/assets/hero/footer-tail.svg';
-import footerTail2 from '@/assets/hero/footer-tail2.svg';
-import footerVector from '@/assets/hero/footer-vector.svg';
+import footerInfoPattern from '@/assets/hero/footer-info-pattern-1.svg';
+import footerInfoPattern2 from '@/assets/hero/footer-info-pattern-2.svg';
+import footerVerticalPattern from '@/assets/hero/footer-vertical-pattern.svg';
+import footerBottomMountain from '@/assets/hero/footer-bottom-mountain.svg';
 
 const socials = [
   {
@@ -35,10 +33,10 @@ const socials = [
 export default function Footer() {
   return (
     <>
-      <section className="relative overflow-hidden bg-[#04B1A4]">
+      <section className="relative overflow-hidden bg-[#FBEFCF]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-[-8px] z-10 h-[55px] overflow-hidden sm:h-[58px] md:h-[62px] lg:top-[-10px] lg:h-[68px]"
+          className="pointer-events-none absolute inset-x-0 top-[-4px] z-10 h-[28px] overflow-hidden sm:top-[-6px] sm:h-[38px] md:top-[-8px] md:h-[50px] lg:top-[-10px] lg:h-[68px]"
         >
           <div
             className="h-full w-full"
@@ -82,7 +80,7 @@ export default function Footer() {
             </p>
           </article>
 
-          <article className="w-full rounded-[28px] bg-[#F99508] px-7 py-8 text-[#FDDEB2] sm:px-9 sm:py-9 lg:w-[541px] lg:rounded-[29px] lg:px-[40px] lg:py-[30px]">
+          <article className="w-full rounded-[28px] bg-[#5DA144] px-7 py-8 text-[#FDDEB2] sm:px-9 sm:py-9 lg:w-[541px] lg:rounded-[29px] lg:px-[40px] lg:py-[30px]">
             <h2
               className="font-heading text-[24px] leading-[1.15] font-bold tracking-[-0.02em] sm:text-[27px] md:text-[30px] lg:text-[32px]"
               style={{
@@ -99,11 +97,55 @@ export default function Footer() {
             </p>
           </article>
         </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-[-4px] z-10 h-[28px] overflow-hidden sm:bottom-[-6px] sm:h-[38px] md:bottom-[-8px] md:h-[50px] lg:bottom-[-10px] lg:h-[68px]"
+        >
+          <div
+            className="h-full w-full"
+            style={{
+              backgroundImage: `url(${footerInfoPattern2.src})`,
+              backgroundRepeat: 'repeat-x',
+              backgroundPosition: 'center bottom',
+              backgroundSize: 'auto 100%',
+            }}
+          />
+        </div>
       </section>
 
       <footer className="relative overflow-hidden bg-[#FBEFCF] text-[#072E47]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-[-4px] z-10 w-[28px] overflow-hidden sm:left-[-6px] sm:w-[38px] md:left-[-8px] md:w-[50px] lg:left-[-10px] lg:w-[68px]"
+        >
+          <div
+            className="h-full w-full"
+            style={{
+              backgroundImage: `url(${footerVerticalPattern.src})`,
+              backgroundRepeat: 'repeat-y',
+              backgroundPosition: 'left center',
+              backgroundSize: '100% auto',
+            }}
+          />
+        </div>
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-[-4px] z-10 w-[28px] overflow-hidden sm:right-[-6px] sm:w-[38px] md:right-[-8px] md:w-[50px] lg:right-[-10px] lg:w-[68px]"
+        >
+          <div
+            className="h-full w-full"
+            style={{
+              backgroundImage: `url(${footerVerticalPattern.src})`,
+              backgroundRepeat: 'repeat-y',
+              backgroundPosition: 'right center',
+              backgroundSize: '100% auto',
+            }}
+          />
+        </div>
+
         <div className="relative mx-auto h-[590px] w-full max-w-[1920px] sm:h-[625px] md:h-[660px] lg:h-[700px]">
-          <div className="relative z-20 flex flex-col items-center px-5 pt-7 sm:pt-8 lg:pt-7">
+          <div className="relative z-20 flex flex-col items-center px-5 pt-16 sm:pt-20 lg:pt-24">
             <Image
               src={footerFrame}
               alt="PyCon Davao 2026"
@@ -124,10 +166,10 @@ export default function Footer() {
             <p className="mt-6 max-w-[960px] px-5 text-center font-sans text-[18px] leading-[1.45] font-medium sm:text-[18px] md:text-[19px] lg:mt-7 lg:text-[20px]">
               Message us at{' '}
               <a
-                href="mailto:durianpy.davao@gmail.com"
+                href="mailto:contact@durianpy.org"
                 className="font-medium transition-opacity hover:opacity-70"
               >
-                durianpy.davao@gmail.com
+                contact@durianpy.org
               </a>{' '}
               for questions and inquiries
             </p>
@@ -150,63 +192,17 @@ export default function Footer() {
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[205px] sm:h-[225px] md:h-[250px] lg:h-[275px]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex items-end justify-center overflow-hidden"
           >
-            <div className="absolute inset-x-0 bottom-0 h-full overflow-hidden">
-              <Image
-                src={footerTail2}
-                alt=""
-                width={564}
-                height={342}
-                draggable={false}
-                className="absolute bottom-[-14px] left-[61%] z-[1] h-auto w-[190px] max-w-none select-none sm:right-[6%] sm:left-auto sm:w-[240px] md:right-[12%] md:w-[280px] lg:right-[15%] lg:bottom-[-18px] lg:w-[315px]"
-              />
-
-              <Image
-                src={footerMntn}
-                alt=""
-                width={788}
-                height={343}
-                draggable={false}
-                className="absolute bottom-[-38px] left-1/2 z-[2] h-auto w-[420px] max-w-none -translate-x-1/2 select-none sm:bottom-[-44px] sm:w-[470px] md:bottom-[-52px] md:w-[525px] lg:bottom-[-62px] lg:w-[590px]"
-              />
-
-              <Image
-                src={footerVector}
-                alt=""
-                width={728}
-                height={119}
-                draggable={false}
-                className="absolute bottom-[-4px] left-1/2 z-[3] h-auto w-[380px] max-w-none -translate-x-1/2 select-none sm:w-[425px] md:w-[475px] lg:w-[530px]"
-              />
-
-              <div
-                className="absolute bottom-[-55px] left-1/2 z-[4] w-[820px] max-w-none origin-center sm:w-[1080px] md:w-[1270px] lg:w-[1120px]"
-                style={{
-                  transform: 'translateX(-82%) rotate(10deg)',
-                }}
-              >
-                <div className="w-[90%] overflow-hidden">
-                  <Image
-                    src={footerTail}
-                    alt=""
-                    width={5590}
-                    height={922}
-                    draggable={false}
-                    className="h-auto w-[111.111%] max-w-none select-none"
-                  />
-                </div>
-              </div>
-
-              <Image
-                src={footerRattle}
-                alt=""
-                width={131}
-                height={352}
-                draggable={false}
-                className="absolute bottom-[8px] left-[72%] z-[2] hidden h-auto w-[38px] max-w-none select-none sm:right-[4%] sm:left-auto sm:block sm:w-[48px] md:right-[9%] md:w-[57px] lg:right-[13%] lg:bottom-[10px] lg:w-[68px]"
-              />
-            </div>
+            <Image
+              src={footerBottomMountain}
+              alt=""
+              width={1920}
+              height={322}
+              priority
+              draggable={false}
+              className="h-auto w-[220%] min-w-[780px] max-w-none select-none sm:w-[160%] sm:min-w-[960px] md:w-[130%] md:min-w-[1200px] lg:w-full lg:min-w-0"
+            />
           </div>
         </div>
       </footer>

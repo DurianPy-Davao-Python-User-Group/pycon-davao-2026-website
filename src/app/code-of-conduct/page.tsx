@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import bridgePattern from '@/assets/code-of-conduct/Bridge_Pattern.svg';
-import tail from '@/assets/code-of-conduct/Tail.svg';
+import tail4 from '@/assets/code-of-conduct/Tail4.svg';
+import border from '@/assets/code-of-conduct/Border.svg';
+import mountain from '@/assets/code-of-conduct/Mountain.svg';
+import frame from '@/assets/code-of-conduct/Frame_10.svg'
 
 export default function Home() {
   return (
@@ -15,21 +18,48 @@ export default function Home() {
             priority
           />
         </div>
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col gap-6 p-6 sm:p-10 md:p-14 lg:p-20">
-          <div className="font-heading leading-none">
-            <h1 className="text-pycon-orange text-5xl font-extrabold tracking-tight sm:text-7xl md:text-8xl lg:text-9xl">
-              CODE OF
-            </h1>
-            <h1 className="text-pycon-orange text-5xl font-extrabold tracking-tight sm:text-7xl md:text-8xl lg:text-9xl">
-              CONDUCT
-            </h1>
+        {/* Header Hero Banner */}
+        <section className="relative z-10 w-full">
+          <div className="relative mx-auto flex w-full items-center justify-between gap-4 px-6 pt-8 pb-6 sm:px-10 sm:pt-12 sm:pb-8 md:px-14 md:pt-16 md:pb-10 lg:px-20 lg:pt-20 lg:pb-12 xl:px-24 xl:pt-24 xl:pb-14">
+            <div className="relative z-10 flex flex-col gap-2 sm:gap-3 md:gap-4">
+              <h1 className="font-heading text-pycon-orange text-4xl font-extrabold leading-[0.88] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[9.5rem]">
+                <span className="block">CODE OF</span>
+                <span className="block">CONDUCT</span>
+              </h1>
+              <h2 className="font-heading text-pycon-teal text-base font-bold tracking-tight sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
+                PYCON DAVAO 2026
+              </h2>
+            </div>
+            <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 shrink-0 select-none">
+              <div className="w-24 sm:w-40 md:w-56 lg:w-[360px] xl:w-[440px] 2xl:w-[560px]">
+                <Image
+                  src={tail4}
+                  alt=""
+                  className="h-auto w-full object-contain"
+                  priority
+                />
+              </div>
+            </div>
           </div>
-          <h2 className="font-heading text-pycon-teal text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
-            PYCON DAVAO 2026
-          </h2>
+
+          {/* Bottom Pattern Border Ribbon */}
+          <div className="relative z-20 w-full overflow-hidden leading-none select-none">
+            <Image
+              src={border}
+              alt=""
+              width={1920}
+              height={56}
+              draggable={false}
+              className="h-6 w-full object-cover object-center sm:h-8 md:h-10 lg:h-12 xl:h-14"
+              priority
+            />
+          </div>
+        </section>
+
+        <div className="relative z-10 mx-auto flex w-full flex-1 flex-col gap-6 p-6 sm:p-10 md:p-14 lg:p-20">
           <div className="flex flex-col gap-6 text-base leading-relaxed sm:gap-8 sm:text-lg md:gap-10 md:text-xl lg:text-2xl">
             <p>
-              <strong className="text-pycon-teal">PyCon Davao 2026</strong> is a community event
+              <strong className="text-pycon-teal">PyCon Davao</strong> is a community event
               dedicated to promoting collaboration, learning, and innovation within the Python
               community. We are committed to providing a welcoming, safe, and inclusive environment
               for all participants. All attendees, speakers, exhibitors, organizers, and volunteers
@@ -82,9 +112,12 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="pointer-events-none z-10 flex w-full justify-end select-none">
-          <div className="w-48 sm:w-64 md:w-80 lg:w-[420px] xl:w-[500px]">
-            <Image src={tail} alt="" className="h-auto w-full object-contain" priority />
+        <div className="relative pointer-events-none z-10 flex w-full select-none">
+          <div className="absolute bottom-[-30] w-full h-[500px] lg:h-[700px]">
+            <Image src={frame} alt="" className="to-pycon-beige from-transparent h-auto w-full opacity-40 object-contain" priority />
+          </div>
+          <div className="w-full z-10">
+            <Image src={mountain} alt="" className="h-auto w-full object-contain" priority />
           </div>
         </div>
       </main>
