@@ -41,6 +41,11 @@ const highlights = [
     src: image4,
     alt: 'PyCon Davao 2025 highlight 4',
   },
+  {
+    id: 5,
+    src: image4,
+    alt: 'PyCon Davao 2025 highlight 5',
+  },
 ];
 
 const stats = [
