@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState, useSyncExternalStore } from 'react';
 
 import leaf6 from '@/assets/hero/leaf6.svg';
 import leafRight from '@/assets/hero/leafRight.svg';
@@ -95,23 +95,25 @@ function Divider() {
 
 export default function PyCon2025Highlights() {
   const [api, setApi] = useState<CarouselApi>();
-  const [activeIndex, setActiveIndex] = useState(0);
 
-  const onSelect = useCallback(() => {
-    if (!api) return;
-    setActiveIndex(api.selectedScrollSnap());
-  }, [api]);
+  const subscribe = useCallback(
+    (callback: () => void) => {
+      if (!api) return () => {};
+      api.on('select', callback);
+      api.on('reInit', callback);
+      return () => {
+        api.off('select', callback);
+        api.off('reInit', callback);
+      };
+    },
+    [api],
+  );
 
-  useEffect(() => {
-    if (!api) return;
-    onSelect();
-    api.on('select', onSelect);
-    api.on('reInit', onSelect);
-    return () => {
-      api.off('select', onSelect);
-      api.off('reInit', onSelect);
-    };
-  }, [api, onSelect]);
+  const activeIndex = useSyncExternalStore(
+    subscribe,
+    () => (api ? api.selectedScrollSnap() : 0),
+    () => 0,
+  );
 
   return (
     <section className="relative isolate w-full overflow-hidden bg-[#f7efd1]">
