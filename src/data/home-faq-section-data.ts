@@ -1,6 +1,8 @@
+import React, { type ReactNode } from 'react';
+
 export interface HomeFaqItem {
   question: string;
-  answer: string;
+  answer: ReactNode;
 }
 
 export interface HomeFaqSectionData {
@@ -36,18 +38,27 @@ export const homeFaqSectionData: HomeFaqSectionData = {
     },
     {
       question: 'Can I submit a talk or workshop proposal?',
-      answer:
-        'Yes. Proposal guidelines, available session formats, and submission deadlines will be shared when the call for proposals opens.',
+      answer: React.createElement(
+        React.Fragment,
+        null,
+        'Yes. Proposal guidelines, available session formats, and submission deadlines will be shared when the call for proposals opens. ',
+        React.createElement(
+          'a',
+          {
+            href: 'https://forms.gle/3pRdF5pYaQY2XZn28',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'View proposal guidelines'
+        )
+      ),
     },
     {
       question: 'Do I need Python experience to attend?',
       answer:
         'No. The conference welcomes all experience levels, and the program will identify sessions so you can find topics suited to your background.',
-    },
-    {
-      question: 'Will there be opportunities to volunteer?',
-      answer:
-        'Yes. Volunteer roles and application details will be announced closer to the conference date.',
     },
     {
       question: 'Is the venue accessible?',

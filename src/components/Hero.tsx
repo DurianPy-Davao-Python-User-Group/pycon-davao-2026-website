@@ -6,6 +6,8 @@ import heroMountainLeftFg from '@/assets/hero/hero-mountain-left-fg.svg';
 import heroMountainRight from '@/assets/hero/hero-mountain-right.svg';
 import heroBg from '@/assets/hero/hero-bg.svg';
 import pattern4 from '@/assets/hero/pattern-4.svg';
+import heroMascot from '@/assets/hero/hero-mascot.svg'
+import heroSnake from '@/assets/hero/hero-snake.svg'
 
 export default function Hero() {
   return (
@@ -40,13 +42,13 @@ export default function Hero() {
           />
         </div>
 
-        <h1 className="font-heading text-pycon-teal-dark mb-3 text-xl leading-snug tracking-tight sm:mb-4 sm:text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem]">
+        <h1 className="font-heading text-pycon-teal-dark mb-3 text-xl leading-snug tracking-tight sm:mb-4 sm:text-2xl md:text-2xl lg:text-3xl xl:text-[2.0rem]">
           <span className="font-bold">PAGLANTAW</span>
           <span className="font-medium">: Envisioning the Future Through Python</span>
         </h1>
 
         <p className="text-pycon-dark-blue/90 mb-6 max-w-[600px] font-sans text-base leading-relaxed sm:mb-10 sm:text-lg md:text-xl">
-          Mindanao&apos;s largest Python summit returns for its second full-scale edition, ready to
+          Davao&apos;s largest Python summit returns for its second full-scale edition, ready to
           jump-start your next breakthrough.
         </p>
 
@@ -114,6 +116,29 @@ export default function Hero() {
             width={1773}
             height={786}
             className="h-auto w-full translate-y-0.5 object-contain object-bottom opacity-70"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* Characters: Mascot (Left) & Snake (Right) */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 select-none">
+        {/* Left Mascot */}
+        <div className="absolute bottom-10 left-0 w-[120px] sm:w-[160px] md:w-[220px] lg:w-[230px] xl:w-[280px]">
+          <Image
+            src={heroMascot}
+            alt="PyCon Davao Mascot"
+            className="h-auto w-full object-contain object-bottom drop-shadow-[0px_8px_24px_rgba(0,0,0,0.12)]"
+            priority
+          />
+        </div>
+
+        {/* Right Snake */}
+        <div className="absolute right-0 bottom-10 w-[115px] sm:w-[155px] md:w-[210px] lg:w-[215px] xl:w-[265px]">
+          <Image
+            src={heroSnake}
+            alt="Python Snake"
+            className="h-auto w-full object-contain object-bottom drop-shadow-[0px_8px_24px_rgba(0,0,0,0.12)]"
             priority
           />
         </div>

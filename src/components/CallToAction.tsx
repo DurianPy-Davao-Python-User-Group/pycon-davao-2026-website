@@ -50,10 +50,10 @@ export default function CallToAction() {
             Ready to level up your Python journey?
           </h3>
           <p className="text-foreground w-auto text-center text-sm sm:text-base md:text-lg lg:w-[550px] lg:text-xl xl:w-auto">
-            Secure your badge and be part of Mindanao&apos;s biggest open-source celebration.
+            Secure your badge and be part of Davao&apos;s biggest open-source celebration.
           </p>
-          <Button className="w-[200px] cursor-pointer rounded-full px-6 py-2.5 text-sm font-bold sm:px-8 sm:py-3 sm:text-base md:w-[300px] md:px-10 md:py-3.5 md:text-lg lg:text-xl">
-            Get Tickets
+          <Button className="w-[200px] cursor-pointer rounded-full px-6 py-5.5 text-sm font-bold sm:px-8 sm:py-6.5 sm:text-base md:w-[300px] md:px-10 md:py-7.5 md:text-lg lg:text-xl">
+            Coming Soon
           </Button>
         </div>
       </div>

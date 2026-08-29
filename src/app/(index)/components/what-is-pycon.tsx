@@ -33,12 +33,6 @@ export default function WhatIsPyCon() {
       aria-labelledby="what-is-pycon-heading"
       className="bg-pycon-beige relative overflow-hidden px-6 py-12 sm:px-10 sm:py-16 md:px-12 md:py-20"
     >
-      <Image
-        src={tealSnakeBody}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-14 right-0 z-0 w-[170px] max-w-none translate-x-12 -rotate-40 sm:-top-20 sm:w-[200px] sm:translate-x-12 sm:-rotate-6 md:-top-28 md:w-[220px] md:translate-x-8 md:-rotate-3 lg:w-[280px] lg:translate-x-0 lg:rotate-0 xl:w-[300px]"
-      />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl">
         <div className="max-w-4xl">

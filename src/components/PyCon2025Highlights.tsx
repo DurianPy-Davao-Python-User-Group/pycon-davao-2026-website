@@ -98,7 +98,7 @@ export default function PyCon2025Highlights() {
 
   const subscribe = useCallback(
     (callback: () => void) => {
-      if (!api) return () => {};
+      if (!api) return () => { };
       api.on('select', callback);
       api.on('reInit', callback);
       return () => {
@@ -286,7 +286,7 @@ export default function PyCon2025Highlights() {
 
                 <li>
                   Celebrated community-driven innovation, knowledge sharing, and collaboration
-                  across Mindanao and beyond.
+                  across Davao and beyond.
                 </li>
               </ul>
 
