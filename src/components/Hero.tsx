@@ -11,7 +11,7 @@ import heroSnake from '@/assets/hero/hero-snake.svg'
 
 export default function Hero() {
   return (
-    <section className="from-pycon-beige to-pycon-beige relative flex min-h-[100dvh] w-full flex-col justify-between overflow-hidden bg-gradient-to-b via-[#fcf5de] via-50%">
+    <section className="from-pycon-beige to-pycon-beige relative flex min-h-[55dvh] w-full flex-col justify-between overflow-hidden bg-gradient-to-b via-[#fcf5de] via-50% md:min-h-[65dvh] lg:min-h-[95dvh]">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
         <Image
           src={heroBridgePattern}
@@ -30,8 +30,8 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-20 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-6 pt-16 pb-16 text-center sm:px-8 md:pt-24 md:pb-24 lg:pt-28">
-        <div className="relative mb-4 w-full max-w-[280px] sm:mb-6 sm:max-w-[440px] md:max-w-[540px] lg:max-w-[620px]">
+      <div className="relative z-20 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-4 pt-10 pb-24 text-center sm:px-8 sm:pt-16 sm:pb-28 md:px-16 md:pt-20 md:pb-32 lg:px-24 lg:pt-24 lg:pb-36 xl:px-28">
+        <div className="relative mb-3 w-full max-w-[210px] sm:mb-5 sm:max-w-[320px] md:mb-6 md:max-w-[420px] lg:max-w-[500px] xl:max-w-[560px]">
           <Image
             src={heroLogo}
             alt="PyCon Davao 2026 Logo"
@@ -42,12 +42,12 @@ export default function Hero() {
           />
         </div>
 
-        <h1 className="font-heading text-pycon-teal-dark mb-3 text-xl leading-snug tracking-tight sm:mb-4 sm:text-2xl md:text-2xl lg:text-3xl xl:text-[2.0rem]">
+        <h1 className="font-heading text-pycon-teal-dark mb-2.5 max-w-[290px] text-lg leading-snug tracking-tight sm:mb-3.5 sm:max-w-[480px] sm:text-xl md:mb-4 md:max-w-[620px] md:text-xl lg:max-w-[740px] lg:text-2xl xl:max-w-[800px] xl:text-[1.90rem]">
           <span className="font-bold">PAGLANTAW</span>
           <span className="font-medium">: Envisioning the Future Through Python</span>
         </h1>
 
-        <p className="text-pycon-dark-blue/90 mb-6 max-w-[600px] font-sans text-base leading-relaxed sm:mb-10 sm:text-lg md:text-xl">
+        <p className="text-pycon-dark-blue/90 mb-5 max-w-[280px] font-sans text-xs leading-relaxed sm:mb-7 sm:max-w-[420px] sm:text-sm md:mb-8 md:max-w-[520px] md:text-base lg:max-w-[580px] lg:text-lg">
           Davao&apos;s largest Python summit returns for its second full-scale edition, ready to
           jump-start your next breakthrough.
         </p>
@@ -55,7 +55,7 @@ export default function Hero() {
         <div className="relative z-30">
           <button
             type="button"
-            className="font-heading group bg-pycon-teal text-pycon-beige-light inline-flex cursor-pointer items-center justify-center rounded-full px-8 py-3.5 text-base font-bold shadow-[0px_4px_24px_0px_rgba(4,177,164,0.35)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#039d91] hover:shadow-[0px_8px_32px_0px_rgba(4,177,164,0.45)] active:scale-[0.98] sm:px-10 sm:py-4 sm:text-lg md:text-xl"
+            className="font-heading group bg-pycon-teal text-pycon-beige-light inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-bold shadow-[0px_4px_24px_0px_rgba(4,177,164,0.35)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#039d91] hover:shadow-[0px_8px_32px_0px_rgba(4,177,164,0.45)] active:scale-[0.98] sm:px-7 sm:py-3.5 sm:text-base md:px-9 md:py-4 md:text-lg lg:text-xl"
           >
             <span>Early-Bird Tickets Opening Soon</span>
           </button>
@@ -124,7 +124,7 @@ export default function Hero() {
       {/* Characters: Mascot (Left) & Snake (Right) */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 select-none">
         {/* Left Mascot */}
-        <div className="absolute bottom-10 left-0 w-[120px] sm:w-[160px] md:w-[220px] lg:w-[230px] xl:w-[280px]">
+        <div className="absolute -left-6 bottom-6 w-[130px] sm:-left-10 sm:bottom-8 sm:w-[180px] md:-left-14 md:bottom-10 md:w-[240px] lg:-left-16 lg:bottom-12 lg:w-[260px] xl:-left-0 xl:w-[320px]">
           <Image
             src={heroMascot}
             alt="PyCon Davao Mascot"
@@ -134,7 +134,7 @@ export default function Hero() {
         </div>
 
         {/* Right Snake */}
-        <div className="absolute right-0 bottom-10 w-[115px] sm:w-[155px] md:w-[210px] lg:w-[215px] xl:w-[265px]">
+        <div className="absolute -right-6 bottom-6 w-[125px] sm:-right-10 sm:bottom-8 sm:w-[175px] md:-right-14 md:bottom-10 md:w-[230px] lg:-right-16 lg:bottom-12 lg:w-[250px] xl:-right-0 xl:w-[305px]">
           <Image
             src={heroSnake}
             alt="Python Snake"

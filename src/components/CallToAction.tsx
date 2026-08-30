@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 
 export default function CallToAction() {
   return (
-    <section className="to-pycon-teal relative flex h-auto min-h-[65dvh] w-full flex-col overflow-hidden bg-gradient-to-b from-transparent p-6 sm:p-10 md:min-h-[70dvh] md:p-14 lg:min-h-[80dvh] lg:p-20 xl:min-h-[115dvh]">
+    <section className="to-pycon-teal relative flex h-auto min-h-[55dvh] sm:min-h-[60dvh] w-full flex-col overflow-hidden bg-gradient-to-b from-transparent p-6 sm:p-10 md:min-h-[70dvh] md:p-14 lg:min-h-[90dvh] lg:p-20 xl:min-h-[100dvh]">
       {/* Mobile background */}
       <Image
         src={ctaBg}
@@ -66,7 +66,7 @@ export default function CallToAction() {
         unoptimized
         width={371}
         height={741}
-        className="pointer-events-none absolute bottom-58 -left-32 z-40 w-[70vw] drop-shadow-[0px_4px_39.3px_#00000040] md:bottom-78 md:-left-45 md:w-[50vw] lg:bottom-80 lg:-left-80 lg:w-[60vw] xl:bottom-95 xl:w-[45vw]"
+        className="pointer-events-none absolute bottom-58 -left-32 z-40 w-[70vw] drop-shadow-[0px_4px_39.3px_#00000040] md:bottom-78 md:-left-45 md:w-[50vw] lg:bottom-80 lg:-left-80 lg:w-[60vw] xl:bottom-95 xl:w-[45vw] overflow-visible"
       />
 
       <Image
