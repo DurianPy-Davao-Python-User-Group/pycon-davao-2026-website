@@ -55,7 +55,8 @@ export default function Hero() {
         <div className="relative z-30">
           <button
             type="button"
-            className="font-heading group bg-pycon-teal text-pycon-beige-light inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-bold shadow-[0px_4px_24px_0px_rgba(4,177,164,0.35)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#039d91] hover:shadow-[0px_8px_32px_0px_rgba(4,177,164,0.45)] active:scale-[0.98] sm:px-7 sm:py-3.5 sm:text-base md:px-9 md:py-4 md:text-lg lg:text-xl"
+            disabled
+            className="disabled:pointer-events-none contrast-50 font-heading group bg-pycon-teal text-pycon-beige-light inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-bold shadow-[0px_4px_24px_0px_rgba(4,177,164,0.35)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#039d91] hover:shadow-[0px_8px_32px_0px_rgba(4,177,164,0.45)] active:scale-[0.98] sm:px-7 sm:py-3.5 sm:text-base md:px-9 md:py-4 md:text-lg lg:text-xl"
           >
             <span>Early-Bird Tickets Opening Soon</span>
           </button>
