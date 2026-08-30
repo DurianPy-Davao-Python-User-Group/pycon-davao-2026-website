@@ -10,6 +10,7 @@ import image1 from '@/assets/highlights-2025/1.webp';
 import image2 from '@/assets/highlights-2025/2.webp';
 import image3 from '@/assets/highlights-2025/3.webp';
 import image4 from '@/assets/highlights-2025/4.webp';
+import image5 from '@/assets/highlights-2025/5.webp'
 
 import {
   Carousel,
@@ -19,6 +20,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 
 const highlights = [
   {
@@ -43,7 +45,7 @@ const highlights = [
   },
   {
     id: 5,
-    src: image4,
+    src: image5,
     alt: 'PyCon Davao 2025 highlight 5',
   },
 ];
@@ -167,6 +169,11 @@ export default function PyCon2025Highlights() {
           {/* Carousel – single responsive instance for all breakpoints */}
           <Carousel
             opts={{ loop: true }}
+            plugins={[
+              Autoplay({
+                delay: 2000,
+              }),
+            ]}
             setApi={setApi}
             className="relative z-10 mx-auto mt-[38px] w-[71.6667%] md:mt-[42px] md:w-[72%] lg:mt-[38px] lg:w-full lg:max-w-[1240px]"
           >
