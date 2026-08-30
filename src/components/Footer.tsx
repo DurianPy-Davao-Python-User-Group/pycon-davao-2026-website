@@ -158,9 +158,9 @@ export default function Footer() {
 
             <button
               type="button"
-              className="font-heading mt-5 inline-flex h-[52px] w-[250px] cursor-pointer items-center justify-center rounded-full bg-[#F99508] px-8 text-base font-medium text-[#FBEFCF] shadow-[0px_4px_24px_0px_rgba(249,149,8,0.28)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#e98a00] hover:shadow-[0px_8px_32px_0px_rgba(249,149,8,0.38)] active:scale-[0.98] sm:h-[54px] sm:w-[280px] sm:text-lg md:w-[300px] lg:h-[56px] lg:w-[315px] lg:text-xl"
+              className="font-heading mt-5 inline-flex h-[52px] w-[290px] cursor-pointer items-center justify-center rounded-full bg-[#F99508] px-8 text-base font-medium text-[#FBEFCF] shadow-[0px_4px_24px_0px_rgba(249,149,8,0.28)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#e98a00] hover:shadow-[0px_8px_32px_0px_rgba(249,149,8,0.38)] active:scale-[0.98] sm:h-[54px] sm:w-[300px] sm:text-lg md:w-[300px] lg:h-[56px] lg:w-[335px] lg:text-xl"
             >
-              GET TICKETS
+              TICKETS OPENING SOON
             </button>
 
             <p className="mt-6 max-w-[960px] px-5 text-center font-sans text-[18px] leading-[1.45] font-medium sm:text-[18px] md:text-[19px] lg:mt-7 lg:text-[20px]">

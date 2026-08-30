@@ -159,7 +159,7 @@ export default function PyCon2025Highlights() {
               Looking Back:
             </p>
 
-            <h2 className="font-heading mt-[8px] text-[45px] leading-none font-bold tracking-[-0.06em] whitespace-nowrap text-[#F99508] md:text-[50px] lg:mt-[12px] lg:text-[68px]">
+            <h2 className="font-heading mt-[8px] text-[45px] leading-none font-bold tracking-[-0.06em] whitespace-pre-wrap text-[#F99508] md:text-[50px] lg:mt-[12px] lg:text-[68px]">
               PyCon Davao 2025
             </h2>
           </header>
