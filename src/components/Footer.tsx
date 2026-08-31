@@ -71,7 +71,7 @@ export default function Footer() {
 
             <p className="mt-6 font-sans text-[14px] leading-[1.6] font-medium text-[#FDDEB2] sm:text-[15px] md:text-[17px] lg:mt-[28px] lg:text-[19px] lg:leading-[30px]">
               If you believe someone is violating the Code of Conduct or if you have any other
-              concerns, please reach out to a member of the PyCon Davao 2025 Code of Conduct
+              concerns, please reach out to a member of the PyCon Davao 2026 Code of Conduct
               workgroup immediately. You can contact them via email at{' '}
               <a href="mailto:contact@durianpy.org" className="transition-opacity hover:opacity-75">
                 contact@durianpy.org

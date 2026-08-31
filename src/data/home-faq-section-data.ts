@@ -67,8 +67,69 @@ export const homeFaqSectionData: HomeFaqSectionData = {
     },
     {
       question: 'How can I contact the organizers?',
-      answer:
-        'Use the official contact details listed on this website for questions about registration, speaking, sponsorship, accessibility, or the event itself.',
+      answer: React.createElement(
+        React.Fragment,
+        null,
+        'You can reach out to us via email at ',
+        React.createElement(
+          'a',
+          {
+            href: 'mailto:contact@durianpy.org',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'contact@durianpy.org'
+        ),
+        ' or connect with us on ',
+        React.createElement(
+          'a',
+          {
+            href: 'https://www.facebook.com/durianpy',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'Facebook'
+        ),
+        ', ',
+        React.createElement(
+          'a',
+          {
+            href: 'https://www.instagram.com/durianpy.dvo',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'Instagram'
+        ),
+        ', ',
+        React.createElement(
+          'a',
+          {
+            href: 'https://www.linkedin.com/company/durianpy',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'LinkedIn'
+        ),
+        ', or ',
+        React.createElement(
+          'a',
+          {
+            href: 'https://github.com/orgs/DurianPy-Davao-Python-User-Group',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'GitHub'
+        ),
+        ' for questions about registration, speaking, sponsorship, accessibility, or the event itself.'
+      ),
     },
   ],
 };
