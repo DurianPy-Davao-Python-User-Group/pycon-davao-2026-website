@@ -16,6 +16,7 @@
   --color-pycon-beige: var(--pycon-beige);
   --color-pycon-beige-light: var(--pycon-beige-light);
   --color-pycon-beige-card: var(--pycon-beige-card);
+  --color-pycon-beige-dark: var(--pycon-beige-dark);
   --color-pycon-teal: var(--pycon-teal);
   --color-pycon-teal-dark: var(--pycon-teal-dark);
   --color-pycon-green: var(--pycon-green);
@@ -66,6 +67,7 @@
   --pycon-beige: #fbefcf;
   --pycon-beige-light: #fff9f2;
   --pycon-beige-card: #fae4b7;
+  --pycon-beige-dark: #f9d9a5;
   --pycon-teal: #04b1a4;
   --pycon-teal-dark: #0e8b8f;
   --pycon-green: #5da144;
