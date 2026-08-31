@@ -19,7 +19,7 @@ const tickets = [
     name: 'Kodigo',
     label: 'Scholarship',
     benefits: ['Event pass', 'Lunch', 'Snacks'],
-    className: 'bg-[#f9d9a5] text-pycon-dark-blue',
+    className: 'bg-pycon-beige-dark text-pycon-dark-blue',
   },
   {
     id: 'coder',
@@ -108,7 +108,7 @@ export default function TicketTypesSelector({
                 aria-checked={selected}
                 onClick={() => setSelectedTicket(ticket.id)}
                 className={cn(
-                  'font-heading min-h-64 cursor-pointer rounded-xl p-6 text-left shadow-sm transition-[transform,box-shadow] duration-200 outline-none hover:-translate-y-1 hover:shadow-lg focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-teal-600 md:min-h-72',
+                  'font-heading min-h-64 cursor-pointer rounded-xl p-6 text-left shadow-sm transition-[transform,box-shadow] transition-transform duration-200 duration-300 outline-none hover:-translate-y-1 hover:shadow-lg focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-teal-600 md:min-h-72',
                   ticket.className,
                   selected && 'z-10 scale-[1.045] shadow-xl',
                 )}
@@ -116,7 +116,9 @@ export default function TicketTypesSelector({
                 <span className="block text-center text-xl font-extrabold uppercase">
                   {ticket.name}
                 </span>
-                <span className="block text-center text-xs italic opacity-90">({ticket.label})</span>
+                <span className="block text-center text-xs italic opacity-90">
+                  ({ticket.label})
+                </span>
 
                 <ul className="mt-7 space-y-2 text-sm font-medium">
                   {ticket.benefits.map((benefit) => (
