@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: 'PyCon Davao 2026',
     images: [
       {
-        url: '/images/pycon-davao-2026-og.jpg',
+        url: '/images/pycon-davao-2026-og.png',
         width: 1200,
         height: 630,
         alt: 'PyCon Davao 2026: PAGLANTAW promotional artwork',
