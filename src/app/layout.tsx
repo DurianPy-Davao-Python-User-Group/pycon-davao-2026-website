@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: ogTitle,
     description,
     images: {
-      url: '/images/pycon-davao-2026-og.jpg',
+      url: '/images/pycon-davao-2026-og.png',
       alt: 'PyCon Davao 2026: PAGLANTAW promotional artwork',
     },
   },
