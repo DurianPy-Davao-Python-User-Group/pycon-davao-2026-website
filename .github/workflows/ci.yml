@@ -15,6 +15,10 @@ jobs:
   validate:
     name: Validation & Security
     runs-on: ubuntu-latest
+    env:
+      KODIGO_REGISTRATION_URL: https://example.com/register/kodigo
+      CODER_KASOSYO_REGISTRATION_URL: https://example.com/register/coder-kasosyo
+      KUMPANYA_REGISTRATION_URL: https://example.com/register/kumpanya
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
