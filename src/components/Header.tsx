@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import HeaderOption from '@/components/HeaderOption';
 import HeaderDropdown from '@/components/HeaderDropdown';
+import BuyTicketButton from './ui/buy-ticket-button';
 import MobileMenu, { type NavOption, type SponsorshipOption } from '@/components/MobileMenu';
 import headerLogo from '@/assets/header/header-pycon-logo.svg';
 
@@ -128,8 +129,10 @@ export default function Header() {
           ))}
         </nav>
 
+        <BuyTicketButton isVisible />
+
         {/* Mobile Menu Button */}
-        <div className="ml-auto flex items-center lg:hidden">
+        <div className="flex items-center lg:hidden">
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
