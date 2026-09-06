@@ -35,6 +35,10 @@ jobs:
         run: npm ci
 
       - name: Build Project
+        env:
+          KODIGO_REGISTRATION_URL: ${{ vars.KODIGO_REGISTRATION_URL }}
+          CODER_KASOSYO_REGISTRATION_URL: ${{ vars.CODER_KASOSYO_REGISTRATION_URL }}
+          KUMPANYA_REGISTRATION_URL: ${{ vars.KUMPANYA_REGISTRATION_URL }}
         run: npm run build
 
       - name: Sync Static Assets to S3
