@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import PlaceholderPage from '@/components/PlaceholderPage';
+import TicketTypesSection from '@/components/sections/ticket-types-section';
 
 export const metadata: Metadata = {
   title: 'Tickets',
@@ -15,14 +15,8 @@ export const metadata: Metadata = {
 
 export default function TicketsPage() {
   return (
-    <PlaceholderPage
-      title="TICKETS"
-      subtitle="PYCON DAVAO 2026"
-      badge="OPENING SOON"
-      description="Ticket sales for PyCon Davao 2026 will open soon! We are preparing student, professional, and patron tiers."
-      additionalText="Stay tuned on our social media channels or check back here for early bird announcements and registration links."
-      actionText="Back to Home"
-      actionHref="/"
-    />
+    <main>
+      <TicketTypesSection />
+    </main>
   );
 }

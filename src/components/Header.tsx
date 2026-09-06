@@ -129,7 +129,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <BuyTicketButton isVisible />
+        <BuyTicketButton isVisible className="ml-auto max-[350px]:hidden max-[351px]:hidden" />
 
         {/* Mobile Menu Button */}
         <div className="flex items-center lg:hidden">

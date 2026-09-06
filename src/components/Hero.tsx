@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { getCtaStatus } from '@/config/tickets-config';
 import heroLogo from '@/assets/hero/hero-logo.svg';
 import heroBridgePattern from '@/assets/hero/hero-bridge-pattern.svg';
 import heroMountainLeftBg from '@/assets/hero/hero-mountain-left-bg.svg';
@@ -6,10 +8,12 @@ import heroMountainLeftFg from '@/assets/hero/hero-mountain-left-fg.svg';
 import heroMountainRight from '@/assets/hero/hero-mountain-right.svg';
 import heroBg from '@/assets/hero/hero-bg.svg';
 import pattern4 from '@/assets/hero/pattern-4.svg';
-import heroMascot from '@/assets/hero/hero-mascot.svg'
-import heroSnake from '@/assets/hero/hero-snake.svg'
+import heroMascot from '@/assets/hero/hero-mascot.svg';
+import heroSnake from '@/assets/hero/hero-snake.svg';
 
 export default function Hero() {
+  const heroCta = getCtaStatus('hero');
+
   return (
     <section className="from-pycon-beige to-pycon-beige relative flex min-h-[55dvh] w-full flex-col justify-between overflow-hidden bg-gradient-to-b via-[#fcf5de] via-50% md:min-h-[65dvh] lg:min-h-[95dvh]">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
@@ -53,13 +57,22 @@ export default function Hero() {
         </p>
 
         <div className="relative z-30">
-          <button
-            type="button"
-            disabled
-            className="disabled:pointer-events-none contrast-50 font-heading group bg-pycon-teal text-pycon-beige-light inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-bold shadow-[0px_4px_24px_0px_rgba(4,177,164,0.35)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#039d91] hover:shadow-[0px_8px_32px_0px_rgba(4,177,164,0.45)] active:scale-[0.98] sm:px-7 sm:py-3.5 sm:text-base md:px-9 md:py-4 md:text-lg lg:text-xl"
-          >
-            <span>Early-Bird Tickets Opening Soon</span>
-          </button>
+          {heroCta.isOpen ? (
+            <Link
+              href={heroCta.href}
+              className="font-heading group bg-pycon-teal text-pycon-beige-light inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-bold shadow-[0px_4px_24px_0px_rgba(4,177,164,0.35)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#039d91] hover:shadow-[0px_8px_32px_0px_rgba(4,177,164,0.45)] active:scale-[0.98] sm:px-7 sm:py-3.5 sm:text-base md:px-9 md:py-4 md:text-lg lg:text-xl"
+            >
+              <span>{heroCta.text}</span>
+            </Link>
+          ) : (
+            <button
+              type="button"
+              disabled
+              className="font-heading group bg-pycon-teal text-pycon-beige-light inline-flex cursor-pointer items-center justify-center rounded-full px-5 py-2.5 text-xs font-bold shadow-[0px_4px_24px_0px_rgba(4,177,164,0.35)] contrast-50 transition-all duration-200 disabled:pointer-events-none sm:px-7 sm:py-3.5 sm:text-base md:px-9 md:py-4 md:text-lg lg:text-xl"
+            >
+              <span>{heroCta.text}</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -125,7 +138,7 @@ export default function Hero() {
       {/* Characters: Mascot (Left) & Snake (Right) */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 select-none">
         {/* Left Mascot */}
-        <div className="absolute -left-6 bottom-6 w-[130px] sm:-left-10 sm:bottom-8 sm:w-[180px] md:-left-14 md:bottom-10 md:w-[240px] lg:-left-16 lg:bottom-12 lg:w-[260px] xl:-left-0 xl:w-[320px]">
+        <div className="absolute bottom-6 -left-6 w-[130px] sm:bottom-8 sm:-left-10 sm:w-[180px] md:bottom-10 md:-left-14 md:w-[240px] lg:bottom-12 lg:-left-16 lg:w-[260px] xl:-left-0 xl:w-[320px]">
           <Image
             src={heroMascot}
             alt="PyCon Davao Mascot"
