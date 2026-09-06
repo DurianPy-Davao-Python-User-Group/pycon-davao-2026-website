@@ -5,7 +5,6 @@ import HomeFaqSection from '@/components/sections/home-faq-section';
 import { HomeFaqSectionData } from '@/data/home-faq-section-data';
 import PyCon2025Highlights from '@/components/PyCon2025Highlights';
 import CallToAction from '@/components/CallToAction';
-import TicketTypesSection from '@/components/sections/ticket-types-section';
 
 export default function Home() {
   return (
@@ -14,7 +13,6 @@ export default function Home() {
       <WhatIsPyCon />
       <Conference />
       <PyCon2025Highlights />
-      <TicketTypesSection />
       <HomeFaqSection data={HomeFaqSectionData} />
       <CallToAction />
     </>

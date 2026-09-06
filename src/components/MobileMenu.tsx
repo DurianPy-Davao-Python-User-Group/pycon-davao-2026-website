@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ChevronDown, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import HeaderOption from '@/components/HeaderOption';
+import BuyTicketButton from '@/components/ui/buy-ticket-button';
 
 export interface NavOption {
   label: string;
@@ -43,6 +44,11 @@ export default function MobileMenu({
       <div className="overflow-hidden">
         <div className="border-pycon-header-text/10 bg-pycon-beige rounded-b-[20px] border-t px-6 py-6 shadow-lg">
           <nav className="flex flex-col gap-4 text-center" aria-label="Mobile Navigation">
+            {/* Buy Tickets option (first option, visible only at 350px and below) */}
+            <div className="max-[350px]:block max-[351px]:block min-[352px]:hidden">
+              <BuyTicketButton isVisible onClick={onClose} className="w-full py-2.5 text-sm" />
+            </div>
+
             {/* Primary Options (Home, Code of Conduct, etc.) */}
             {primaryOptions.map((option) => (
               <HeaderOption

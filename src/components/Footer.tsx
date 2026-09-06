@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { getCtaStatus } from '@/config/tickets-config';
 
 import footerFrame from '@/assets/hero/footer-frame.svg';
 import footerInfoPattern from '@/assets/hero/footer-info-pattern-1.svg';
@@ -31,6 +33,8 @@ const socials = [
 ];
 
 export default function Footer() {
+  const footerCta = getCtaStatus('footer');
+
   return (
     <>
       <section className="relative overflow-hidden bg-[#FBEFCF]">
@@ -156,13 +160,22 @@ export default function Footer() {
               className="h-auto w-[320px] max-w-[86vw] select-none sm:w-[370px] md:w-[430px] lg:w-[500px]"
             />
 
-            <button
-              type="button"
-              disabled
-              className="disabled:pointer-events-none contrast-50 font-heading mt-5 inline-flex h-[52px] w-[290px] cursor-pointer items-center justify-center rounded-full bg-[#F99508] px-8 text-base font-medium text-[#FBEFCF] shadow-[0px_4px_24px_0px_rgba(249,149,8,0.28)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#e98a00] hover:shadow-[0px_8px_32px_0px_rgba(249,149,8,0.38)] active:scale-[0.98] sm:h-[54px] sm:w-[300px] sm:text-lg md:w-[300px] lg:h-[56px] lg:w-[335px] lg:text-xl"
-            >
-              TICKETS OPENING SOON
-            </button>
+            {footerCta.isOpen ? (
+              <Link
+                href={footerCta.href}
+                className="font-heading mt-6 inline-flex min-h-[54px] w-auto max-w-[calc(100vw-64px)] cursor-pointer items-center justify-center rounded-full bg-[#F99508] px-7 py-4 text-center text-sm font-semibold tracking-wide text-[#FBEFCF] shadow-[0px_4px_24px_0px_rgba(249,149,8,0.28)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#e98a00] hover:shadow-[0px_8px_32px_0px_rgba(249,149,8,0.38)] active:scale-[0.98] sm:min-h-[58px] sm:max-w-none sm:px-10 sm:py-4 sm:text-base sm:whitespace-nowrap md:min-h-[60px] md:px-12 md:py-4.5 md:text-lg"
+              >
+                {footerCta.text}
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled
+                className="font-heading mt-6 inline-flex min-h-[54px] w-auto max-w-[calc(100vw-64px)] items-center justify-center rounded-full bg-[#F99508] px-7 py-4 text-center text-sm font-semibold tracking-wide text-[#FBEFCF] shadow-[0px_4px_24px_0px_rgba(249,149,8,0.28)] contrast-50 transition-all duration-200 disabled:pointer-events-none sm:min-h-[58px] sm:max-w-none sm:px-10 sm:py-4 sm:text-base sm:whitespace-nowrap md:min-h-[60px] md:px-12 md:py-4.5 md:text-lg"
+              >
+                {footerCta.text}
+              </button>
+            )}
 
             <p className="mt-6 max-w-[960px] px-5 text-center font-sans text-[18px] leading-[1.45] font-medium sm:text-[18px] md:text-[19px] lg:mt-7 lg:text-[20px]">
               Message us at{' '}
@@ -202,7 +215,7 @@ export default function Footer() {
               height={322}
               priority
               draggable={false}
-              className="h-auto w-[220%] min-w-[780px] max-w-none select-none sm:w-[160%] sm:min-w-[960px] md:w-[130%] md:min-w-[1200px] lg:w-full lg:min-w-0"
+              className="h-auto w-[220%] max-w-none min-w-[780px] select-none sm:w-[160%] sm:min-w-[960px] md:w-[130%] md:min-w-[1200px] lg:w-full lg:min-w-0"
             />
           </div>
         </div>

@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { getCtaStatus } from '@/config/tickets-config';
 import ctaBg from '@/assets/cta/mobile-bridge-bg.svg';
 import ctaBridgePattern from '@/assets/cta/cta-bridge-pattern.svg';
 import ctaCard from '@/assets/cta/cta-image.jpg';
@@ -8,8 +10,10 @@ import mascot from '@/assets/cta/pycon-mascot.svg';
 import { Button } from '@/components/ui/button';
 
 export default function CallToAction() {
+  const cta = getCtaStatus('cta');
+
   return (
-    <section className="to-pycon-teal relative flex h-auto min-h-[55dvh] sm:min-h-[60dvh] w-full flex-col overflow-hidden bg-gradient-to-b from-transparent p-6 sm:p-10 md:min-h-[70dvh] md:p-14 lg:min-h-[90dvh] lg:p-20 xl:min-h-[100dvh]">
+    <section className="to-pycon-teal relative flex h-auto min-h-[55dvh] w-full flex-col overflow-hidden bg-gradient-to-b from-transparent p-6 sm:min-h-[60dvh] sm:p-10 md:min-h-[70dvh] md:p-14 lg:min-h-[90dvh] lg:p-20 xl:min-h-[100dvh]">
       {/* Mobile background */}
       <Image
         src={ctaBg}
@@ -52,9 +56,21 @@ export default function CallToAction() {
           <p className="text-foreground w-auto text-center text-sm sm:text-base md:text-lg lg:w-[550px] lg:text-xl xl:w-auto">
             Secure your badge and be part of Davao&apos;s biggest open-source celebration.
           </p>
-          <Button disabled className="disabled:pointer-events-none contrast-50 w-[200px] cursor-pointer rounded-full px-6 py-5.5 text-sm font-bold sm:px-8 sm:py-6.5 sm:text-base md:w-[300px] md:px-10 md:py-7.5 md:text-lg lg:text-xl">
-            Coming Soon
-          </Button>
+          {cta.isOpen ? (
+            <Link
+              href={cta.href}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex w-auto min-w-[200px] cursor-pointer items-center justify-center rounded-full px-6 py-3.5 text-center text-sm font-bold shadow-md transition-all duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:outline-none sm:min-w-[260px] sm:px-8 sm:py-4 sm:text-base md:text-lg"
+            >
+              {cta.text}
+            </Link>
+          ) : (
+            <Button
+              disabled
+              className="w-[200px] cursor-pointer rounded-full px-6 py-5.5 text-sm font-bold contrast-50 disabled:pointer-events-none sm:px-8 sm:py-6.5 sm:text-base md:w-[300px] md:px-10 md:py-7.5 md:text-lg lg:text-xl"
+            >
+              Coming Soon
+            </Button>
+          )}
         </div>
       </div>
 
@@ -66,7 +82,7 @@ export default function CallToAction() {
         unoptimized
         width={371}
         height={741}
-        className="pointer-events-none absolute bottom-58 -left-32 z-40 w-[70vw] drop-shadow-[0px_4px_39.3px_#00000040] md:bottom-78 md:-left-45 md:w-[50vw] lg:bottom-80 lg:-left-80 lg:w-[60vw] xl:bottom-95 xl:w-[45vw] overflow-visible"
+        className="pointer-events-none absolute bottom-58 -left-32 z-40 w-[70vw] overflow-visible drop-shadow-[0px_4px_39.3px_#00000040] md:bottom-78 md:-left-45 md:w-[50vw] lg:bottom-80 lg:-left-80 lg:w-[60vw] xl:bottom-95 xl:w-[45vw]"
       />
 
       <Image
