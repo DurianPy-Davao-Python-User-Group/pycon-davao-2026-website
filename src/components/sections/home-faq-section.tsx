@@ -11,6 +11,32 @@ interface HomeFaqSectionProps {
 }
 
 const HomeFaqSection = ({ data }: HomeFaqSectionProps) => {
+  const leftColumn = data.filter((_, index) => index % 2 === 0);
+  const rightColumn = data.filter((_, index) => index % 2 === 1);
+
+  const renderFaqItem = (item: HomeFaqItem, index: number) => {
+    const question = typeof item === 'string' ? item : item.question;
+    const answer = typeof item === 'string' ? '' : item.answer;
+
+    return (
+      <AccordionItem
+        key={`${question}-${index}`}
+        value={`faq-${index}`}
+        className="overflow-hidden rounded-3xl border border-[#f4d79a] bg-[#fde6b5] transition-colors focus-within:border-[#efc66f] hover:border-[#efc66f]"
+      >
+        <AccordionTrigger className="font-heading text-pycon-dark-blue [&_[data-slot=accordion-trigger-icon]]:text-pycon-dark-blue min-h-11 cursor-pointer items-center px-4 py-3 font-bold hover:no-underline sm:px-5">
+          {question}
+        </AccordionTrigger>
+
+        {answer && (
+          <AccordionContent className="text-pycon-dark-blue px-4 pb-4 leading-relaxed sm:px-5">
+            {answer}
+          </AccordionContent>
+        )}
+      </AccordionItem>
+    );
+  };
+
   return (
     <section className="bg-pycon-beige px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
       <div className="mx-auto max-w-7xl">
@@ -18,29 +44,16 @@ const HomeFaqSection = ({ data }: HomeFaqSectionProps) => {
           Frequently Asked Questions
         </h2>
 
-        <Accordion className="grid items-start gap-x-10 gap-y-3 md:grid-cols-2">
-          {data.map((item, index) => {
-            const question = typeof item === 'string' ? item : item.question;
-            const answer = typeof item === 'string' ? '' : item.answer;
+        <Accordion className="w-full">
+          <div className="grid items-start gap-y-3 md:grid-cols-2 md:gap-x-10">
+            <div className="flex flex-col gap-y-3">
+              {leftColumn.map((item, index) => renderFaqItem(item, index * 2))}
+            </div>
 
-            return (
-              <AccordionItem
-                key={`${question}-${index}`}
-                value={`faq-${index}`}
-                className="overflow-hidden rounded-3xl border border-[#f4d79a] bg-[#fde6b5] transition-colors focus-within:border-[#efc66f] hover:border-[#efc66f]"
-              >
-                <AccordionTrigger className="font-heading text-pycon-dark-blue [&_[data-slot=accordion-trigger-icon]]:text-pycon-dark-blue min-h-11 cursor-pointer items-center px-4 py-3 font-bold hover:no-underline sm:px-5">
-                  {question}
-                </AccordionTrigger>
-
-                {answer && (
-                  <AccordionContent className="text-pycon-dark-blue px-4 pb-4 leading-relaxed sm:px-5">
-                    {answer}
-                  </AccordionContent>
-                )}
-              </AccordionItem>
-            );
-          })}
+            <div className="flex flex-col gap-y-3">
+              {rightColumn.map((item, index) => renderFaqItem(item, index * 2 + 1))}
+            </div>
+          </div>
         </Accordion>
       </div>
     </section>

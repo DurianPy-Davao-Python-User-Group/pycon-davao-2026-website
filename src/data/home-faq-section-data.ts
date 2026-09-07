@@ -14,34 +14,29 @@ export const homeFaqSectionData: HomeFaqSectionData = {
     {
       question: 'What is PyCon Davao 2026?',
       answer:
-        'PyCon Davao 2026 is a community conference for Python developers, learners, educators, and technology enthusiasts to connect and share knowledge.',
+        'PyCon Davao 2026 is a premier community-driven conference bringing together Python developers, educators, researchers, learners, and tech enthusiasts to connect, collaborate, and share knowledge.',
     },
     {
-      question: 'Who can attend the conference?',
+      question: 'When and where will the conference take place?',
       answer:
-        'Everyone is welcome, from people writing their first lines of Python to experienced developers and industry professionals.',
+        'The confirmed conference schedule, venue details, and program guide will be published on the official PyCon Davao website and our official social media channels.',
     },
     {
-      question: 'When and where will it take place?',
+      question: 'Who can attend PyCon Davao 2026?',
       answer:
-        'The confirmed conference schedule and venue will be published on this website and the official PyCon Davao social channels.',
+        'PyCon Davao is open to anyone passionate about Python, programming, and technology. Students, software engineers, educators, researchers, industry professionals, and complete beginners are all warmly welcome.',
     },
     {
-      question: 'How can I purchase a ticket?',
+      question: 'Do I need Python experience to attend?',
       answer:
-        'Ticket options and registration instructions will be available on the conference website once registration opens.',
-    },
-    {
-      question: 'What does my ticket include?',
-      answer:
-        'Ticket inclusions vary by ticket type. The registration page will list the sessions, meals, merchandise, and other benefits included with each option.',
+        'No prior Python experience is necessary. PyCon Davao welcomes attendees of all skill levels, offering sessions and activities suitable for both beginners and seasoned practitioners.',
     },
     {
       question: 'Can I submit a talk or workshop proposal?',
       answer: React.createElement(
         React.Fragment,
         null,
-        'Yes. Proposal guidelines, available session formats, and submission deadlines will be shared when the call for proposals opens. ',
+        'Yes. Proposal guidelines, session formats, and submission deadlines are available through our Call for Proposals (CFP). ',
         React.createElement(
           'a',
           {
@@ -56,21 +51,116 @@ export const homeFaqSectionData: HomeFaqSectionData = {
       ),
     },
     {
-      question: 'Do I need Python experience to attend?',
-      answer:
-        'No. The conference welcomes all experience levels, and the program will identify sessions so you can find topics suited to your background.',
-    },
-    {
       question: 'Is the venue accessible?',
       answer:
-        'Accessibility information will be included with the final venue details. You may also contact the organizers about specific accommodations.',
+        'Venue accessibility details will be provided alongside our final venue announcement. If you require specific accommodations or assistance, please reach out to the organizing team in advance.',
     },
     {
-      question: 'How can I contact the organizers?',
+      question: 'How do I register for PyCon Davao 2026?',
+      answer:
+        'Registration is handled securely through TechTix, accessible via the official PyCon Davao 2026 website. Choose your preferred ticket tier and complete the registration steps online.',
+    },
+    {
+      question: 'What ticket options are available?',
+      answer:
+        'We offer multiple ticket tiers tailored for students, professionals, and community supporters. Please visit the Tickets section of the official PyCon Davao 2026 website for current pricing, inclusions, and availability.',
+    },
+    {
+      question: 'What does my ticket include?',
+      answer:
+        'Ticket inclusions vary based on the selected tier, and may include access to sessions, conference kits, meals/refreshments, and certificates of attendance. A detailed breakdown is available on the official website.',
+    },
+    {
+      question: 'Is one ticket valid for both days?',
+      answer:
+        'Registration for Sprint Day is separate from Main Conference tickets. Attendees can select Sprint Day as an optional add-on during checkout, or register for it individually.',
+    },
+    {
+      question: 'Can I attend only the Main Conference?',
+      answer:
+        'Yes. You may register exclusively for the Main Conference. Review the available ticket options and inclusions on the official PyCon Davao 2026 website.',
+    },
+    {
+      question: 'Can I attend only Sprint Day?',
+      answer:
+        'Yes. You may register to participate in Sprint Day only. Details and standalone ticket options can be found on the official website.',
+    },
+    {
+      question: 'Is on-site registration available?',
+      answer:
+        'No. On-site registration will not be available for either the Main Conference or Sprint Day due to venue capacity and security protocols. All attendees must register online in advance.',
+    },
+    {
+      question: 'Are tickets transferable?',
+      answer:
+        'No. PyCon Davao 2026 tickets are strictly non-transferable. Badges and event entry are reserved exclusively for the registered attendee named on the ticket.',
+    },
+    {
+      question: 'What should I do if I encounter an issue with my registration?',
       answer: React.createElement(
         React.Fragment,
         null,
-        'You can reach out to us via email at ',
+        'For ticketing inquiries, payment issues, or registration concerns, please reach out to us at ',
+        React.createElement(
+          'a',
+          {
+            href: 'mailto:contact@durianpy.org',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'contact@durianpy.org'
+        ),
+        ' or send a message via the ',
+        React.createElement(
+          'a',
+          {
+            href: 'https://www.facebook.com/durianpy',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'DurianPy Facebook page'
+        ),
+        '.'
+      ),
+    },
+    {
+      question: 'Where can I ask questions or report issues about the website?',
+      answer: React.createElement(
+        React.Fragment,
+        null,
+        'For technical feedback, bug reports, or questions regarding the official event website, please email ',
+        React.createElement(
+          'a',
+          {
+            href: 'mailto:contact@durianpy.org',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'contact@durianpy.org'
+        ),
+        ' or contact us through the ',
+        React.createElement(
+          'a',
+          {
+            href: 'https://www.facebook.com/durianpy',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'DurianPy Facebook page'
+        ),
+        '.'
+      ),
+    },
+    {
+      question: 'How can I contact the organizers for other inquiries?',
+      answer: React.createElement(
+        React.Fragment,
+        null,
+        'For inquiries regarding speaking, sponsorship, partnerships, or community collaborations, you can reach our team via email at ',
         React.createElement(
           'a',
           {
@@ -128,7 +218,7 @@ export const homeFaqSectionData: HomeFaqSectionData = {
           },
           'GitHub'
         ),
-        ' for questions about registration, speaking, sponsorship, accessibility, or the event itself.'
+        '.'
       ),
     },
   ],
