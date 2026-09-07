@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { getCtaStatus } from '@/config/tickets-config';
 
@@ -33,7 +36,21 @@ const socials = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
   const footerCta = getCtaStatus('footer');
+  const isTicketsPage = pathname === '/tickets' || pathname === '/tickets/';
+
+  const handleCtaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isTicketsPage) {
+      e.preventDefault();
+      const section = document.getElementById('ticket-types');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <>
@@ -163,6 +180,7 @@ export default function Footer() {
             {footerCta.isOpen ? (
               <Link
                 href={footerCta.href}
+                onClick={handleCtaClick}
                 className="font-heading mt-6 inline-flex min-h-[54px] w-auto max-w-[calc(100vw-64px)] cursor-pointer items-center justify-center rounded-full bg-[#F99508] px-7 py-4 text-center text-sm font-semibold tracking-wide text-[#FBEFCF] shadow-[0px_4px_24px_0px_rgba(249,149,8,0.28)] transition-all duration-200 hover:scale-[1.03] hover:bg-[#e98a00] hover:shadow-[0px_8px_32px_0px_rgba(249,149,8,0.38)] active:scale-[0.98] sm:min-h-[58px] sm:max-w-none sm:px-10 sm:py-4 sm:text-base sm:whitespace-nowrap md:min-h-[60px] md:px-12 md:py-4.5 md:text-lg"
               >
                 {footerCta.text}

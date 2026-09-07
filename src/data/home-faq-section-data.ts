@@ -1,4 +1,5 @@
 import React, { type ReactNode } from 'react';
+import Link from 'next/link';
 
 export interface HomeFaqItem {
   question: string;
@@ -57,23 +58,62 @@ export const homeFaqSectionData: HomeFaqSectionData = {
     },
     {
       question: 'How do I register for PyCon Davao 2026?',
-      answer:
-        'Registration is handled securely through TechTix, accessible via the official PyCon Davao 2026 website. Choose your preferred ticket tier and complete the registration steps online.',
+      answer: React.createElement(
+        React.Fragment,
+        null,
+        'Registration is handled securely through TechTix, accessible via the ',
+        React.createElement(
+          Link,
+          {
+            href: '/tickets',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'Tickets section of the official PyCon Davao 2026 website'
+        ),
+        '. Choose your preferred ticket tier and complete the registration steps online.'
+      ),
     },
     {
       question: 'What ticket options are available?',
-      answer:
-        'We offer multiple ticket tiers tailored for students, professionals, and community supporters. Please visit the Tickets section of the official PyCon Davao 2026 website for current pricing, inclusions, and availability.',
+      answer: React.createElement(
+        React.Fragment,
+        null,
+        'We offer multiple ticket tiers tailored for students and professionals. Please visit the ',
+        React.createElement(
+          Link,
+          {
+            href: '/tickets',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'Tickets section of the official PyCon Davao 2026 website'
+        ),
+        ' for current pricing, and inclusions.'
+      ),
     },
     {
       question: 'What does my ticket include?',
-      answer:
-        'Ticket inclusions vary based on the selected tier, and may include access to sessions, conference kits, meals/refreshments, and certificates of attendance. A detailed breakdown is available on the official website.',
+      answer: React.createElement(
+        React.Fragment,
+        null,
+        'Ticket inclusions vary based on the selected tier, and may include access to sessions, conference kits, meals/refreshments, and certificates of attendance. A detailed breakdown is available on the ',
+        React.createElement(
+          Link,
+          {
+            href: '/tickets',
+            className:
+              'font-semibold underline underline-offset-2 hover:text-pycon-orange transition-colors',
+          },
+          'Tickets section of the official PyCon Davao 2026 website'
+        ),
+        '.'
+      ),
     },
     {
       question: 'Is one ticket valid for both days?',
       answer:
-        'Registration for Sprint Day is separate from Main Conference tickets. Attendees can select Sprint Day as an optional add-on during checkout, or register for it individually.',
+        'Registration for Sprint Day is separate from Main Conference tickets. Attendees can select Sprint Day as an optional add-on.',
     },
     {
       question: 'Can I attend only the Main Conference?',
@@ -83,7 +123,7 @@ export const homeFaqSectionData: HomeFaqSectionData = {
     {
       question: 'Can I attend only Sprint Day?',
       answer:
-        'Yes. You may register to participate in Sprint Day only. Details and standalone ticket options can be found on the official website.',
+        'No. It is considered as an optional add-on. You must have a Main Conference ticket to purchase a Sprint Day ticket.',
     },
     {
       question: 'Is on-site registration available?',

@@ -64,7 +64,7 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
     <section
       id="ticket-types"
       aria-labelledby="ticket-types-heading"
-      className="bg-pycon-beige relative isolate overflow-hidden px-5 py-16 sm:px-8 md:py-20 lg:px-12 lg:py-24"
+      className="bg-pycon-beige relative isolate overflow-hidden px-5 py-16 scroll-mt-20 sm:px-8 sm:scroll-mt-24 md:py-20 md:scroll-mt-28 lg:px-12 lg:py-24"
     >
       <div
         aria-hidden
