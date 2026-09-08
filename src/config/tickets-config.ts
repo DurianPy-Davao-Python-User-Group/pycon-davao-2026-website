@@ -34,7 +34,7 @@ export const SALES_PROFILES: Record<SaleId, SaleProfile> = {
     name: '9.9 Sale',
     badge: '9.9 SALE — 25% OFF',
     discountPercent: 25,
-    heroCtaText: '9.9 Mega Sale (25% OFF)',
+    heroCtaText: '9.9 Sale (25% OFF)',
     footerCtaText: '9.9 SALE (25% OFF)',
     headerCtaText: '9.9 Sale (25% OFF)',
   },
@@ -53,7 +53,7 @@ export const SALES_PROFILES: Record<SaleId, SaleProfile> = {
  * Switch the active sale here:
  * Options: 'none' | 'early-bird' | '9.9-sale' | 'flash-sale'
  */
-export const ACTIVE_SALE: SaleId = 'early-bird';
+export const ACTIVE_SALE: SaleId = '9.9-sale';
 
 /**
  * Toggle whether ticket registrations are actively open.
