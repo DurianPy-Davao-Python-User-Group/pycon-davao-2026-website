@@ -29,13 +29,6 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
   const kasosyoPricing = getTicketPricing('kasosyo');
   const extraPricing = getTicketPricing('extra');
 
-  // Kumpanya promo is exclusive of any ticket sale discounts (fixed 15% off regular Coder price)
-  const kumpanyaOriginalPrice = coderPricing.regularPrice;
-  const kumpanyaDiscountedPrice =
-    Math.round(
-      coderPricing.regularPrice * (1 - BASE_TICKETS.kumpanyaPromo.discountPercent / 100) * 100,
-    ) / 100;
-
   // Close tooltip when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent | TouchEvent) {
@@ -64,7 +57,7 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
     <section
       id="ticket-types"
       aria-labelledby="ticket-types-heading"
-      className="bg-pycon-beige relative isolate overflow-hidden px-5 py-16 scroll-mt-20 sm:px-8 sm:scroll-mt-24 md:py-20 md:scroll-mt-28 lg:px-12 lg:py-24"
+      className="bg-pycon-beige relative isolate scroll-mt-20 overflow-hidden px-5 py-16 sm:scroll-mt-24 sm:px-8 md:scroll-mt-28 md:py-20 lg:px-12 lg:py-24"
     >
       <div
         aria-hidden
@@ -257,34 +250,34 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
                   e.stopPropagation();
                   handleCardClick(registrationLinks.kumpanya);
                 }}
+                role={IS_REGISTRATION_OPEN ? 'button' : undefined}
+                tabIndex={IS_REGISTRATION_OPEN ? 0 : undefined}
+                onKeyDown={(e) => {
+                  if (IS_REGISTRATION_OPEN && (e.key === 'Enter' || e.key === ' ')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleCardClick(registrationLinks.kumpanya);
+                  }
+                }}
+                aria-label={`Kumpanya/Company Promo: Get tickets for as low as ${formatPHP(BASE_TICKETS.kumpanyaPromo.asLowAsPrice)}`}
                 className={cn(
-                  'mt-6 rounded-2xl border-2 border-dashed border-white/60 bg-white/10 p-4 transition-all duration-200',
+                  'mt-6 rounded-2xl border-2 border-dashed border-white/60 bg-white/10 p-5 text-center transition-all duration-200',
                   IS_REGISTRATION_OPEN
-                    ? 'cursor-pointer hover:border-white hover:bg-white/20 hover:shadow-md'
+                    ? 'cursor-pointer hover:border-white hover:bg-white/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
                     : '',
                 )}
               >
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-heading rounded-full bg-[#F99508] px-2.5 py-0.5 text-[11px] font-black text-white uppercase">
-                    Save 15%
-                  </span>
-                  <span className="text-[11px] font-medium text-white/80">
-                    Min. {BASE_TICKETS.kumpanyaPromo.minPurchases} purchases
-                  </span>
-                </div>
-                <h4 className="font-heading mt-2 text-base font-bold text-white">
+                <h4 className="font-heading text-base font-black tracking-tight text-white uppercase sm:text-lg">
                   Kumpanya/Company Promo
                 </h4>
-                <div className="mt-1 flex items-baseline gap-2">
-                  <span className="font-heading text-xl font-extrabold text-white">
-                    {formatPHP(kumpanyaDiscountedPrice)}
-                  </span>
-                  <span className="font-heading text-xs text-white/70 line-through">
-                    {formatPHP(kumpanyaOriginalPrice)}
-                  </span>
+                <p className="font-heading mt-2 text-xs font-bold tracking-wider text-white/90 uppercase sm:text-sm">
+                  Get tickets for as low as
+                </p>
+                <div className="font-heading mt-1 text-3xl font-black tracking-tight text-white sm:text-4xl">
+                  {formatPHP(BASE_TICKETS.kumpanyaPromo.asLowAsPrice)}
                 </div>
-                <p className="mt-1 text-[11px] text-white/80">
-                  Click here to register bulk/corporate tickets
+                <p className="mt-2 font-sans text-xs font-medium text-white/85 sm:text-sm">
+                  The more tickets you buy, the bigger your discount!
                 </p>
               </div>
             </div>

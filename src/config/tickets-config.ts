@@ -87,10 +87,8 @@ export const BASE_TICKETS = {
   kumpanyaPromo: {
     id: 'kumpanya',
     name: 'Kumpanya/Company Promo',
-    discountPercent: 15,
-    minPurchases: 10,
-    // Applied to Coder base: 750 * (1 - 0.15) = 637.50
-    calculatedPrice: 637.5,
+    // Tiered volume discount promo: get tickets for as low as ₱487.50
+    asLowAsPrice: 487.5,
   },
   extra: {
     id: 'extra',
@@ -133,8 +131,7 @@ export function getTicketPricing(
   const base = BASE_TICKETS[ticketId];
   const sale = getActiveSale();
   // Scholarship ('kodigo') and Sprint Day add-on ('extra') are fixed prices and excluded from ticket sales
-  const discountPercent =
-    ticketId === 'kodigo' || ticketId === 'extra' ? 0 : sale.discountPercent;
+  const discountPercent = ticketId === 'kodigo' || ticketId === 'extra' ? 0 : sale.discountPercent;
   const hasDiscount = discountPercent > 0;
 
   const discountedPrice = hasDiscount
