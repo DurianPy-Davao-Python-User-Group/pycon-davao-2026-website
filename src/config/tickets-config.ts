@@ -53,7 +53,7 @@ export const SALES_PROFILES: Record<SaleId, SaleProfile> = {
  * Switch the active sale here:
  * Options: 'none' | 'early-bird' | '9.9-sale' | 'flash-sale'
  */
-export const ACTIVE_SALE: SaleId = '9.9-sale';
+export const ACTIVE_SALE: SaleId = 'none';
 
 /**
  * Toggle whether ticket registrations are actively open.
