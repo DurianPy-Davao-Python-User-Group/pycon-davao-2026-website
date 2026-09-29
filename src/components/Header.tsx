@@ -13,6 +13,7 @@ import headerLogo from '@/assets/header/header-pycon-logo.svg';
 const PRIMARY_NAV_OPTIONS: NavOption[] = [
   { label: 'Home', href: '/' },
   { label: 'Code of Conduct', href: '/code-of-conduct' },
+  { label: 'Travel Guide', href: '/travel-guide' },
 ];
 
 const SPONSORSHIP_OPTIONS: SponsorshipOption[] = [
@@ -77,7 +78,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="bg-pycon-beige sticky top-0 z-60 w-full rounded-b-[20px] shadow-[0_8px_30px_rgba(7,46,71,0.08),0_2px_8px_rgba(7,46,71,0.04)] transition-all duration-300"
+      className="bg-pycon-beige sticky top-0 z-60 w-full overflow-x-clip rounded-b-[20px] shadow-[0_8px_30px_rgba(7,46,71,0.08),0_2px_8px_rgba(7,46,71,0.04)] transition-all duration-300"
     >
       <div className="flex h-[70px] w-full items-center justify-between px-6 sm:h-[82px] sm:px-10 md:h-[92px] lg:justify-start lg:gap-14 xl:gap-20 2xl:gap-24">
         {/* Logo */}
@@ -111,6 +112,7 @@ export default function Header() {
               label={option.label}
               isExternal={option.isExternal}
               className={desktopOptionClass}
+              activeClassName="text-pycon-header-hover"
             />
           ))}
 
@@ -129,7 +131,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <BuyTicketButton isVisible className="ml-auto max-[350px]:hidden max-[351px]:hidden" />
+        <BuyTicketButton isVisible className="ml-auto hidden sm:inline-flex" />
 
         {/* Mobile Menu Button */}
         <div className="flex items-center lg:hidden">
