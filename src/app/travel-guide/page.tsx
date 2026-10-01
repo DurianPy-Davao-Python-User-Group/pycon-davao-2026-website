@@ -49,7 +49,16 @@ export default function TravelGuidePage() {
                     id="travel-guide-day-1-venue"
                     className="font-heading text-pycon-orange mt-2 text-lg leading-tight font-medium sm:text-xl lg:text-[clamp(1.5rem,2.08vw,2.5rem)]"
                   >
-                    Finster Auditorium, Ateneo de Davao University
+                    <a
+                      href="https://maps.app.goo.gl/H4HgpAG9dVsahDLP7"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-sm underline decoration-transparent underline-offset-4 hover:decoration-current focus-visible:decoration-current focus-visible:outline-pycon-teal focus-visible:outline-2 focus-visible:outline-offset-4"
+                    >
+                      <span>Finster Auditorium, Ateneo de Davao University</span>
+                      <MapPin aria-hidden="true" className="size-[0.8em] shrink-0" />
+                      <span className="sr-only">(opens in a new tab)</span>
+                    </a>
                   </h3>
                   <p className="mt-2">Jacinto Street, Davao City</p>
 
