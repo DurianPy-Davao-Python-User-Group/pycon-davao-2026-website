@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero';
 import Conference from '@/components/Conference';
+import Speakers from '@/components/Speakers';
 import WhatIsPyCon from './components/what-is-pycon';
 import HomeFaqSection from '@/components/sections/home-faq-section';
 import { HomeFaqSectionData } from '@/data/home-faq-section-data';
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <WhatIsPyCon />
       <Conference />
+      <Speakers />
       <PyCon2025Highlights />
       <HomeFaqSection data={HomeFaqSectionData} />
       <CallToAction />
