@@ -329,7 +329,7 @@ export default function PyCon2025Highlights() {
           </p>
         </div>
 
-        <Divider />
+        
       </div>
     </section>
   );
