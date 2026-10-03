@@ -58,7 +58,7 @@ function Carousel({
   );
   const subscribe = React.useCallback(
     (callback: () => void) => {
-      if (!api) return () => {};
+      if (!api) return () => { };
       api.on('select', callback);
       api.on('reInit', callback);
       return () => {
