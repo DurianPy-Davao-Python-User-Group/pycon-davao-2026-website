@@ -77,21 +77,18 @@ type EventColorConfig = [`bg-pycon-${string}`, `text-pycon-${string}`];
 const getEventColorConfig = (eventType?: ProgramEntryType): EventColorConfig => {
   switch (eventType) {
     case 'break':
-      return ['bg-pycon-gray', 'text-pycon-gray'];
     case 'workshop':
       return ['bg-pycon-orange', 'text-pycon-orange'];
 
     case 'session':
-      return ['bg-pycon-violet', 'text-pycon-violet'];
-
     case 'open-spaces':
-      return ['bg-pycon-lavender', 'text-pycon-lavender'];
+      return ['bg-pycon-teal', 'text-pycon-teal'];
 
     case 'registration':
     case 'opening-remarks':
     case 'lightning-session':
     default:
-      return ['bg-pycon-red-orange', 'text-pycon-red-orange'];
+      return ['bg-pycon-green', 'text-pycon-green'];
   }
 };
 
