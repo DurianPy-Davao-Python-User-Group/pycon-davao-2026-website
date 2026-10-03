@@ -12,6 +12,7 @@ import headerLogo from '@/assets/header/header-pycon-logo.svg';
 
 const PRIMARY_NAV_OPTIONS: NavOption[] = [
   { label: 'Home', href: '/' },
+  { label: 'Program', href: '/program' },
   { label: 'Code of Conduct', href: '/code-of-conduct' },
   { label: 'Travel Guide', href: '/travel-guide' },
 ];
