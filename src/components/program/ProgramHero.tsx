@@ -1,61 +1,88 @@
 import Image from 'next/image';
-import flowerOne from '@/assets/program/bg-flower1.svg';
-import flowerTwo from '@/assets/program/bg-flower2.svg';
-import heroPattern from '@/assets/program/hero-pattern.svg';
-import heroPatternTwo from '@/assets/program/hero-pattern2.svg';
+import backgroundFlowersLeft from '@/assets/program/bg-flower1.svg';
+import backgroundFlowersRight from '@/assets/program/bg-flower2.svg';
+import backgroundPattern from '@/assets/program/bg-pattern1.svg';
+import tail from '@/assets/program/tail.svg';
+import bottomPattern from '@/assets/program/hero-pattern.svg';
+import bottomTribalPattern from '@/assets/program/hero-pattern2.svg';
 import mascot from '@/assets/program/mascot.svg';
+import gradient from '@/assets/program/gradient.svg';
 
 export default function ProgramHero() {
   return (
-    <section className="bg-pycon-beige relative isolate overflow-hidden">
-      <Image
-        src={flowerOne}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute top-5 -left-24 h-[85%] w-auto opacity-35"
-      />
-      <Image
-        src={flowerTwo}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute top-0 -right-28 h-[95%] w-auto opacity-30"
-      />
-      <div className="relative mx-auto flex min-h-[310px] max-w-[1440px] items-center px-6 py-12 sm:min-h-[370px] sm:px-12 lg:min-h-[470px] lg:px-16">
-        <div className="relative z-10 mx-auto -translate-y-7 text-center sm:-translate-y-8 lg:mx-0 lg:ml-[8%] lg:max-w-4xl lg:translate-y-0 lg:text-left">
-          <h1 className="font-heading text-pycon-orange mb-1 text-[clamp(2.5rem,9vw,4rem)] leading-[0.95] font-extrabold tracking-tight lg:text-[clamp(3rem,9vw,7rem)]">
+    <>
+      <section
+        className="relative flex min-h-[280px] w-full items-center justify-center overflow-hidden bg-pycon-beige sm:min-h-[300px] sm:aspect-[1369/557]"
+      >
+        {/* Background decorations */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 bg-no-repeat"
+          aria-hidden="true"
+          style={{
+            backgroundImage: `
+              url(${backgroundFlowersLeft.src}),
+              url(${backgroundPattern.src}),
+              url(${backgroundFlowersRight.src}),
+              url(${tail.src})
+            `,
+            backgroundPosition:
+              'left center, center center, right center, center bottom',
+            backgroundSize:
+              'auto 100%, auto 130%, auto 100%, auto 31%',
+          }}
+        />
+
+        {/* Hero text */}
+        <div className="relative z-10 flex w-full flex-col items-center px-4 text-center lg:mr-[8%] lg:w-[72%] lg:px-6">
+          <h1
+            id="program-hero-title"
+            className="font-heading text-[clamp(2.8rem,10vw,8.5rem)] leading-[0.92] font-extrabold tracking-[0.015em] text-pycon-orange"
+          >
             SCHEDULE
           </h1>
-          <p className="font-heading text-pycon-teal-dark text-[clamp(0.875rem,3.8vw,1.5rem)] leading-tight font-extrabold tracking-wide lg:text-[clamp(1rem,3vw,2rem)]">
+          <p className="font-heading mt-3 max-w-full text-[clamp(1rem,3.35vw,3rem)] leading-tight font-bold tracking-[-0.035em] text-pycon-teal sm:mt-4">
             PYCON DAVAO AT A GLANCE
           </p>
         </div>
+
+        {/* Gradient at the bottom of the section */}
+        <div
+          className="absolute inset-x-0 bottom-0 z-25 h-[100px] bg-bottom bg-repeat-x sm:h-[120px]"
+          style={{
+            backgroundImage: `url(${gradient.src})`,
+            backgroundSize: 'auto 100%',
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Mascot */}
         <Image
           src={mascot}
-          alt="PyCon Davao mascot sitting beside the schedule heading"
+          alt=""
           priority
-          className="pointer-events-none absolute right-[3%] bottom-8 hidden h-[80%] w-auto object-contain lg:block"
+          className="absolute right-[0%] z-30 h-[65%] w-auto max-w-none object-contain object-bottom sm:h-[75%] lg:h-[85%]"
         />
-        <Image
-          src={mascot}
-          alt="PyCon Davao mascot beside the schedule heading"
-          priority
-          className="pointer-events-none absolute right-[5%] bottom-6 h-[38%] w-auto object-contain sm:h-[48%] lg:hidden"
+      </section>
+
+      <div className="w-full">
+        <div
+          className="h-[50px] w-full bg-repeat-x bg-bottom"
+          style={{
+            backgroundImage: `url(${bottomPattern.src})`,
+            backgroundSize: 'auto 100%',
+          }}
+          aria-hidden="true"
+        />
+
+        <div
+          className="mt-2 h-[50px] w-full bg-repeat-x bg-bottom"
+          style={{
+            backgroundImage: `url(${bottomTribalPattern.src})`,
+            backgroundSize: 'auto 100%',
+          }}
+          aria-hidden="true"
         />
       </div>
-      <div aria-hidden="true" className="relative h-16 overflow-hidden sm:h-[72px]">
-        <Image
-          src={heroPattern}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <Image
-          src={heroPatternTwo}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover opacity-80"
-        />
-      </div>
-    </section>
+    </>
   );
 }

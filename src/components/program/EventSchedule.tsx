@@ -139,7 +139,7 @@ function RoomHeaders({ rooms }: RoomHeadersProps) {
   return rooms.map((roomName, index) => {
     let splitContent: string;
     return (
-      <div style={{ gridColumnStart: index + 2, gridRowStart: 1 }} key={roomName} className="sticky top-0 z-11 min-w-0 py-4 text-center">
+      <div style={{ gridColumnStart: index + 2, gridRowStart: 1 }} key={roomName} className="font-bold sticky top-0 z-11 min-w-0 py-4 text-center">
         <h3 key={roomName} className="font-pipanganan text-pycon-orange truncate text-lg">
           {roomName.split('').map((x, i) => {
             const isLast = roomName.length === i + 1;
