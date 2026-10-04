@@ -94,19 +94,18 @@ const SponsorsSection = ({ data }: SponsorsSectionProps) => {
           </p>
         </header>
 
-        <div className="mx-auto flex max-w-5xl flex-col gap-12">
+        <div className="mx-auto flex max-w-5xl flex-col gap-12 lg:gap-16">
           {data.map((group) => {
             const style = tierStyles[group.tier];
 
             return (
               <div
                 key={group.tier}
-                className="border-pycon-orange/50 relative rounded-2xl border px-4 pt-12 pb-8 sm:px-8"
+                className="border-pycon-orange/50 relative rounded-[28px] border px-4 pt-12 pb-8 sm:px-8"
               >
-                <h3 className="bg-pycon-orange font-heading absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full px-6 py-1.5 text-sm font-bold whitespace-nowrap text-white sm:text-base">
+                <h3 className="bg-pycon-orange font-heading absolute top-0 left-1/2 w-max min-w-1/4 -translate-x-1/2 -translate-y-1/2 rounded-[18px] px-6 py-1.5 text-center text-base font-bold whitespace-nowrap text-white sm:py-2 sm:text-lg md:px-8 md:py-2.5 md:text-xl lg:py-3 lg:text-2xl">
                   {group.displayName}
                 </h3>
-
                 <ul className={cn('flex flex-wrap justify-center', style.gap)}>
                   {group.sponsors.map((sponsor) => renderSponsor(sponsor, style))}
                 </ul>
