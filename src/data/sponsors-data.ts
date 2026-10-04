@@ -14,6 +14,8 @@ export interface SponsorTierGroup {
   sponsors: Sponsor[];
 }
 
+export const sponsorPlaceholderLogoUrl = '/images/sponsors/placeholder.svg';
+
 const sponsorTiers: Omit<SponsorTierGroup, 'sponsors'>[] = [
   { tier: 'apo', displayName: 'Apo' },
   { tier: 'agila', displayName: 'Agila' },
