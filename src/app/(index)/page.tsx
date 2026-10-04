@@ -9,7 +9,6 @@ import HomeFaqSection from '@/components/sections/home-faq-section';
 import { HomeFaqSectionData } from '@/data/home-faq-section-data';
 import CallToAction from '@/components/CallToAction';
 
-
 export default function Home() {
   return (
     <>
