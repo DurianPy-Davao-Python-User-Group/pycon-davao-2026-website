@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { EventSchedule } from '@/components/program/EventSchedule'
 import { schedules } from '@/data/schedule';
+import ProgramHero from '@/components/program/ProgramHero';
 
 export const metadata: Metadata = {
   title: 'Program & Schedule',
@@ -16,12 +17,15 @@ export const metadata: Metadata = {
 
 export default function ProgramPage() {
   return (
-    <section className="p-0 sm:p-8">
-      <div className="bg-pycon-custard-light rounded-xl p-4">
-        <div className="mx-auto">
-          <EventSchedule schedules={schedules} />
+    <>
+      <ProgramHero />
+      <section className="p-0 sm:p-8">
+        <div className="bg-pycon-custard-light rounded-xl p-4">
+          <div className="mx-auto">
+            <EventSchedule schedules={schedules} />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

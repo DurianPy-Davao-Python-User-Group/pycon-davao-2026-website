@@ -104,7 +104,7 @@ interface DayTabsProps {
 
 function DayTabs({ days, activeDay, onDayChange }: DayTabsProps) {
   return (
-    <div className="border-pycon-orange/30 mb-6 flex overflow-x-auto border-b">
+    <div className="border-pycon-orange/30 mb-6 flex justify-center overflow-x-auto border-b">
       {days
         .sort((a, b) => new Date(`${a.date}T00:00:00+08:00`).getTime() - new Date(`${b.date}T00:00:00+08:00`).getTime())
         .map((day) => (
@@ -112,8 +112,8 @@ function DayTabs({ days, activeDay, onDayChange }: DayTabsProps) {
             key={day.id}
             onClick={() => onDayChange(day.id)}
             className={cn(
-              'font-nunito cursor-pointer border-b-2 px-4 py-3 text-sm font-bold whitespace-nowrap transition-colors',
-              activeDay === day.id ? 'border-primary text-primary' : 'text-pycon-orange/50 hover:text-pycon-red/70 border-transparent'
+              'font-nunito cursor-pointer border-b-2 px-4 py-3 text-md font-extrabold whitespace-nowrap transition-colors',
+              activeDay === day.id ? 'border-pycon-orange text-pycon-orange' : 'text-pycon-orange/50 hover:text-pycon-red/70 border-transparent'
             )}
           >
             {day.label}
@@ -128,7 +128,7 @@ interface BreakEntryProps {
 }
 
 function BreakEntry({ title }: BreakEntryProps) {
-  return <h4 className="font-nunito text-center text-sm leading-relaxed font-bold">{title}</h4>;
+  return <h4 className="font-nunito text-sm leading-relaxed font-bold">{title}</h4>;
 }
 
 interface RoomHeadersProps {
@@ -198,9 +198,6 @@ function ProgramEntryCard({ event, roomIndex, gridRowStart, gridRowSpan }: Progr
   const hasDetailedContent = (event.speakers && event.speakers.length > 0) || event.type === 'session';
   const isBreakOrRegistration = event.type === 'break' || event.type === 'registration';
 
-  const timeBlockAlignment = hasDetailedContent ? 'justify-start' : 'justify-center';
-  const timeBlockPadding = hasDetailedContent ? 'px-2 pt-4 pb-2' : 'px-2 py-2';
-  const contentAlignment = hasDetailedContent ? 'justify-start' : 'justify-center';
   const eventDuration = calculateEventDurationInMinutes(event.startTime, event.endTime);
 
   const [bgColorClass, textColorClass] = getEventColorConfig(event.type);
@@ -219,7 +216,7 @@ function ProgramEntryCard({ event, roomIndex, gridRowStart, gridRowSpan }: Progr
         {/* Time Display Block */}
         <div
           className={cn(
-            `font-nunito flex flex-col items-center ${timeBlockAlignment} ${timeBlockPadding} text-pycon-white min-w-[80px] flex-shrink-0 text-sm font-bold`,
+            `font-nunito flex flex-col items-center justify-center px-2 py-2 text-pycon-white min-w-[80px] flex-shrink-0 text-sm font-bold`,
             bgColorClass
           )}
         >
@@ -229,7 +226,7 @@ function ProgramEntryCard({ event, roomIndex, gridRowStart, gridRowSpan }: Progr
 
         {/* Event Content */}
         <div
-          className={cn('font-nunito flex min-w-0 flex-1 flex-col overflow-hidden px-4 pb-4 font-bold', hasDetailedContent ? 'pt-4' : 'py-4', contentAlignment)}
+          className={cn('font-nunito flex min-w-0 flex-1 flex-col justify-center overflow-hidden px-4 pb-4 font-bold', hasDetailedContent ? 'pt-4' : 'py-4')}
         >
           {isBreakOrRegistration ? <BreakEntry title={event.title} /> : <SessionEntry event={event} />}
         </div>
@@ -334,15 +331,15 @@ export function EventSchedule({ schedules }: EventScheduleProps) {
         <div className="flex flex-col gap-y-4">
           {sortedEvents.map((event) => {
             const isBreakOrRegistration = event.type === 'break' || event.type === 'registration';
-            const [bgColorClass] = getEventColorConfig(event.type);
+            const [bgColorClass, textColorClass] = getEventColorConfig(event.type);
 
             return (
               <Card key={`${event.title}-${event.id}`} className="bg-pycon-custard-lighter border-none pt-0">
                 <CardHeader className={cn(bgColorClass, 'text-pycon-white grid-rows-[auto] justify-center rounded-t-xl py-2 text-sm font-semibold')}>
                   {formatDisplayTime(event.startTime)} - {formatDisplayTime(event.endTime)}
                 </CardHeader>
-                <CardContent>{isBreakOrRegistration ? <BreakEntry title={event.title} /> : <SessionEntry event={event} />}</CardContent>
-                {event.room && <CardFooter className="font-nunito justify-end text-sm font-bold">{event.room}</CardFooter>}
+                <CardContent className={cn(textColorClass, 'flex flex-col items-center justify-center text-center')}>{isBreakOrRegistration ? <BreakEntry title={event.title} /> : <SessionEntry event={event} />}</CardContent>
+                {event.room && <CardFooter className={cn(textColorClass, "font-nunito justify-center text-xs font-bold")}>{event.room}</CardFooter>}
               </Card>
             );
           })}
