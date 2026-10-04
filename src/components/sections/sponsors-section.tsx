@@ -101,7 +101,7 @@ const SponsorsSection = ({ data }: SponsorsSectionProps) => {
             return (
               <div
                 key={group.tier}
-                className="border-pycon-orange/50 relative rounded-[32px] border px-4 pt-12 pb-8 sm:px-8"
+                className="border-pycon-orange/50 relative rounded-2xl border px-4 pt-12 pb-8 sm:px-8"
               >
                 <h3 className="bg-pycon-orange font-heading absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full px-6 py-1.5 text-sm font-bold whitespace-nowrap text-white sm:text-base">
                   {group.displayName}
