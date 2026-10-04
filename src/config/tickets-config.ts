@@ -55,12 +55,63 @@ export const SALES_PROFILES: Record<SaleId, SaleProfile> = {
  */
 export const ACTIVE_SALE: SaleId = 'none';
 
+export type TicketId = 'kodigo' | 'coder' | 'kasosyo' | 'kumpanya' | 'extra';
+
+export type TicketStatus = 'open' | 'slots-full' | 'registrations-closed' | 'closed';
+
+export const TICKET_STATUS_LABELS: Record<TicketStatus, string> = {
+  open: 'Open',
+  'slots-full': 'Slots Full',
+  'registrations-closed': 'Registrations Closed',
+  closed: 'Closed',
+};
+
 /**
- * Toggle whether ticket registrations are actively open.
- * - When true: CTA buttons link to `/tickets` or active registration, tickets are clickable.
- * - When false: `/tickets` shows a "Registrations are closed" banner, CTAs show "Opening Soon" / "Closed".
+ * Configure each ticket's availability status individually:
+ * - 'open': Available for registration
+ * - 'registrations-closed': Registrations are closed
+ * - 'slots-full': All slots are filled / sold out
+ * - 'closed': Ticket tier is closed
  */
-export const IS_REGISTRATION_OPEN: boolean = true;
+export const TICKET_STATUSES: Record<TicketId, TicketStatus> = {
+  kodigo: 'registrations-closed',
+  coder: 'open',
+  kasosyo: 'open',
+  kumpanya: 'registrations-closed',
+  extra: 'open',
+};
+
+/**
+ * Global toggle to configure that ticket selling is done / concluded.
+ * - When true (or when all tickets in TICKET_STATUSES are closed):
+ *   Global CTAs (Header, Hero, Footer, CallToAction) indicate "Tickets Closed",
+ *   and the tickets section announces that ticket selling has concluded.
+ * - Set to false when tickets are still actively being sold.
+ */
+export const IS_TICKETS_SELLING_DONE: boolean = false;
+
+export function areAllTicketsClosed(): boolean {
+  return Object.values(TICKET_STATUSES).every((status) => status !== 'open');
+}
+
+export function isTicketSellingDone(): boolean {
+  return IS_TICKETS_SELLING_DONE || areAllTicketsClosed();
+}
+
+export function isTicketOpen(ticketId: TicketId): boolean {
+  if (IS_TICKETS_SELLING_DONE) return false;
+  return TICKET_STATUSES[ticketId] === 'open';
+}
+
+export function getTicketStatus(ticketId: TicketId): TicketStatus {
+  return TICKET_STATUSES[ticketId];
+}
+
+/**
+ * Toggle whether ticket registrations are actively open overall.
+ * Automatically false when ticket selling is done or all tickets are closed.
+ */
+export const IS_REGISTRATION_OPEN: boolean = !IS_TICKETS_SELLING_DONE && !areAllTicketsClosed();
 
 /**
  * Base regular prices for each ticket type in PHP
@@ -152,6 +203,29 @@ export function getTicketPricing(
 
 export function getCtaStatus(location: 'header' | 'hero' | 'footer' | 'cta') {
   const sale = getActiveSale();
+  const sellingDone = isTicketSellingDone();
+
+  if (sellingDone) {
+    let text: string;
+
+    switch (location) {
+      case 'footer':
+        text = 'TICKETS CLOSED';
+        break;
+      case 'header':
+      case 'hero':
+      case 'cta':
+      default:
+        text = 'Tickets Closed';
+        break;
+    }
+
+    return {
+      text,
+      href: '/tickets',
+      isOpen: false,
+    };
+  }
 
   if (!IS_REGISTRATION_OPEN) {
     return {

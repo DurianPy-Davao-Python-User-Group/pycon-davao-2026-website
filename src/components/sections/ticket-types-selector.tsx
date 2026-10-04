@@ -8,6 +8,10 @@ import {
   BASE_TICKETS,
   formatPHP,
   IS_REGISTRATION_OPEN,
+  isTicketOpen,
+  getTicketStatus,
+  isTicketSellingDone,
+  TICKET_STATUS_LABELS,
 } from '@/config/tickets-config';
 
 export type RegistrationLinks = {
@@ -29,6 +33,23 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
   const kasosyoPricing = getTicketPricing('kasosyo');
   const extraPricing = getTicketPricing('extra');
 
+  const isKodigoOpen = isTicketOpen('kodigo');
+  const kodigoStatus = getTicketStatus('kodigo');
+
+  const isCoderOpen = isTicketOpen('coder');
+  const coderStatus = getTicketStatus('coder');
+
+  const isKumpanyaOpen = isTicketOpen('kumpanya');
+  const kumpanyaStatus = getTicketStatus('kumpanya');
+
+  const isKasosyoOpen = isTicketOpen('kasosyo');
+  const kasosyoStatus = getTicketStatus('kasosyo');
+
+  const isExtraOpen = isTicketOpen('extra');
+  const extraStatus = getTicketStatus('extra');
+
+  const sellingDone = isTicketSellingDone();
+
   // Close tooltip when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent | TouchEvent) {
@@ -46,8 +67,8 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
     };
   }, [showTooltip]);
 
-  const handleCardClick = (url: string) => {
-    if (!IS_REGISTRATION_OPEN) return;
+  const handleCardClick = (url: string, isOpen: boolean) => {
+    if (!isOpen) return;
     if (url && url !== '#') {
       window.open(url, '_blank', 'noopener,noreferrer');
     }
@@ -73,8 +94,15 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
           Ticket Types
         </h2>
 
-        {/* Notice when registrations are closed */}
-        {!IS_REGISTRATION_OPEN ? (
+        {/* Notice when registrations are closed / selling is done */}
+        {sellingDone ? (
+          <div className="mx-auto mt-6 flex max-w-2xl items-center justify-center gap-2.5 rounded-xl border border-amber-600/30 bg-amber-500/10 px-5 py-3.5 text-center text-sm font-semibold text-amber-900 md:text-base">
+            <AlertCircle className="size-5 shrink-0 text-amber-700" />
+            <span>
+              Ticket selling has concluded. All registration slots are now closed or filled!
+            </span>
+          </div>
+        ) : !IS_REGISTRATION_OPEN ? (
           <div className="mx-auto mt-6 flex max-w-2xl items-center justify-center gap-2.5 rounded-xl border border-amber-600/30 bg-amber-500/10 px-5 py-3 text-center text-sm font-semibold text-amber-900 md:text-base">
             <AlertCircle className="size-5 shrink-0 text-amber-700" />
             <span>
@@ -83,7 +111,7 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
           </div>
         ) : (
           <p className="text-pycon-dark-blue mx-auto mt-3 max-w-2xl text-center font-sans text-sm md:text-base">
-            Click on any ticket tier to proceed to registration.
+            Click on any available ticket tier to proceed to registration.
           </p>
         )}
 
@@ -98,29 +126,35 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
         <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:items-stretch lg:gap-6">
           {/* 1. KODIGO (Scholarship) */}
           <div
-            onClick={() => handleCardClick(registrationLinks.kodigo)}
-            role={IS_REGISTRATION_OPEN ? 'button' : undefined}
-            tabIndex={IS_REGISTRATION_OPEN ? 0 : undefined}
+            onClick={() => handleCardClick(registrationLinks.kodigo, isKodigoOpen)}
+            role={isKodigoOpen ? 'button' : undefined}
+            tabIndex={isKodigoOpen ? 0 : undefined}
             onKeyDown={(e) => {
-              if (IS_REGISTRATION_OPEN && (e.key === 'Enter' || e.key === ' ')) {
+              if (isKodigoOpen && (e.key === 'Enter' || e.key === ' ')) {
                 e.preventDefault();
-                handleCardClick(registrationLinks.kodigo);
+                handleCardClick(registrationLinks.kodigo, isKodigoOpen);
               }
             }}
             className={cn(
               'relative flex flex-col justify-between rounded-[28px] bg-[#FBE2B7] p-7 text-[#072E47] shadow-md transition-all duration-300 md:p-8',
-              IS_REGISTRATION_OPEN
+              isKodigoOpen
                 ? 'cursor-pointer hover:-translate-y-1.5 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#072E47]'
-                : 'opacity-90',
+                : 'cursor-default opacity-90',
             )}
           >
             <div>
-              {/* Sale badge if active */}
-              {kodigoPricing.hasDiscount && (
+              {/* Status badge when closed, or sale badge if active and open */}
+              {!isKodigoOpen ? (
+                <div className="mb-3 text-center">
+                  <span className="inline-block rounded-full bg-[#072E47] px-3.5 py-1 text-xs font-bold tracking-wide text-[#FBE2B7] uppercase shadow-sm">
+                    {TICKET_STATUS_LABELS[kodigoStatus]}
+                  </span>
+                </div>
+              ) : kodigoPricing.hasDiscount ? (
                 <div className="bg-pycon-orange mb-3 inline-block rounded-full px-3 py-0.5 text-center text-xs font-bold text-white shadow-sm">
                   {kodigoPricing.saleBadge}
                 </div>
-              )}
+              ) : null}
 
               <h3 className="font-heading text-center text-2xl font-black tracking-tight text-[#072E47] uppercase sm:text-3xl">
                 Kodigo
@@ -162,31 +196,36 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
               </ul>
             </div>
 
-            {IS_REGISTRATION_OPEN && (
-              <div className="mt-8 pt-4">
+            {/* Bottom Action / Status Button */}
+            <div className="mt-8 pt-4">
+              {isKodigoOpen ? (
                 <span className="font-heading block w-full rounded-xl bg-[#072E47] py-2.5 text-center text-xs font-bold tracking-wider text-white uppercase shadow-sm transition-colors group-hover:bg-[#0c4061]">
                   Select Kodigo
                 </span>
-              </div>
-            )}
+              ) : (
+                <span className="font-heading block w-full rounded-xl bg-[#072E47]/15 py-2.5 text-center text-xs font-bold tracking-wider text-[#072E47]/70 uppercase">
+                  {TICKET_STATUS_LABELS[kodigoStatus]}
+                </span>
+              )}
+            </div>
           </div>
 
           {/* 2. CODER (Regular) */}
           <div
-            onClick={() => handleCardClick(registrationLinks.coderKasosyo)}
-            role={IS_REGISTRATION_OPEN ? 'button' : undefined}
-            tabIndex={IS_REGISTRATION_OPEN ? 0 : undefined}
+            onClick={() => handleCardClick(registrationLinks.coderKasosyo, isCoderOpen)}
+            role={isCoderOpen ? 'button' : undefined}
+            tabIndex={isCoderOpen ? 0 : undefined}
             onKeyDown={(e) => {
-              if (IS_REGISTRATION_OPEN && (e.key === 'Enter' || e.key === ' ')) {
+              if (isCoderOpen && (e.key === 'Enter' || e.key === ' ')) {
                 e.preventDefault();
-                handleCardClick(registrationLinks.coderKasosyo);
+                handleCardClick(registrationLinks.coderKasosyo, isCoderOpen);
               }
             }}
             className={cn(
               'relative flex flex-col justify-between rounded-[28px] bg-[#4E9F45] p-7 text-white shadow-md transition-all duration-300 md:p-8',
-              IS_REGISTRATION_OPEN
+              isCoderOpen
                 ? 'cursor-pointer hover:-translate-y-1.5 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white'
-                : 'opacity-90',
+                : 'cursor-default opacity-90',
             )}
           >
             {/* BEST VALUE Badge */}
@@ -195,14 +234,20 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
             </div>
 
             <div>
-              {/* Sale badge if active */}
-              {coderPricing.hasDiscount && (
+              {/* Status badge when closed, or sale badge if active and open */}
+              {!isCoderOpen ? (
+                <div className="mt-1 mb-2 text-center">
+                  <span className="inline-block rounded-full bg-red-600/90 px-3.5 py-1 text-xs font-black tracking-wider text-white uppercase shadow-md">
+                    {TICKET_STATUS_LABELS[coderStatus]}
+                  </span>
+                </div>
+              ) : coderPricing.hasDiscount ? (
                 <div className="mt-1 mb-2 text-center">
                   <span className="inline-block rounded-full bg-white px-3 py-0.5 text-xs font-bold text-[#4E9F45] shadow-sm">
                     {coderPricing.saleBadge}
                   </span>
                 </div>
-              )}
+              ) : null}
 
               <h3 className="font-heading mt-1 text-center text-2xl font-black tracking-tight text-white uppercase sm:text-3xl">
                 Coder
@@ -248,25 +293,32 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
               <div
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleCardClick(registrationLinks.kumpanya);
+                  handleCardClick(registrationLinks.kumpanya, isKumpanyaOpen);
                 }}
-                role={IS_REGISTRATION_OPEN ? 'button' : undefined}
-                tabIndex={IS_REGISTRATION_OPEN ? 0 : undefined}
+                role={isKumpanyaOpen ? 'button' : undefined}
+                tabIndex={isKumpanyaOpen ? 0 : undefined}
                 onKeyDown={(e) => {
-                  if (IS_REGISTRATION_OPEN && (e.key === 'Enter' || e.key === ' ')) {
+                  if (isKumpanyaOpen && (e.key === 'Enter' || e.key === ' ')) {
                     e.preventDefault();
                     e.stopPropagation();
-                    handleCardClick(registrationLinks.kumpanya);
+                    handleCardClick(registrationLinks.kumpanya, isKumpanyaOpen);
                   }
                 }}
-                aria-label={`Kumpanya/Company Promo: Get tickets for as low as ${formatPHP(BASE_TICKETS.kumpanyaPromo.asLowAsPrice)}`}
+                aria-label={`Kumpanya/Company Promo: ${isKumpanyaOpen ? `Get tickets for as low as ${formatPHP(BASE_TICKETS.kumpanyaPromo.asLowAsPrice)}` : TICKET_STATUS_LABELS[kumpanyaStatus]}`}
                 className={cn(
                   'mt-6 rounded-2xl border-2 border-dashed border-white/60 bg-white/10 p-5 text-center transition-all duration-200',
-                  IS_REGISTRATION_OPEN
+                  isKumpanyaOpen
                     ? 'cursor-pointer hover:border-white hover:bg-white/20 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white'
-                    : '',
+                    : 'cursor-default opacity-85',
                 )}
               >
+                {!isKumpanyaOpen && (
+                  <div className="mb-2">
+                    <span className="inline-block rounded-full bg-black/40 px-3 py-0.5 text-[11px] font-bold tracking-wider text-white uppercase shadow-xs">
+                      {TICKET_STATUS_LABELS[kumpanyaStatus]}
+                    </span>
+                  </div>
+                )}
                 <h4 className="font-heading text-base font-black tracking-tight text-white uppercase sm:text-lg">
                   Kumpanya/Company Promo
                 </h4>
@@ -282,42 +334,53 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
               </div>
             </div>
 
-            {IS_REGISTRATION_OPEN && (
-              <div className="mt-8 pt-4">
+            {/* Bottom Action / Status Button */}
+            <div className="mt-8 pt-4">
+              {isCoderOpen ? (
                 <span className="font-heading block w-full rounded-xl bg-white py-2.5 text-center text-xs font-bold tracking-wider text-[#4E9F45] uppercase shadow-sm transition-colors hover:bg-white/90">
                   Select Coder
                 </span>
-              </div>
-            )}
+              ) : (
+                <span className="font-heading block w-full rounded-xl bg-white/20 py-2.5 text-center text-xs font-bold tracking-wider text-white/80 uppercase">
+                  {TICKET_STATUS_LABELS[coderStatus]}
+                </span>
+              )}
+            </div>
           </div>
 
           {/* 3. KASOSYO (Patron) */}
           <div
-            onClick={() => handleCardClick(registrationLinks.coderKasosyo)}
-            role={IS_REGISTRATION_OPEN ? 'button' : undefined}
-            tabIndex={IS_REGISTRATION_OPEN ? 0 : undefined}
+            onClick={() => handleCardClick(registrationLinks.coderKasosyo, isKasosyoOpen)}
+            role={isKasosyoOpen ? 'button' : undefined}
+            tabIndex={isKasosyoOpen ? 0 : undefined}
             onKeyDown={(e) => {
-              if (IS_REGISTRATION_OPEN && (e.key === 'Enter' || e.key === ' ')) {
+              if (isKasosyoOpen && (e.key === 'Enter' || e.key === ' ')) {
                 e.preventDefault();
-                handleCardClick(registrationLinks.coderKasosyo);
+                handleCardClick(registrationLinks.coderKasosyo, isKasosyoOpen);
               }
             }}
             className={cn(
               'relative flex flex-col justify-between rounded-[28px] bg-[#0F766E] p-7 text-white shadow-md transition-all duration-300 md:p-8',
-              IS_REGISTRATION_OPEN
+              isKasosyoOpen
                 ? 'cursor-pointer hover:-translate-y-1.5 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white'
-                : 'opacity-90',
+                : 'cursor-default opacity-90',
             )}
           >
             <div>
-              {/* Sale badge if active */}
-              {kasosyoPricing.hasDiscount && (
+              {/* Status badge when closed, or sale badge if active and open */}
+              {!isKasosyoOpen ? (
+                <div className="mb-3 text-center">
+                  <span className="inline-block rounded-full bg-red-600/90 px-3.5 py-1 text-xs font-black tracking-wider text-white uppercase shadow-md">
+                    {TICKET_STATUS_LABELS[kasosyoStatus]}
+                  </span>
+                </div>
+              ) : kasosyoPricing.hasDiscount ? (
                 <div className="mb-3 text-center">
                   <span className="bg-pycon-orange inline-block rounded-full px-3 py-0.5 text-xs font-bold text-white shadow-sm">
                     {kasosyoPricing.saleBadge}
                   </span>
                 </div>
-              )}
+              ) : null}
 
               <h3 className="font-heading text-center text-2xl font-black tracking-tight text-white uppercase sm:text-3xl">
                 Kasosyo
@@ -360,13 +423,18 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
               </ul>
             </div>
 
-            {IS_REGISTRATION_OPEN && (
-              <div className="mt-8 pt-4">
+            {/* Bottom Action / Status Button */}
+            <div className="mt-8 pt-4">
+              {isKasosyoOpen ? (
                 <span className="font-heading block w-full rounded-xl bg-white py-2.5 text-center text-xs font-bold tracking-wider text-[#0F766E] uppercase shadow-sm transition-colors hover:bg-white/90">
                   Select Kasosyo
                 </span>
-              </div>
-            )}
+              ) : (
+                <span className="font-heading block w-full rounded-xl bg-white/20 py-2.5 text-center text-xs font-bold tracking-wider text-white/80 uppercase">
+                  {TICKET_STATUS_LABELS[kasosyoStatus]}
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
@@ -378,10 +446,15 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
             {/* Left: ADD-ON Pill & Title */}
             <div>
-              <div className="flex items-center gap-2.5">
+              <div className="flex flex-wrap items-center gap-2.5">
                 <span className="font-heading rounded-full bg-white px-3 py-0.5 text-xs font-black text-[#E57D06] uppercase">
                   Add-On
                 </span>
+                {!isExtraOpen && (
+                  <span className="font-heading rounded-full bg-red-600/90 px-3 py-0.5 text-xs font-black tracking-wider text-white uppercase shadow-xs">
+                    {TICKET_STATUS_LABELS[extraStatus]}
+                  </span>
+                )}
                 <span className="text-xs font-medium text-white/80">Exclusive of tickets</span>
               </div>
               <h3 className="font-heading mt-2 text-2xl font-black tracking-tight text-white uppercase sm:text-3xl">
@@ -411,22 +484,29 @@ export default function TicketTypesSelector({ registrationLinks }: TicketTypesSe
                 )}
               </div>
 
-              {/* Tooltip trigger button */}
-              <button
-                type="button"
-                onClick={() => setShowTooltip((prev) => !prev)}
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
-                className="group flex cursor-pointer items-center gap-2 rounded-lg bg-white/10 px-3 py-1.5 text-sm font-medium text-white transition-all hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-white"
-                aria-expanded={showTooltip}
-                aria-label="Sprint Day Access info tooltip"
-              >
-                <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-white text-[#E57D06]">
-                  <Check className="size-3.5 stroke-[3]" />
-                </div>
-                <span>Sprint Day access</span>
-                <Info className="size-4 shrink-0 text-white/80 transition-transform group-hover:scale-110" />
-              </button>
+              {/* Tooltip trigger button & status */}
+              <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+                {!isExtraOpen && (
+                  <span className="font-heading rounded-lg bg-white/20 px-3 py-1 text-xs font-bold tracking-wider text-white uppercase sm:text-sm">
+                    {TICKET_STATUS_LABELS[extraStatus]}
+                  </span>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setShowTooltip((prev) => !prev)}
+                  onMouseEnter={() => setShowTooltip(true)}
+                  onMouseLeave={() => setShowTooltip(false)}
+                  className="group flex cursor-pointer items-center gap-2 rounded-lg bg-white/10 px-3 py-1.5 text-sm font-medium text-white transition-all hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-white"
+                  aria-expanded={showTooltip}
+                  aria-label="Sprint Day Access info tooltip"
+                >
+                  <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-white text-[#E57D06]">
+                    <Check className="size-3.5 stroke-[3]" />
+                  </div>
+                  <span>Sprint Day access</span>
+                  <Info className="size-4 shrink-0 text-white/80 transition-transform group-hover:scale-110" />
+                </button>
+              </div>
             </div>
           </div>
 

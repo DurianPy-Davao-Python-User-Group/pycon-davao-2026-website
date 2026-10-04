@@ -68,7 +68,7 @@ export default function CallToAction() {
               disabled
               className="w-[200px] cursor-pointer rounded-full px-6 py-5.5 text-sm font-bold contrast-50 disabled:pointer-events-none sm:px-8 sm:py-6.5 sm:text-base md:w-[300px] md:px-10 md:py-7.5 md:text-lg lg:text-xl"
             >
-              Coming Soon
+              {cta.text}
             </Button>
           )}
         </div>
