@@ -1,6 +1,6 @@
 import { Speaker } from '@/data/speaker'
 
-export const schedules: Schedule[] = [
+export const sampleSchedules: Schedule[] = [
   {
     id: 'day-1',
     date: '2026-10-10',
