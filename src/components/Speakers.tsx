@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
-import { speakerGroups, speakersData, type Speaker, type SpeakerGroup } from '@/data/speakers-data';
+import { speakerGroups, speakers, type Speaker, type SpeakerGroup } from '@/data/speakers-data';
 
 const checkerboard = {
   backgroundColor: '#fff',
@@ -13,7 +13,7 @@ const checkerboard = {
 };
 
 function SpeakerCard({ speaker, group }: { speaker: Speaker; group: SpeakerGroup }) {
-  const fullName = `${speaker.firstName} ${speaker.lastName}`;
+  const fullName = `${speaker.name}`;
 
   const card = (
     <article
@@ -22,9 +22,9 @@ function SpeakerCard({ speaker, group }: { speaker: Speaker; group: SpeakerGroup
         group.borderClassName,
       )}
     >
-      {speaker.image ? (
+      {speaker.avatarUrl ? (
         <Image
-          src={speaker.image}
+          src={speaker.avatarUrl}
           alt={fullName}
           fill
           sizes="(min-width: 1024px) 220px, (min-width: 768px) 30vw, 70vw"
@@ -52,7 +52,7 @@ function SpeakerCard({ speaker, group }: { speaker: Speaker; group: SpeakerGroup
 
   return (
     <a
-      href={speaker.socials}
+      href={speaker.socials.linkedin ?? speaker.socials.github ?? speaker.socials.twitter ?? '#'}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${fullName} on social media`}
@@ -64,7 +64,7 @@ function SpeakerCard({ speaker, group }: { speaker: Speaker; group: SpeakerGroup
 }
 
 function SpeakerGroupSection({ group }: { group: SpeakerGroup }) {
-  const speakers = speakersData.filter((speaker) => speaker.speakerType === group.type);
+  const groupSpeakers = speakers.filter((speaker) => speaker.category === group.type);
 
   return (
     <div className="flex w-full flex-col items-center gap-6">
@@ -78,22 +78,28 @@ function SpeakerGroupSection({ group }: { group: SpeakerGroup }) {
       </h3>
 
       <div className="hidden w-full flex-wrap justify-center gap-5 md:flex">
-        {speakers.map((speaker) => (
+        {groupSpeakers.map((speaker) => (
           <div key={speaker.id} className="w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-3.75rem)/4)]">
             <SpeakerCard speaker={speaker} group={group} />
           </div>
         ))}
       </div>
 
-      <Carousel opts={{ align: 'center' }} className="w-full md:hidden">
-        <CarouselContent>
-          {speakers.map((speaker) => (
-            <CarouselItem key={speaker.id} className="basis-[70%]">
-              <SpeakerCard speaker={speaker} group={group} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+      {groupSpeakers.length === 1 ? (
+        <div className="w-[70%] md:hidden">
+          <SpeakerCard speaker={groupSpeakers[0]} group={group} />
+        </div>
+      ) : (
+        <Carousel opts={{ align: 'center' }} className="w-full md:hidden">
+          <CarouselContent>
+            {groupSpeakers.map((speaker) => (
+              <CarouselItem key={speaker.id} className="basis-[70%]">
+                <SpeakerCard speaker={speaker} group={group} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      )}
     </div>
   );
 }
