@@ -25,6 +25,10 @@
   --color-pycon-dark-blue: var(--pycon-dark-blue);
   --color-pycon-orange: var(--pycon-orange);
   --color-pycon-orange-accent: var(--pycon-orange-accent);
+  --color-pycon-custard: var(--pycon-custard); /* #fddeb2; */
+  --color-pycon-custard-light: var(--pycon-custard-light); /* #feefdb; */
+  --color-pycon-custard-lighter: var(--pycon-custard-lighter); /* #fff6ea; */
+  --color-pycon-white: var(--pycon-white); /* #fff; */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -76,6 +80,10 @@
   --pycon-dark-blue: #072e47;
   --pycon-orange: #f99508;
   --pycon-orange-accent: #f87f11;
+  --pycon-custard: #fddeb2; /* #fddeb2; */
+  --pycon-custard-light: #feefdb; /* #feefdb; */
+  --pycon-custard-lighter: #fff6ea; /* #fff6ea; */
+  --pycon-white: #fff; /* #fff; */
 
   --background: var(--pycon-beige);
   --foreground: var(--pycon-dark-blue);

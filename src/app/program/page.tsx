@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
-import PlaceholderPage from '@/components/PlaceholderPage';
+import { EventSchedule } from '@/components/program/EventSchedule'
+import { sampleSchedules } from '@/data/schedule';
+import backgroundPattern from '@/assets/program/bg-pattern2.svg';
+import ProgramHero from '@/components/program/ProgramHero';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Program & Schedule',
@@ -15,14 +19,20 @@ export const metadata: Metadata = {
 
 export default function ProgramPage() {
   return (
-    <PlaceholderPage
-      title="PROGRAM"
-      subtitle="PYCON DAVAO 2026"
-      badge="IN PREPARATION"
-      description="The full conference schedule, keynote speakers, workshops, and panel sessions are currently being finalized."
-      additionalText="Interested in speaking at PyCon Davao 2026? Watch out for the Call for Speakers (CFS) announcement on DurianPy social media!"
-      actionText="Back to Home"
-      actionHref="/"
-    />
+    <>
+      <ProgramHero />
+      <section
+        className="bg-pycon-orange bg-repeat p-0 sm:p-8"
+        style={{
+          backgroundImage: `url(${backgroundPattern.src})`,
+        }}
+      >
+        <div className="bg-pycon-custard-light rounded-xl px-12 py-4">
+          <div className="mx-auto">
+            <EventSchedule schedules={sampleSchedules} />
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
