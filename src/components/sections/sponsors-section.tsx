@@ -40,7 +40,12 @@ const tierStyles: Record<SponsorTier, TierStyle> = {
   },
   'waling-waling': {
     gap: 'gap-3 sm:gap-4',
-    logo: 'size-18 rounded-xl sm:size-20 lg:size-24',
+    logo: 'size-20 rounded-xl sm:size-24 lg:size-28',
+    showDetails: false,
+  },
+  partners: {
+    gap: 'gap-3 sm:gap-4',
+    logo: 'size-14 rounded-xl lg:size-16',
     showDetails: false,
   },
 };
@@ -48,15 +53,9 @@ const tierStyles: Record<SponsorTier, TierStyle> = {
 const sponsorLogoSize = 224;
 
 const SponsorsSection = ({ data }: SponsorsSectionProps) => {
-  const renderSponsor = (sponsor: Sponsor, style: TierStyle) => (
-    <li key={sponsor.id}>
-      <a
-        href={sponsor.websiteUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Visit ${sponsor.name} website`}
-        className="focus-visible:outline-pycon-dark-blue flex flex-col items-center gap-3 rounded-3xl text-center transition-transform duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 motion-reduce:transition-none motion-reduce:hover:scale-100"
-      >
+  const renderSponsor = (sponsor: Sponsor, style: TierStyle) => {
+    const content = (
+      <>
         <Image
           src={sponsor.logoUrl || sponsorPlaceholderLogoUrl}
           alt={`${sponsor.name} logo`}
@@ -78,9 +77,27 @@ const SponsorsSection = ({ data }: SponsorsSectionProps) => {
             )}
           </span>
         )}
-      </a>
-    </li>
-  );
+      </>
+    );
+
+    return (
+      <li key={sponsor.id}>
+        {sponsor.websiteUrl ? (
+          <a
+            href={sponsor.websiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${sponsor.name} website`}
+            className="focus-visible:outline-pycon-dark-blue flex flex-col items-center gap-3 rounded-3xl text-center transition-transform duration-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 motion-reduce:transition-none motion-reduce:hover:scale-100"
+          >
+            {content}
+          </a>
+        ) : (
+          <div className="flex flex-col items-center gap-3 text-center">{content}</div>
+        )}
+      </li>
+    );
+  };
 
   return (
     <section className="bg-pycon-beige px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
