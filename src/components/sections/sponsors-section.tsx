@@ -20,27 +20,27 @@ interface TierStyle {
 const tierStyles: Record<SponsorTier, TierStyle> = {
   apo: {
     gap: '',
-    logo: 'size-44 lg:size-56',
+    logo: 'size-48 lg:size-56',
     showDetails: true,
   },
   agila: {
     gap: 'gap-x-10 gap-y-8',
-    logo: 'size-36 lg:size-44',
+    logo: 'size-40 lg:size-48',
     showDetails: true,
   },
   durian: {
     gap: 'gap-x-10 gap-y-8',
-    logo: 'size-28 lg:size-36',
+    logo: 'size-32 lg:size-36',
     showDetails: true,
   },
   cacao: {
     gap: 'gap-3 sm:gap-8',
-    logo: 'size-18 sm:size-24',
+    logo: 'size-24 sm:size-28 lg:size-32',
     showDetails: false,
   },
   'waling-waling': {
     gap: 'gap-3 sm:gap-4',
-    logo: 'size-14 rounded-xl sm:size-16 lg:size-20',
+    logo: 'size-18 rounded-xl sm:size-20 lg:size-24',
     showDetails: false,
   },
 };
