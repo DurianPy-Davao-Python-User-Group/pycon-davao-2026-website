@@ -10,8 +10,8 @@ export type SponsorTier = 'apo' | 'agila' | 'durian' | 'cacao' | 'waling-waling'
 export interface Sponsor {
   id: string;
   name: string;
-  tagline?: string;
   logoUrl: string;
+  tagline?: string;
   websiteUrl: string;
   tier: SponsorTier;
 }
@@ -36,7 +36,6 @@ const sponsors: Sponsor[] = [
     {
     id: 'pythonph',
     name: 'Python Philippines, Inc. (PythonPH)',
-    tagline: 'PythonPH is a non-stock, non-profit, volunteer-run organization dedicated to support and facilitate the growth of the community of Python programmers in the Philippines.',
     logoUrl: PythonPHLogo.src,
     websiteUrl: 'https://python.ph/',
     tier: 'cacao',
@@ -44,7 +43,6 @@ const sponsors: Sponsor[] = [
   {
     id: 'opswerks',
     name: 'OpsWerks',
-    tagline: 'IT Managed Services',
     logoUrl: OpsWerksLogo.src,
     websiteUrl: 'https://opswerks.com/about/about-us',
     tier: 'durian',
@@ -52,7 +50,6 @@ const sponsors: Sponsor[] = [
   {
     id: 'inventiv',
     name: 'Inventiv',
-    tagline: 'Inventiv is a software development company that builds scalable systems designed to grow with intention. We deliver custom software development, cloud solutions, API integration, system architecture, and technical consulting to forward-thinking businesses, managing each engagement from concept through deployment and ongoing support.',
     logoUrl: InventiveLogo.src,
     websiteUrl: 'https://inventivlabs.io',
     tier: 'agila',
@@ -60,7 +57,6 @@ const sponsors: Sponsor[] = [
   {
     id: 'careerteam',
     name: 'Career Team',
-    tagline: 'As a workforce services provider and a workforce technology vendor, we bring practical, on-the-ground knowledge into system design and implementation. Our platform is Career Edge - a cloud-native, purpose-built solution designed by workforce development professionals for workforce development professionals — solving common legacy challenges such as outdated user experiences, limited integrations, siloed workflows, and cumbersome reporting.',
     logoUrl: CareerTeamLogo.src,
     websiteUrl: 'http://careerteam.com',
     tier: 'waling-waling',
@@ -68,7 +64,6 @@ const sponsors: Sponsor[] = [
   {
     id: 'unionbank',
     name: 'UnionBank of the Philippines',
-    tagline: 'UnionBank empowers consumers to live their best lives through the latest financial innovations.',
     logoUrl: UnionBankLogo.src,
     websiteUrl: 'https://www.unionbankph.com/',
     tier: 'cacao',
@@ -76,7 +71,6 @@ const sponsors: Sponsor[] = [
   {
     id: 'snazzyframes',
     name: 'Snazzy Frames',
-    tagline: 'Snazzy Frames is an interactive photobooth experience that brings fun, creativity, and instant keepsakes to events. Guests can take photos, receive printed photo strips or keychains, and get their digital copies online—making every event a little more memorable and shareable.',
     logoUrl: SnazzyFramesLogo.src,
     websiteUrl: 'https://www.facebook.com/snazzyframes',
     tier: 'durian',
