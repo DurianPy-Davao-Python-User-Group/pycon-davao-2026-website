@@ -2,7 +2,6 @@ import CareerTeamLogo from '@/assets/sponsors/career-team.png';
 import InventiveLogo from '@/assets/sponsors/inventiv.png';
 import OpsWerksLogo from '@/assets/sponsors/opswerks.png';
 import PythonPHLogo from '@/assets/sponsors/pythonph.png';
-import SnazzyFramesLogo from '@/assets/sponsors/snazzy-frames.png';
 import UnionBankLogo from '@/assets/sponsors/unionbank.jpeg';
 
 export type SponsorTier = 'apo' | 'agila' | 'durian' | 'cacao' | 'waling-waling';
@@ -68,13 +67,6 @@ const sponsors: Sponsor[] = [
     websiteUrl: 'https://www.unionbankph.com/',
     tier: 'cacao',
   },
-  {
-    id: 'snazzyframes',
-    name: 'Snazzy Frames',
-    logoUrl: SnazzyFramesLogo.src,
-    websiteUrl: 'https://www.facebook.com/snazzyframes',
-    tier: 'durian',
-  }
 ];
 
 export const sponsorTierGroups: SponsorTierGroup[] = sponsorTiers.map((sponsorTier) => ({
