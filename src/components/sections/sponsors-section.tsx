@@ -48,6 +48,11 @@ const tierStyles: Record<SponsorTier, TierStyle> = {
     logo: 'size-14 rounded-xl lg:size-16',
     showDetails: false,
   },
+  'photobooth-partner': {
+    gap: 'gap-3 sm:gap-4',
+    logo: 'size-14 rounded-xl lg:size-16',
+    showDetails: true,
+  },
 };
 
 const sponsorLogoSize = 224;
@@ -120,7 +125,7 @@ const SponsorsSection = ({ data }: SponsorsSectionProps) => {
                 key={group.tier}
                 className="border-pycon-orange/50 relative rounded-[28px] border px-4 pt-12 pb-8 sm:px-8"
               >
-                <h3 className="bg-pycon-orange font-heading absolute top-0 left-1/2 w-max min-w-1/4 -translate-x-1/2 -translate-y-1/2 rounded-[18px] px-6 py-1.5 text-center text-base font-bold whitespace-nowrap text-white sm:py-2 sm:text-lg md:px-8 md:py-2.5 md:text-xl lg:py-3 lg:text-2xl">
+                <h3 className="bg-pycon-orange font-heading absolute top-0 left-1/2 w-max max-w-full min-w-1/4 -translate-x-1/2 -translate-y-1/2 rounded-[18px] px-6 py-1.5 text-center text-base font-bold text-balance text-white sm:py-2 sm:text-lg md:px-8 md:py-2.5 md:text-xl lg:py-3 lg:text-2xl">
                   {group.displayName}
                 </h3>
                 <ul className={cn('flex flex-wrap justify-center', style.gap)}>

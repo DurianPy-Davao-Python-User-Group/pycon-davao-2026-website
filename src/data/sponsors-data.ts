@@ -17,8 +17,10 @@ import PyTsadaLogo from '@/assets/sponsors/pytsada.png';
 import SparcsLogo from '@/assets/sponsors/sparcs.png';
 import SysdevLogo from '@/assets/sponsors/sysdev.png';
 import GdgDavaoLogo from '@/assets/sponsors/gdg-davao.png';
+import SnazzyFramesLogo from '@/assets/sponsors/snazzy-frames.png';
 
-export type SponsorTier = 'apo' | 'agila' | 'durian' | 'cacao' | 'waling-waling' | 'partners';
+export type SponsorTier =
+  'apo' | 'agila' | 'durian' | 'cacao' | 'waling-waling' | 'partners' | 'photobooth-partner';
 
 export interface Sponsor {
   id: string;
@@ -44,6 +46,7 @@ const sponsorTiers: Omit<SponsorTierGroup, 'sponsors'>[] = [
   { tier: 'cacao', displayName: 'Cacao' },
   { tier: 'waling-waling', displayName: 'Waling-Waling' },
   { tier: 'partners', displayName: 'Community Partners' },
+  { tier: 'photobooth-partner', displayName: 'Official Photobooth Partner' },
 ];
 
 const sponsors: Sponsor[] = [
@@ -146,6 +149,13 @@ const sponsors: Sponsor[] = [
     name: 'PyTsada',
     logoUrl: PyTsadaLogo.src,
     tier: 'partners',
+  },
+  {
+    id: 'snazzy-frames',
+    name: 'Snazzy Frames',
+    logoUrl: SnazzyFramesLogo.src,
+    websiteUrl: 'https://www.facebook.com/snazzyframes',
+    tier: 'photobooth-partner',
   },
   {
     id: 'sparcs',
