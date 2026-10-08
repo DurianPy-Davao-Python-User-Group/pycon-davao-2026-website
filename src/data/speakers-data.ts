@@ -18,6 +18,7 @@ import zorexSalvo from '@/assets/speakers/zorex-salvo.jpg';
 import jessePanganiban from '@/assets/speakers/jesse-panganiban.jpg';
 import nashGolosino from '@/assets/speakers/nash-golosino.png';
 import jeremyPatrick from '@/assets/speakers/jeremy-patrick-pacabis.jpg';
+import melCadano from '@/assets/speakers/mel-cadano.jpeg';
 
 const avatarById: Record<string, StaticImageData> = {
   'kristine-mae-adlaon': kristineMaeAdlaon,
@@ -39,6 +40,7 @@ const avatarById: Record<string, StaticImageData> = {
   'francis-reid-arranguez': francisReidArranguez,
   'nash-golosino': nashGolosino,
   'jeremy-patrick-pacabis': jeremyPatrick,
+  'mel-cadano': melCadano,
 };
 
 export type category = 'keynote' | 'tech-talk' | 'sprint-lead';
@@ -287,6 +289,19 @@ export const speakers: Speaker[] = [
       twitter: 'https://www.facebook.com/jeremypacabis/',
     },
     avatarUrl: avatarById['jeremy-patrick-pacabis'],
+  },
+  {
+    id: 'mel-cadano',
+    name: 'Mel Cadano',
+    category: 'tech-talk',
+    designation: 'Backend Engineer',
+    company: '',
+    bio: "",
+    socials: {
+      linkedin: 'https://www.linkedin.com/in/mel-cadano/',
+      twitter: 'https://www.facebook.com/grmelcdn/',
+    },
+    avatarUrl: avatarById['mel-cadano'],
   },
 
   // Sprint leads
