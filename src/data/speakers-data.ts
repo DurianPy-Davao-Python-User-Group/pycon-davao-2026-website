@@ -19,6 +19,7 @@ import jessePanganiban from '@/assets/speakers/jesse-panganiban.jpg';
 import nashGolosino from '@/assets/speakers/nash-golosino.png';
 import jeremyPatrick from '@/assets/speakers/jeremy-patrick-pacabis.jpg';
 import melCadano from '@/assets/speakers/mel-cadano.jpeg';
+import jaimeEmanuelLucero from '@/assets/speakers/jaime-emanuel-lucero.jpeg';
 
 const avatarById: Record<string, StaticImageData> = {
   'kristine-mae-adlaon': kristineMaeAdlaon,
@@ -41,6 +42,7 @@ const avatarById: Record<string, StaticImageData> = {
   'nash-golosino': nashGolosino,
   'jeremy-patrick-pacabis': jeremyPatrick,
   'mel-cadano': melCadano,
+  'jaime-emanuel-lucero': jaimeEmanuelLucero,
 };
 
 export type category = 'keynote' | 'tech-talk' | 'sprint-lead';
@@ -302,6 +304,19 @@ export const speakers: Speaker[] = [
       twitter: 'https://www.facebook.com/grmelcdn/',
     },
     avatarUrl: avatarById['mel-cadano'],
+  },
+  {
+    id: 'jaime-emanuel-lucero',
+    name: 'Jaime Emanuel  Lucero',
+    category: 'tech-talk',
+    designation: 'Full-stack AI Developer',
+    company: 'Inventiv',
+    bio: "Jaime Emanuel Lucero is a Full Stack AI Engineer at Inventiv, where he works on developing AI-powered applications and software solutions. He holds a degree in Computer Science, with a focus on Data Science and Artificial Intelligence. His experience spans full-stack development, machine learning, and the integration of AI technologies into practical business applications. He is passionate about building intelligent systems that solve real-world problems and improve how people and organizations work.",
+    socials: {
+      linkedin: 'https://www.linkedin.com/in/jaime-emanuel-lucero-a80b14259?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+      twitter: 'https://www.facebook.com/share/19GQsYD1DJ/?mibextid=wwXIfr',
+    },
+    avatarUrl: avatarById['jaime-emanuel-lucero'],
   },
 
   // Sprint leads
