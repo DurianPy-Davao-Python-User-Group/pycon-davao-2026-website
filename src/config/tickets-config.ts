@@ -75,10 +75,10 @@ export const TICKET_STATUS_LABELS: Record<TicketStatus, string> = {
  */
 export const TICKET_STATUSES: Record<TicketId, TicketStatus> = {
   kodigo: 'registrations-closed',
-  coder: 'open',
-  kasosyo: 'open',
+  coder: 'registrations-closed',
+  kasosyo: 'registrations-closed',
   kumpanya: 'registrations-closed',
-  extra: 'open',
+  extra: 'registrations-closed',
 };
 
 /**
@@ -88,7 +88,7 @@ export const TICKET_STATUSES: Record<TicketId, TicketStatus> = {
  *   and the tickets section announces that ticket selling has concluded.
  * - Set to false when tickets are still actively being sold.
  */
-export const IS_TICKETS_SELLING_DONE: boolean = false;
+export const IS_TICKETS_SELLING_DONE: boolean = true;
 
 export function areAllTicketsClosed(): boolean {
   return Object.values(TICKET_STATUSES).every((status) => status !== 'open');
