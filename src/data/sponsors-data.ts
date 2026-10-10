@@ -1,26 +1,34 @@
-import CareerTeamLogo from '@/assets/sponsors/career-team.png';
-import InventiveLogo from '@/assets/sponsors/inventiv.png';
-import OpsWerksLogo from '@/assets/sponsors/opswerks.png';
-import PythonPHLogo from '@/assets/sponsors/pythonph.png';
-import UnionBankLogo from '@/assets/sponsors/unionbank.jpeg';
 import ACCESSLogo from '@/assets/sponsors/access.png';
+import AteneoDeDavaoLogo from '@/assets/sponsors/ateneo-de-davao.png';
 import AWSUGLogo from '@/assets/sponsors/awsug-davao.png';
+import CareerTeamLogo from '@/assets/sponsors/career-team.png';
 import CSSECLogo from '@/assets/sponsors/cssec.png';
 import DataEngineeringPHLogo from '@/assets/sponsors/data-engineering-pilipinas.png';
 import DevConDavaoLogo from '@/assets/sponsors/devcon-davao.png';
 import DjangoGirlsCDOLogo from '@/assets/sponsors/django-girls-cdo.png';
+import GdgDavaoLogo from '@/assets/sponsors/gdg-davao.png';
+import InventiveLogo from '@/assets/sponsors/inventiv.png';
 import MinNaLprocRDLabLogo from '@/assets/sponsors/minna-lproc-r&d-laboratory.png';
+import OpsWerksLogo from '@/assets/sponsors/opswerks.png';
 import PizzayPYLogo from '@/assets/sponsors/pizzapy.png';
 import PyBalanghayLogo from '@/assets/sponsors/pybalanghay.webp';
 import PythonAsiaOrgLogo from '@/assets/sponsors/python-asia-organization.png';
+import PythonPHLogo from '@/assets/sponsors/pythonph.png';
 import PyTsadaLogo from '@/assets/sponsors/pytsada.png';
+import SnazzyFramesLogo from '@/assets/sponsors/snazzy-frames.png';
 import SparcsLogo from '@/assets/sponsors/sparcs.png';
 import SysdevLogo from '@/assets/sponsors/sysdev.png';
-import GdgDavaoLogo from '@/assets/sponsors/gdg-davao.png';
-import SnazzyFramesLogo from '@/assets/sponsors/snazzy-frames.png';
+import UnionBankLogo from '@/assets/sponsors/unionbank.jpeg';
 
 export type SponsorTier =
-  'apo' | 'agila' | 'durian' | 'cacao' | 'waling-waling' | 'partners' | 'photobooth-partner';
+  | 'venue-partner-and-co-presenter'
+  | 'apo'
+  | 'agila'
+  | 'durian'
+  | 'cacao'
+  | 'waling-waling'
+  | 'photobooth-partner'
+  | 'partners';
 
 export interface Sponsor {
   id: string;
@@ -40,13 +48,14 @@ export interface SponsorTierGroup {
 export const sponsorPlaceholderLogoUrl = '/images/sponsors/placeholder.svg';
 
 const sponsorTiers: Omit<SponsorTierGroup, 'sponsors'>[] = [
+  { tier: 'venue-partner-and-co-presenter', displayName: 'Venue Partner and Co-Presenter' },
   { tier: 'apo', displayName: 'Apo' },
   { tier: 'agila', displayName: 'Agila' },
   { tier: 'durian', displayName: 'Durian' },
   { tier: 'cacao', displayName: 'Cacao' },
   { tier: 'waling-waling', displayName: 'Waling-Waling' },
-  { tier: 'partners', displayName: 'Community Partners' },
   { tier: 'photobooth-partner', displayName: 'Official Photobooth Partner' },
+  { tier: 'partners', displayName: 'Community Partners' },
 ];
 
 const sponsors: Sponsor[] = [
@@ -55,6 +64,13 @@ const sponsors: Sponsor[] = [
     name: 'ACCESS',
     logoUrl: ACCESSLogo.src,
     tier: 'partners',
+  },
+  {
+    id: 'ateneo-de-davao',
+    name: 'Ateneo de Davao University',
+    logoUrl: AteneoDeDavaoLogo.src,
+    websiteUrl: 'https://www.addu.edu.ph/',
+    tier: 'venue-partner-and-co-presenter',
   },
   {
     id: 'awsug',

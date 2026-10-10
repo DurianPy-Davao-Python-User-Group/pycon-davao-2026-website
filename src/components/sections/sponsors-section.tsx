@@ -18,6 +18,11 @@ interface TierStyle {
 }
 
 const tierStyles: Record<SponsorTier, TierStyle> = {
+  'venue-partner-and-co-presenter': {
+    gap: '',
+    logo: 'size-48 lg:size-56',
+    showDetails: true,
+  },
   apo: {
     gap: '',
     logo: 'size-48 lg:size-56',
@@ -43,15 +48,15 @@ const tierStyles: Record<SponsorTier, TierStyle> = {
     logo: 'size-20 rounded-xl sm:size-24 lg:size-28',
     showDetails: false,
   },
-  partners: {
-    gap: 'gap-3 sm:gap-4',
-    logo: 'size-14 rounded-xl lg:size-16',
-    showDetails: false,
-  },
   'photobooth-partner': {
     gap: 'gap-3 sm:gap-4',
     logo: 'size-14 rounded-xl lg:size-16',
     showDetails: true,
+  },
+  partners: {
+    gap: 'gap-3 sm:gap-4',
+    logo: 'size-14 rounded-xl lg:size-16',
+    showDetails: false,
   },
 };
 
