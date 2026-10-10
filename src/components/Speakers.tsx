@@ -36,8 +36,8 @@ function SpeakerCard({ speaker, group }: { speaker: Speaker; group: SpeakerGroup
 
       <div
         className={cn(
-          'absolute inset-x-0 bottom-0 flex h-1/2 flex-col justify-end bg-linear-to-t to-transparent px-2 pb-3 text-center',
-          group.gradientClassName,
+          'absolute inset-x-0 bottom-0 flex h-1/2 flex-col justify-end bg-linear-to-t px-2 pb-3 text-center',
+          group.gradientClassName || 'from-white via-white/80 to-transparent',
         )}
       >
         <p className="font-heading text-pycon-dark-blue text-base leading-tight font-bold">

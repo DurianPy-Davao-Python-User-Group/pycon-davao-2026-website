@@ -77,21 +77,21 @@ export const speakerGroups: SpeakerGroup[] = [
     title: 'Keynote Speakers',
     badgeClassName: 'bg-primary',
     borderClassName: 'border-primary',
-    gradientClassName: 'from-primary/40',
+    gradientClassName: 'from-white via-white/80 to-transparent',
   },
   {
     type: 'tech-talk',
     title: 'Tech Talk Speakers',
     badgeClassName: 'bg-pycon-orange-accent',
     borderClassName: 'border-pycon-orange-accent',
-    gradientClassName: 'from-pycon-orange-accent/40',
+    gradientClassName: 'from-white via-white/80 to-transparent',
   },
   {
     type: 'sprint-lead',
     title: 'Sprint Day Leads',
     badgeClassName: 'bg-accent',
     borderClassName: 'border-accent',
-    gradientClassName: 'from-accent/40',
+    gradientClassName: 'from-white via-white/80 to-transparent',
   },
 ];
 
@@ -298,7 +298,7 @@ export const speakers: Speaker[] = [
     category: 'tech-talk',
     designation: 'Backend Engineer',
     company: '',
-    bio: "",
+    bio: '',
     socials: {
       linkedin: 'https://www.linkedin.com/in/mel-cadano/',
       twitter: 'https://www.facebook.com/grmelcdn/',
@@ -311,9 +311,10 @@ export const speakers: Speaker[] = [
     category: 'tech-talk',
     designation: 'Full-stack AI Developer',
     company: 'Inventiv',
-    bio: "Jaime Emanuel Lucero is a Full Stack AI Engineer at Inventiv, where he works on developing AI-powered applications and software solutions. He holds a degree in Computer Science, with a focus on Data Science and Artificial Intelligence. His experience spans full-stack development, machine learning, and the integration of AI technologies into practical business applications. He is passionate about building intelligent systems that solve real-world problems and improve how people and organizations work.",
+    bio: 'Jaime Emanuel Lucero is a Full Stack AI Engineer at Inventiv, where he works on developing AI-powered applications and software solutions. He holds a degree in Computer Science, with a focus on Data Science and Artificial Intelligence. His experience spans full-stack development, machine learning, and the integration of AI technologies into practical business applications. He is passionate about building intelligent systems that solve real-world problems and improve how people and organizations work.',
     socials: {
-      linkedin: 'https://www.linkedin.com/in/jaime-emanuel-lucero-a80b14259?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+      linkedin:
+        'https://www.linkedin.com/in/jaime-emanuel-lucero-a80b14259?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
       twitter: 'https://www.facebook.com/share/19GQsYD1DJ/?mibextid=wwXIfr',
     },
     avatarUrl: avatarById['jaime-emanuel-lucero'],
