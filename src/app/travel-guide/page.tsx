@@ -143,9 +143,12 @@ export default function TravelGuidePage() {
                     id="travel-guide-day-2-venue"
                     className="font-heading text-pycon-orange mt-2 text-lg leading-tight font-medium sm:text-xl lg:text-[clamp(1.5rem,2.08vw,2.5rem)]"
                   >
-                    TBA
+                    Training Room, 8th Floor
                   </h3>
-
+                  <p className="mt-2">
+                    Community Center of the First Companions Building (CCFC Building), Ateneo de
+                    Davao University
+                  </p>
                 </section>
               </div>
             </GuideSection>
