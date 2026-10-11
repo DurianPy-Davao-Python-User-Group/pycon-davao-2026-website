@@ -3,7 +3,6 @@ import { EventSchedule } from '@/components/program/EventSchedule'
 import { sampleSchedules } from '@/data/schedule';
 import backgroundPattern from '@/assets/program/bg-pattern2.svg';
 import ProgramHero from '@/components/program/ProgramHero';
-import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Program & Schedule',

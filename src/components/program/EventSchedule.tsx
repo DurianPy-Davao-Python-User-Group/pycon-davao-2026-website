@@ -2,71 +2,10 @@
 
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { ProgramEntry, Schedule, ProgramEntryType } from '@/data/schedule';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Speaker } from '@/data/speaker'
 import { cn, notLetterRegex } from '@/lib/utils'
 import { Fragment, useState } from 'react';
-
-export const formatDisplayTime = (isoTimeString: string): string => {
-  const date = new Date(isoTimeString);
-  return date.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-    timeZone: 'Asia/Manila'
-  });
-};
-
-export const calculateEventDurationInMinutes = (startTime: string, endTime: string): number => {
-  const startDate = new Date(startTime);
-  const endDate = new Date(endTime);
-  return Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60));
-};
-
-export const generateDayTimeSlots = (dayEvents: ProgramEntry[], intervalMinutes: number): Date[] => {
-  if (dayEvents.length === 0) return [];
-
-  const allEventTimes = dayEvents.flatMap((event) => [new Date(event.startTime), new Date(event.endTime)]);
-
-  const earliestTime = new Date(Math.min(...allEventTimes.map((time) => time.getTime())));
-  const latestTime = new Date(Math.max(...allEventTimes.map((time) => time.getTime())));
-
-  // Round down to nearest interval
-  earliestTime.setMinutes(Math.floor(earliestTime.getMinutes() / intervalMinutes) * intervalMinutes, 0, 0);
-
-  const timeSlots = [];
-  const currentTime = new Date(earliestTime);
-
-  while (currentTime <= latestTime) {
-    timeSlots.push(new Date(currentTime));
-    currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
-  }
-
-  return timeSlots;
-};
-
-export const extractUniqueRoomsFromEvents = (events: ProgramEntry[]): string[] => {
-  return Array.from(new Set(events.map((event) => event.room)));
-};
-
-export const calculateGridRowSpan = (startTime: string, endTime: string, intervalMinutes: number): number => {
-  const durationMinutes = calculateEventDurationInMinutes(startTime, endTime);
-  return Math.max(1, Math.round(durationMinutes / (intervalMinutes / 4)));
-};
-
-export const calculateGridRowStart = (eventStartTime: string, firstTimeSlot?: Date, intervalMinutes = 30): number => {
-  if (!firstTimeSlot) {
-    return 0;
-  }
-
-  const eventDate = new Date(eventStartTime);
-  const timeDifferenceMinutes = (eventDate.getTime() - firstTimeSlot.getTime()) / (1000 * 60);
-  return Math.floor(timeDifferenceMinutes / (intervalMinutes / 4)) + 1;
-};
-
-interface EventScheduleProps {
-  schedules: Schedule[];
-  timeInterval?: number; // in minutes, default 30
-}
 
 interface EventScheduleProps {
   schedules: Schedule[];
@@ -92,6 +31,63 @@ const getEventColorConfig = (eventType?: ProgramEntryType): EventColorConfig => 
   }
 };
 
+const formatDisplayTime = (isoTimeString: string): string => {
+  const date = new Date(isoTimeString);
+  return date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+    timeZone: 'Asia/Manila'
+  });
+};
+
+const calculateEventDurationInMinutes = (startTime: string, endTime: string): number => {
+  const startDate = new Date(startTime);
+  const endDate = new Date(endTime);
+  return Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60));
+};
+
+const generateDayTimeSlots = (dayEvents: ProgramEntry[], intervalMinutes: number): Date[] => {
+  if (dayEvents.length === 0) return [];
+
+  const allEventTimes = dayEvents.flatMap((event) => [new Date(event.startTime), new Date(event.endTime)]);
+
+  const earliestTime = new Date(Math.min(...allEventTimes.map((time) => time.getTime())));
+  const latestTime = new Date(Math.max(...allEventTimes.map((time) => time.getTime())));
+
+  // Round down to nearest interval
+  earliestTime.setMinutes(Math.floor(earliestTime.getMinutes() / intervalMinutes) * intervalMinutes, 0, 0);
+
+  const timeSlots = [];
+  const currentTime = new Date(earliestTime);
+
+  while (currentTime <= latestTime) {
+    timeSlots.push(new Date(currentTime));
+    currentTime.setMinutes(currentTime.getMinutes() + intervalMinutes);
+  }
+
+  return timeSlots;
+};
+
+const extractUniqueRoomsFromEvents = (events: ProgramEntry[]): string[] => {
+  return Array.from(new Set(events.map((event) => event.room)));
+};
+
+const calculateGridRowSpan = (startTime: string, endTime: string, intervalMinutes: number): number => {
+  const durationMinutes = calculateEventDurationInMinutes(startTime, endTime);
+  return Math.max(1, Math.round(durationMinutes / (intervalMinutes / 4)));
+};
+
+const calculateGridRowStart = (eventStartTime: string, firstTimeSlot?: Date, intervalMinutes = 30): number => {
+  if (!firstTimeSlot) {
+    return 0;
+  }
+
+  const eventDate = new Date(eventStartTime);
+  const timeDifferenceMinutes = (eventDate.getTime() - firstTimeSlot.getTime()) / (1000 * 60);
+  return Math.floor(timeDifferenceMinutes / (intervalMinutes / 4)) + 1;
+};
+
 interface DayTabsProps {
   days: Array<{
     id: string;
@@ -104,7 +100,7 @@ interface DayTabsProps {
 
 function DayTabs({ days, activeDay, onDayChange }: DayTabsProps) {
   return (
-    <div className="border-pycon-orange/30 mb-6 flex justify-center overflow-x-auto border-b">
+    <div className="border-pycon-orange/30 mb-6 flex overflow-x-auto border-b">
       {days
         .sort((a, b) => new Date(`${a.date}T00:00:00+08:00`).getTime() - new Date(`${b.date}T00:00:00+08:00`).getTime())
         .map((day) => (
@@ -112,8 +108,8 @@ function DayTabs({ days, activeDay, onDayChange }: DayTabsProps) {
             key={day.id}
             onClick={() => onDayChange(day.id)}
             className={cn(
-              'font-nunito cursor-pointer border-b-2 px-4 py-3 text-md font-extrabold whitespace-nowrap transition-colors',
-              activeDay === day.id ? 'border-pycon-orange text-pycon-orange' : 'text-pycon-orange/50 hover:text-pycon-red/70 border-transparent'
+              'font-nunito cursor-pointer border-b-2 px-4 py-3 text-sm font-bold whitespace-nowrap transition-colors',
+              activeDay === day.id ? 'border-primary text-primary' : 'text-pycon-orange/50 hover:text-pycon-red/70 border-transparent'
             )}
           >
             {day.label}
@@ -121,14 +117,6 @@ function DayTabs({ days, activeDay, onDayChange }: DayTabsProps) {
         ))}
     </div>
   );
-}
-
-interface BreakEntryProps {
-  title: string;
-}
-
-function BreakEntry({ title }: BreakEntryProps) {
-  return <h4 className="font-nunito text-sm leading-relaxed font-bold">{title}</h4>;
 }
 
 interface RoomHeadersProps {
@@ -139,7 +127,7 @@ function RoomHeaders({ rooms }: RoomHeadersProps) {
   return rooms.map((roomName, index) => {
     let splitContent: string;
     return (
-      <div style={{ gridColumnStart: index + 2, gridRowStart: 1 }} key={roomName} className="font-bold sticky top-0 z-11 min-w-0 py-4 text-center">
+      <div style={{ gridColumnStart: index + 2, gridRowStart: 1 }} key={roomName} className="sticky top-0 z-11 min-w-0 py-4 text-center">
         <h3 key={roomName} className="font-pipanganan text-pycon-orange truncate text-lg">
           {roomName.split('').map((x, i) => {
             const isLast = roomName.length === i + 1;
@@ -187,6 +175,22 @@ function RoomHeaders({ rooms }: RoomHeadersProps) {
   });
 }
 
+interface TimeSlotLabelsProps {
+  timeSlots: Date[];
+}
+
+function TimeSlotLabels({ timeSlots }: TimeSlotLabelsProps) {
+  return timeSlots.map((timeSlot, slotIndex) => (
+    <div
+      key={timeSlot.toISOString()}
+      className="text-pycon-orange sticky left-0 z-9 flex flex-col items-end pe-4 text-sm"
+      style={{ gridRow: slotIndex * 4 + 2, gridColumn: 1, gridRowStart: slotIndex * 4 + 2, gridRowEnd: slotIndex * 4 + 2 + 4 }}
+    >
+      <span className="font-nunito font-bold">{formatDisplayTime(timeSlot.toISOString())}</span>
+    </div>
+  ));
+}
+
 interface ProgramEntryCardProps {
   event: ProgramEntry;
   roomIndex: number;
@@ -198,6 +202,9 @@ function ProgramEntryCard({ event, roomIndex, gridRowStart, gridRowSpan }: Progr
   const hasDetailedContent = (event.speakers && event.speakers.length > 0) || event.type === 'session';
   const isBreakOrRegistration = event.type === 'break' || event.type === 'registration';
 
+  const timeBlockAlignment = hasDetailedContent ? 'justify-start' : 'justify-center';
+  const timeBlockPadding = hasDetailedContent ? 'px-2 pt-4 pb-2' : 'px-2 py-2';
+  const contentAlignment = 'justify-center';
   const eventDuration = calculateEventDurationInMinutes(event.startTime, event.endTime);
 
   const [bgColorClass, textColorClass] = getEventColorConfig(event.type);
@@ -216,7 +223,7 @@ function ProgramEntryCard({ event, roomIndex, gridRowStart, gridRowSpan }: Progr
         {/* Time Display Block */}
         <div
           className={cn(
-            `font-nunito flex flex-col items-center justify-center px-2 py-2 text-pycon-white min-w-[80px] flex-shrink-0 text-sm font-bold`,
+            `font-nunito flex flex-col items-center ${timeBlockAlignment} ${timeBlockPadding} text-pycon-white min-w-[80px] flex-shrink-0 text-sm font-bold`,
             bgColorClass
           )}
         >
@@ -226,7 +233,7 @@ function ProgramEntryCard({ event, roomIndex, gridRowStart, gridRowSpan }: Progr
 
         {/* Event Content */}
         <div
-          className={cn('font-nunito flex min-w-0 flex-1 flex-col justify-center overflow-hidden px-4 pb-4 font-bold', hasDetailedContent ? 'pt-4' : 'py-4')}
+          className={cn('font-nunito flex min-w-0 flex-1 flex-col overflow-hidden px-4 pb-4 font-bold', hasDetailedContent ? 'pt-4' : 'py-4', contentAlignment)}
         >
           {isBreakOrRegistration ? <BreakEntry title={event.title} /> : <SessionEntry event={event} />}
         </div>
@@ -235,28 +242,12 @@ function ProgramEntryCard({ event, roomIndex, gridRowStart, gridRowSpan }: Progr
   );
 }
 
-function EmptyDayState() {
-  return (
-    <div className="text-muted-foreground py-12 text-center">
-      <p className="font-nunito font-bold">No events scheduled for this day.</p>
-    </div>
-  );
+interface BreakEntryProps {
+  title: string;
 }
 
-interface TimeSlotLabelsProps {
-  timeSlots: Date[];
-}
-
-function TimeSlotLabels({ timeSlots }: TimeSlotLabelsProps) {
-  return timeSlots.map((timeSlot, slotIndex) => (
-    <div
-      key={timeSlot.toISOString()}
-      className="text-pycon-orange sticky left-0 z-9 flex flex-col items-end pe-4 text-sm"
-      style={{ gridRow: slotIndex * 4 + 2, gridColumn: 1, gridRowStart: slotIndex * 4 + 2, gridRowEnd: slotIndex * 4 + 2 + 4 }}
-    >
-      <span className="font-nunito font-bold">{formatDisplayTime(timeSlot.toISOString())}</span>
-    </div>
-  ));
+function BreakEntry({ title }: BreakEntryProps) {
+  return <h4 className="font-nunito text-sm leading-relaxed font-bold">{title}</h4>;
 }
 
 interface SessionEntryProps {
@@ -270,6 +261,11 @@ function SessionEntry({ event }: SessionEntryProps) {
 
       return <SpeakerInformation speaker={speaker} />;
     }
+
+    if (event.speakers && event.speakers.length > 1) {
+      return <SpeakersList speakers={event.speakers} />;
+    }
+
     return <></>;
   };
 
@@ -285,18 +281,73 @@ function SessionEntry({ event }: SessionEntryProps) {
   );
 }
 
+interface SpeakersListProps {
+  speakers: NonNullable<ProgramEntry['speakers']>;
+}
+
+function SpeakersList({ speakers }: SpeakersListProps) {
+  const lessThan3Speakers = speakers.length && speakers.length < 3;
+  return (
+    <div className="space-y-1">
+      <div className="*:data-[slot=avatar]:ring-background flex -space-x-2">
+        {speakers.map((x) => (
+          <SpeakerAvatar key={x.id} initials={getSpeakerInitials(x.name)} image={x.image} />
+        ))}
+      </div>
+
+      <div className="font-nunito min-w-0 text-xs leading-relaxed font-bold">
+        {speakers.map((speaker, index) => (
+          <Fragment key={speaker.id}>
+            {speaker.name}
+            {speaker.speakerTitle && lessThan3Speakers && <>, {speaker.speakerTitle}</>}
+            <span className={cn(speakers.length === index + 1 && 'hidden')}>; </span>
+          </Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function getSpeakerInitials(fullName: string) {
+  return fullName
+    .split(' ')
+    .map((namePart) => namePart[0])
+    .join('')
+    .slice(0, 2);
+}
+
+function SpeakerAvatar({ image, initials }: { image?: string; initials: string }) {
+  return (
+    <Avatar className="mt-0.5 h-7 w-7 flex-shrink-0">
+      <AvatarImage src={image} />
+      <AvatarFallback className="font-nunito bg-pycon-custard-light text-pycon-violet-dark text-xs">{initials}</AvatarFallback>
+    </Avatar>
+  );
+}
+
 interface SpeakerInformationProps {
   speaker: Speaker;
 }
 
 function SpeakerInformation({ speaker }: SpeakerInformationProps) {
+  const speakerInitials = getSpeakerInitials(speaker.name);
 
   return (
     <div className="flex min-w-0 items-start gap-3">
+      <SpeakerAvatar image={speaker.image} initials={speakerInitials} />
       <div className="min-w-0 flex-1 text-xs leading-relaxed">
         <div className="font-nunito font-bold break-words">{speaker.name}</div>
         {speaker.speakerTitle && <div className="font-nunito mt-1 text-xs leading-relaxed font-bold break-words">{speaker.speakerTitle}</div>}
+        {/* {speaker.talkTitle && <div className="font-nunito mt-1 text-xs leading-relaxed font-bold break-words">{speaker.talkTitle}</div>} */}
       </div>
+    </div>
+  );
+}
+
+function EmptyDayState() {
+  return (
+    <div className="text-muted-foreground py-12 text-center">
+      <p className="font-nunito font-bold">No events scheduled for this day.</p>
     </div>
   );
 }
@@ -304,7 +355,8 @@ function SpeakerInformation({ speaker }: SpeakerInformationProps) {
 export function EventSchedule({ schedules }: EventScheduleProps) {
   const dates = schedules.map((x) => ({
     id: x.id,
-    date: x.date, label: x.label
+    date: x.date,
+    label: x.label
   }));
 
   const datesInMs = schedules.map((x) => new Date(`${x.date}T00:00:00+08:00`).getTime());
@@ -335,11 +387,11 @@ export function EventSchedule({ schedules }: EventScheduleProps) {
 
             return (
               <Card key={`${event.title}-${event.id}`} className="bg-pycon-custard-lighter border-none pt-0">
-                <CardHeader className={cn(bgColorClass, 'text-pycon-white grid-rows-[auto] justify-center rounded-t-xl py-2 text-sm font-semibold')}>
+                <CardHeader className={cn(bgColorClass, textColorClass, 'text-pycon-white grid-rows-[auto] justify-center rounded-t-xl py-2 text-sm font-semibold')}>
                   {formatDisplayTime(event.startTime)} - {formatDisplayTime(event.endTime)}
                 </CardHeader>
-                <CardContent className={cn(textColorClass, 'flex flex-col items-center justify-center text-center')}>{isBreakOrRegistration ? <BreakEntry title={event.title} /> : <SessionEntry event={event} />}</CardContent>
-                {event.room && <CardFooter className={cn(textColorClass, "font-nunito justify-center text-xs font-bold")}>{event.room}</CardFooter>}
+                <CardContent className={cn(textColorClass)}>{isBreakOrRegistration ? <BreakEntry title={event.title} /> : <SessionEntry event={event} />}</CardContent>
+                {event.room && <CardFooter className={cn(textColorClass, "font-nunito justify-end text-sm font-bold")}>{event.room}</CardFooter>}
               </Card>
             );
           })}

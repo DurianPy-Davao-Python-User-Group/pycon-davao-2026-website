@@ -96,6 +96,15 @@ export const sampleSchedules: Schedule[] = [
             description: 'A frontend developer passionate about React and modern web technologies.',
             order: 1,
           },
+          {
+            id: 'speaker-3',
+            name: 'Doe Jane',
+            speakerTitle: 'Frontend Developer',
+            talkTitle: 'State Management',
+            image: '/images/doe-jane.jpg',
+            description: 'A frontend developer passionate about cloud technologies.',
+            order: 1,
+          },
         ],
       },
       {
