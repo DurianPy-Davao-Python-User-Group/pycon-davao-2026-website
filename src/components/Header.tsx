@@ -74,21 +74,21 @@ export default function Header() {
   }, []);
 
   const desktopOptionClass =
-    'focus-visible:outline-pycon-header-hover rounded-md text-center text-sm leading-none whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-4 lg:text-base xl:text-lg 2xl:text-xl';
+    'focus-visible:outline-pycon-header-hover rounded-md text-center text-xs leading-none whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-4 lg:text-[13px] xl:text-sm 2xl:text-base';
 
   return (
     <header
       ref={headerRef}
       className="bg-pycon-beige sticky top-0 z-60 w-full overflow-x-clip rounded-b-[20px] shadow-[0_8px_30px_rgba(7,46,71,0.08),0_2px_8px_rgba(7,46,71,0.04)] transition-all duration-300"
     >
-      <div className="flex h-[70px] w-full items-center justify-between px-6 sm:h-[82px] sm:px-10 md:h-[92px] lg:justify-start lg:gap-14 xl:gap-20 2xl:gap-24">
+      <div className="flex h-[70px] w-full items-center justify-between px-4 sm:h-[82px] sm:px-6 md:h-[92px] lg:justify-start lg:gap-6 lg:px-6 xl:gap-8 xl:px-8 2xl:gap-12 2xl:px-10">
         {/* Logo */}
         <Link
           href="/"
           className="focus-visible:outline-pycon-header-hover flex shrink-0 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4"
           aria-label="PyCon Davao 2026 Home"
         >
-          <div className="relative flex h-[48px] w-[87px] items-center justify-center sm:h-[58px] sm:w-[105px] md:h-[68px] md:w-[124px]">
+          <div className="relative flex h-[46px] w-[84px] items-center justify-center sm:h-[54px] sm:w-[98px] md:h-[58px] md:w-[106px] xl:h-[68px] xl:w-[124px]">
             <Image
               src={headerLogo}
               alt="PyCon Davao 2026 Logo"
@@ -102,7 +102,7 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav
-          className="hidden items-center lg:flex lg:gap-6 xl:gap-8 2xl:gap-12"
+          className="hidden items-center lg:flex lg:gap-3 xl:gap-5 2xl:gap-7"
           aria-label="Main Navigation"
         >
           {/* Primary Nav Options (Home, Code of Conduct, etc.) */}
@@ -118,7 +118,11 @@ export default function Header() {
           ))}
 
           {/* Sponsorship Prospectus Dropdown */}
-          <HeaderDropdown label="Sponsorship Prospectus" options={SPONSORSHIP_OPTIONS} />
+          <HeaderDropdown
+            label="Sponsorship Prospectus"
+            options={SPONSORSHIP_OPTIONS}
+            buttonClassName={desktopOptionClass}
+          />
 
           {/* Secondary Nav Options (About DurianPy, etc.) */}
           {SECONDARY_NAV_OPTIONS.map((option) => (
@@ -132,7 +136,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <BuyTicketButton isVisible className="ml-auto hidden sm:inline-flex" />
+        <BuyTicketButton isVisible className="ml-auto hidden shrink-0 sm:inline-flex lg:px-4 lg:py-2 lg:text-xs xl:px-5 xl:py-2 xl:text-sm" />
 
         {/* Mobile Menu Button */}
         <div className="flex items-center lg:hidden">

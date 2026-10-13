@@ -3,9 +3,9 @@
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { ProgramEntry, Schedule, ProgramEntryType } from '@/data/schedule';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Speaker } from '@/data/speaker'
-import { cn, notLetterRegex } from '@/lib/utils'
-import { Fragment, useState } from 'react';
+import { Speaker } from '@/data/speaker';
+import { cn } from '@/lib/utils';
+import { Fragment, useRef, useState } from 'react';
 
 interface EventScheduleProps {
   schedules: Schedule[];
@@ -69,23 +69,48 @@ const generateDayTimeSlots = (dayEvents: ProgramEntry[], intervalMinutes: number
   return timeSlots;
 };
 
+const CANONICAL_ROOM_ORDER = [
+  'Finister Auditorium',
+  'FinAud',
+  'F613E',
+  'F612 (Mac Lab)',
+  'F600-F601 Combined',
+  '7th Floor 2nd Lounge',
+  'F711-F712 Combined',
+];
+
 const extractUniqueRoomsFromEvents = (events: ProgramEntry[]): string[] => {
-  return Array.from(new Set(events.map((event) => event.room)));
+  const rooms = Array.from(new Set(events.map((event) => event.room)));
+  return rooms.sort((a, b) => {
+    const isFinisterA = a.toLowerCase().includes('finister') || a.toLowerCase().includes('finaud');
+    const isFinisterB = b.toLowerCase().includes('finister') || b.toLowerCase().includes('finaud');
+    if (isFinisterA && !isFinisterB) return -1;
+    if (!isFinisterA && isFinisterB) return 1;
+
+    const idxA = CANONICAL_ROOM_ORDER.indexOf(a);
+    const idxB = CANONICAL_ROOM_ORDER.indexOf(b);
+    if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+    if (idxA !== -1) return -1;
+    if (idxB !== -1) return 1;
+    return a.localeCompare(b);
+  });
 };
 
-const calculateGridRowSpan = (startTime: string, endTime: string, intervalMinutes: number): number => {
+const MINUTES_PER_ROW = 5;
+
+const calculateGridRowSpan = (startTime: string, endTime: string): number => {
   const durationMinutes = calculateEventDurationInMinutes(startTime, endTime);
-  return Math.max(1, Math.round(durationMinutes / (intervalMinutes / 4)));
+  return Math.max(1, Math.round(durationMinutes / MINUTES_PER_ROW));
 };
 
-const calculateGridRowStart = (eventStartTime: string, firstTimeSlot?: Date, intervalMinutes = 30): number => {
+const calculateGridRowStart = (eventStartTime: string, firstTimeSlot?: Date): number => {
   if (!firstTimeSlot) {
     return 0;
   }
 
   const eventDate = new Date(eventStartTime);
   const timeDifferenceMinutes = (eventDate.getTime() - firstTimeSlot.getTime()) / (1000 * 60);
-  return Math.floor(timeDifferenceMinutes / (intervalMinutes / 4)) + 1;
+  return Math.floor(timeDifferenceMinutes / MINUTES_PER_ROW) + 1;
 };
 
 interface DayTabsProps {
@@ -124,67 +149,38 @@ interface RoomHeadersProps {
 }
 
 function RoomHeaders({ rooms }: RoomHeadersProps) {
-  return rooms.map((roomName, index) => {
-    let splitContent: string;
-    return (
-      <div style={{ gridColumnStart: index + 2, gridRowStart: 1 }} key={roomName} className="sticky top-0 z-11 min-w-0 py-4 text-center">
-        <h3 key={roomName} className="font-pipanganan text-pycon-orange truncate text-lg">
-          {roomName.split('').map((x, i) => {
-            const isLast = roomName.length === i + 1;
-            const isNotLetter = notLetterRegex.test(x);
-
-            if (isNotLetter) {
-              splitContent = `${splitContent}${x}`;
-            }
-
-            if (!isNotLetter) {
-              const content = splitContent;
-              splitContent = '';
-              return (
-                <Fragment key={`${x}-${i}`}>
-                  <span className="font-nunito font-black">{content}</span>
-                  {x}
-                </Fragment>
-              );
-            }
-
-            if (isLast) {
-              if (isNotLetter) {
-                return (
-                  <span key={`${x}-${i}`} className="font-nunito font-black">
-                    {splitContent}
-                  </span>
-                );
-              }
-
-              return (
-                <Fragment key={`${x}-${i}`}>
-                  <span className="font-nunito font-black">{splitContent}</span>
-                  {x}
-                </Fragment>
-              );
-            }
-
-            return '';
-          })}
-        </h3>
-
-        <div className="bg-pycon-orange/30 mx-auto mt-2 h-px w-[90%]" />
-      </div>
-    );
-  });
+  return rooms.map((roomName, index) => (
+    <div
+      style={{ gridColumnStart: index + 2, gridRowStart: 1 }}
+      key={roomName}
+      className="bg-pycon-custard-light sticky top-0 z-20 min-w-0 border-b border-pycon-orange/20 py-3 text-center shadow-xs"
+    >
+      <h3
+        title={roomName}
+        className="font-nunito font-bold text-pycon-orange truncate px-2 text-sm tracking-wide md:text-base"
+      >
+        {roomName}
+      </h3>
+    </div>
+  ));
 }
 
 interface TimeSlotLabelsProps {
   timeSlots: Date[];
+  rowsPerInterval: number;
 }
 
-function TimeSlotLabels({ timeSlots }: TimeSlotLabelsProps) {
+function TimeSlotLabels({ timeSlots, rowsPerInterval }: TimeSlotLabelsProps) {
   return timeSlots.map((timeSlot, slotIndex) => (
     <div
       key={timeSlot.toISOString()}
-      className="text-pycon-orange sticky left-0 z-9 flex flex-col items-end pe-4 text-sm"
-      style={{ gridRow: slotIndex * 4 + 2, gridColumn: 1, gridRowStart: slotIndex * 4 + 2, gridRowEnd: slotIndex * 4 + 2 + 4 }}
+      className="text-pycon-orange sticky left-0 z-10 flex flex-col items-end pe-4 text-sm"
+      style={{
+        gridRow: slotIndex * rowsPerInterval + 2,
+        gridColumn: 1,
+        gridRowStart: slotIndex * rowsPerInterval + 2,
+        gridRowEnd: slotIndex * rowsPerInterval + 2 + rowsPerInterval,
+      }}
     >
       <span className="font-nunito font-bold">{formatDisplayTime(timeSlot.toISOString())}</span>
     </div>
@@ -194,46 +190,71 @@ function TimeSlotLabels({ timeSlots }: TimeSlotLabelsProps) {
 interface ProgramEntryCardProps {
   event: ProgramEntry;
   roomIndex: number;
+  totalRooms: number;
   gridRowStart: number;
   gridRowSpan: number;
 }
 
-function ProgramEntryCard({ event, roomIndex, gridRowStart, gridRowSpan }: ProgramEntryCardProps) {
+function ProgramEntryCard({ event, roomIndex, totalRooms, gridRowStart, gridRowSpan }: ProgramEntryCardProps) {
   const hasDetailedContent = (event.speakers && event.speakers.length > 0) || event.type === 'session';
   const isBreakOrRegistration = event.type === 'break' || event.type === 'registration';
+  const duration = calculateEventDurationInMinutes(event.startTime, event.endTime);
+  const isShortDuration = duration <= 15;
+  const isLongDuration = duration > 45;
 
-  const timeBlockAlignment = hasDetailedContent ? 'justify-start' : 'justify-center';
-  const timeBlockPadding = hasDetailedContent ? 'px-2 pt-4 pb-2' : 'px-2 py-2';
-  const contentAlignment = 'justify-center';
-  const eventDuration = calculateEventDurationInMinutes(event.startTime, event.endTime);
+  const timeBlockPadding = isShortDuration
+    ? 'px-2 py-1 justify-center'
+    : isLongDuration
+      ? 'px-2.5 pt-4 pb-3 justify-start'
+      : hasDetailedContent
+        ? 'px-2.5 pt-3 pb-2 justify-center'
+        : 'px-2 py-2 justify-center';
+
+  const contentPadding = isShortDuration
+    ? 'px-3 py-1.5 justify-center'
+    : isLongDuration
+      ? 'px-3.5 pt-4 pb-3 justify-start'
+      : hasDetailedContent
+        ? 'px-3.5 py-2.5 justify-center'
+        : 'px-3.5 py-2 justify-center';
 
   const [bgColorClass, textColorClass] = getEventColorConfig(event.type);
 
   return (
     <Card
       key={event.id}
-      className={cn('bg-pycon-custard-lighter overflow-hidden border-0 p-0 shadow-sm', textColorClass)}
+      className="bg-pycon-custard-lighter border-pycon-orange/15 shadow-xs overflow-hidden border p-0 transition-shadow hover:shadow-md"
       style={{
-        gridColumn: roomIndex + 2,
+        gridColumn: event.isAllRooms ? `2 / span ${totalRooms}` : (roomIndex >= 0 ? roomIndex + 2 : 2),
         gridRow: `${gridRowStart} / span ${gridRowSpan}`,
-        minHeight: `${Math.max(gridRowSpan * 25, 25)}px`
+        minHeight: `${Math.max(gridRowSpan * 20, 36)}px`
       }}
     >
       <div className="flex h-full min-h-0">
         {/* Time Display Block */}
         <div
           className={cn(
-            `font-nunito flex flex-col items-center ${timeBlockAlignment} ${timeBlockPadding} text-pycon-white min-w-[80px] flex-shrink-0 text-sm font-bold`,
+            `font-nunito flex shrink-0 flex-col items-center ${timeBlockPadding} text-pycon-white min-w-20 font-bold`,
             bgColorClass
           )}
         >
-          <div className="font-nunito text-pycon-white text-center leading-tight font-bold">{formatDisplayTime(event.startTime)}</div>
-          <div className="font-nunito text-pycon-white text-center leading-tight font-bold opacity-90">{eventDuration} min</div>
+          <div
+            title={formatDisplayTime(event.startTime)}
+            className="font-nunito text-pycon-white text-center text-xs leading-tight font-bold whitespace-nowrap"
+          >
+            {formatDisplayTime(event.startTime)}
+          </div>
+          <div
+            title={`${duration} min`}
+            className="font-nunito text-pycon-white text-center text-xs leading-tight font-bold opacity-90"
+          >
+            {duration} min
+          </div>
         </div>
 
         {/* Event Content */}
         <div
-          className={cn('font-nunito flex min-w-0 flex-1 flex-col overflow-hidden px-4 pb-4 font-bold', hasDetailedContent ? 'pt-4' : 'py-4', contentAlignment)}
+          className={cn('font-nunito flex min-w-0 flex-1 flex-col overflow-hidden font-bold', contentPadding)}
         >
           {isBreakOrRegistration ? <BreakEntry title={event.title} /> : <SessionEntry event={event} />}
         </div>
@@ -247,7 +268,14 @@ interface BreakEntryProps {
 }
 
 function BreakEntry({ title }: BreakEntryProps) {
-  return <h4 className="font-nunito text-sm leading-relaxed font-bold">{title}</h4>;
+  return (
+    <h4
+      title={title}
+      className="font-nunito text-sm leading-snug font-semibold text-pycon-dark-blue truncate"
+    >
+      {title}
+    </h4>
+  );
 }
 
 interface SessionEntryProps {
@@ -258,7 +286,6 @@ function SessionEntry({ event }: SessionEntryProps) {
   const sessionContent = () => {
     if (event.speakers && event.speakers.length === 1) {
       const speaker = event.speakers[0];
-
       return <SpeakerInformation speaker={speaker} />;
     }
 
@@ -266,18 +293,25 @@ function SessionEntry({ event }: SessionEntryProps) {
       return <SpeakersList speakers={event.speakers} />;
     }
 
-    return <></>;
+    return null;
   };
 
-  const hasOnlyOneSpeaker = event.speakers && event.speakers.length === 1;
-  const title = hasOnlyOneSpeaker ? event.speakers?.[0]?.talkTitle || event.title : event.title;
+  const hasSpeakers = Boolean(event.speakers && event.speakers.length > 0);
+  const title = event.title;
 
   return (
-    <>
-      <h4 className="font-nunito mb-3 text-sm leading-relaxed font-bold break-words">{title}</h4>
-      {/* {event.speakers && event.speakers.length > 0 && <SpeakersList speakers={event.speakers} />} */}
+    <div className="flex min-h-0 flex-col">
+      <h4
+        title={title}
+        className={cn(
+          'font-nunito text-sm leading-snug font-bold text-pycon-dark-blue break-words',
+          hasSpeakers && 'mb-2'
+        )}
+      >
+        {title}
+      </h4>
       {sessionContent()}
-    </>
+    </div>
   );
 }
 
@@ -286,20 +320,84 @@ interface SpeakersListProps {
 }
 
 function SpeakersList({ speakers }: SpeakersListProps) {
+  const hasSprintProjects = speakers.some((s) => s.talkTitle);
+
+  if (hasSprintProjects) {
+    return (
+      <div className="mt-2.5 flex flex-col gap-3">
+        {speakers.map((speaker) => {
+          const initials = getSpeakerInitials(speaker.name);
+          return (
+            <div key={speaker.id} className="flex min-w-0 items-start gap-2.5">
+              <SpeakerAvatar
+                image={speaker.image}
+                initials={initials}
+                name={speaker.name}
+                className="mt-0.5 h-9 w-9"
+              />
+              <div className="min-w-0 flex-1 leading-snug">
+                <div
+                  title={speaker.name}
+                  className="font-nunito text-sm font-bold text-pycon-dark-blue truncate"
+                >
+                  {speaker.name}
+                </div>
+                {speaker.talkTitle && (
+                  <div
+                    title={speaker.talkTitle}
+                    className="font-nunito text-orange-800 mt-0.5 text-sm font-semibold leading-snug"
+                  >
+                    {speaker.talkTitle}
+                  </div>
+                )}
+                {speaker.speakerTitle && (
+                  <div
+                    title={speaker.speakerTitle}
+                    className="font-nunito mt-0.5 text-sm font-normal leading-normal text-pycon-dark-blue/80"
+                  >
+                    {speaker.speakerTitle}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   const lessThan3Speakers = speakers.length && speakers.length < 3;
   return (
-    <div className="space-y-1">
+    <div className="space-y-1.5">
       <div className="*:data-[slot=avatar]:ring-background flex -space-x-2">
         {speakers.map((x) => (
-          <SpeakerAvatar key={x.id} initials={getSpeakerInitials(x.name)} image={x.image} />
+          <SpeakerAvatar
+            key={x.id}
+            initials={getSpeakerInitials(x.name)}
+            image={x.image}
+            name={x.name}
+            className="h-8 w-8"
+          />
         ))}
       </div>
 
-      <div className="font-nunito min-w-0 text-xs leading-relaxed font-bold">
+      <div className="font-nunito min-w-0 text-sm leading-relaxed text-pycon-dark-blue">
         {speakers.map((speaker, index) => (
           <Fragment key={speaker.id}>
-            {speaker.name}
-            {speaker.speakerTitle && lessThan3Speakers && <>, {speaker.speakerTitle}</>}
+            <span
+              title={speaker.name}
+              className="font-bold text-pycon-dark-blue"
+            >
+              {speaker.name}
+            </span>
+            {speaker.speakerTitle && lessThan3Speakers && (
+              <span
+                title={speaker.speakerTitle}
+                className="font-normal text-pycon-dark-blue/80"
+              >
+                {' '}({speaker.speakerTitle})
+              </span>
+            )}
             <span className={cn(speakers.length === index + 1 && 'hidden')}>; </span>
           </Fragment>
         ))}
@@ -316,11 +414,21 @@ function getSpeakerInitials(fullName: string) {
     .slice(0, 2);
 }
 
-function SpeakerAvatar({ image, initials }: { image?: string; initials: string }) {
+function SpeakerAvatar({
+  image,
+  initials,
+  name,
+  className
+}: {
+  image?: string;
+  initials: string;
+  name?: string;
+  className?: string;
+}) {
   return (
-    <Avatar className="mt-0.5 h-7 w-7 flex-shrink-0">
-      <AvatarImage src={image} />
-      <AvatarFallback className="font-nunito bg-pycon-custard-light text-pycon-violet-dark text-xs">{initials}</AvatarFallback>
+    <Avatar className={cn('mt-0.5 h-9 w-9 shrink-0 overflow-hidden rounded-full border border-pycon-orange/30 shadow-xs', className)}>
+      <AvatarImage src={image} alt={name} className="aspect-square size-full object-cover object-center" />
+      <AvatarFallback className="font-nunito bg-pycon-custard-light text-pycon-dark-blue text-xs font-bold sm:text-sm">{initials}</AvatarFallback>
     </Avatar>
   );
 }
@@ -333,12 +441,28 @@ function SpeakerInformation({ speaker }: SpeakerInformationProps) {
   const speakerInitials = getSpeakerInitials(speaker.name);
 
   return (
-    <div className="flex min-w-0 items-start gap-3">
-      <SpeakerAvatar image={speaker.image} initials={speakerInitials} />
-      <div className="min-w-0 flex-1 text-xs leading-relaxed">
-        <div className="font-nunito font-bold break-words">{speaker.name}</div>
-        {speaker.speakerTitle && <div className="font-nunito mt-1 text-xs leading-relaxed font-bold break-words">{speaker.speakerTitle}</div>}
-        {/* {speaker.talkTitle && <div className="font-nunito mt-1 text-xs leading-relaxed font-bold break-words">{speaker.talkTitle}</div>} */}
+    <div className="flex min-w-0 items-start gap-2.5">
+      <SpeakerAvatar
+        image={speaker.image}
+        initials={speakerInitials}
+        name={speaker.name}
+        className="mt-0.5 h-9 w-9"
+      />
+      <div className="min-w-0 flex-1 leading-snug">
+        <div
+          title={speaker.name}
+          className="font-nunito font-bold text-pycon-dark-blue truncate text-sm"
+        >
+          {speaker.name}
+        </div>
+        {speaker.speakerTitle && (
+          <div
+            title={speaker.speakerTitle}
+            className="font-nunito mt-0.5 text-sm font-normal leading-normal text-pycon-dark-blue/80 line-clamp-2 break-words"
+          >
+            {speaker.speakerTitle}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -363,6 +487,15 @@ export function EventSchedule({ schedules }: EventScheduleProps) {
   const earliestDate = dates.find((x) => Math.min(...datesInMs) === new Date(`${x.date}T00:00:00+08:00`).getTime())?.id;
 
   const [selectedDayId, setSelectedDayId] = useState(earliestDate || '');
+  const gridContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleDayChange = (dayId: string) => {
+    setSelectedDayId(dayId);
+    if (gridContainerRef.current) {
+      gridContainerRef.current.scrollTop = 0;
+      gridContainerRef.current.scrollLeft = 0;
+    }
+  };
 
   const currentDaySchedule = schedules.find((x) => x.id === selectedDayId);
   const currentDayEvents = currentDaySchedule?.programEntries || [];
@@ -378,7 +511,7 @@ export function EventSchedule({ schedules }: EventScheduleProps) {
   return (
     <>
       <div className="contents md:hidden">
-        <DayTabs days={dates} activeDay={selectedDayId} onDayChange={setSelectedDayId} />
+        <DayTabs days={dates} activeDay={selectedDayId} onDayChange={handleDayChange} />
 
         <div className="flex flex-col gap-y-4">
           {sortedEvents.map((event) => {
@@ -386,57 +519,80 @@ export function EventSchedule({ schedules }: EventScheduleProps) {
             const [bgColorClass, textColorClass] = getEventColorConfig(event.type);
 
             return (
-              <Card key={`${event.title}-${event.id}`} className="bg-pycon-custard-lighter border-none pt-0">
-                <CardHeader className={cn(bgColorClass, textColorClass, 'text-pycon-white grid-rows-[auto] justify-center rounded-t-xl py-2 text-sm font-semibold')}>
+              <Card key={`${event.title}-${event.id}`} className="bg-pycon-custard-lighter border-pycon-orange/20 overflow-hidden border pt-0 shadow-xs">
+                <CardHeader className={cn(bgColorClass, 'text-pycon-white grid-rows-[auto] justify-center rounded-t-xl py-2 text-sm font-bold')}>
                   {formatDisplayTime(event.startTime)} - {formatDisplayTime(event.endTime)}
                 </CardHeader>
-                <CardContent className={cn(textColorClass)}>{isBreakOrRegistration ? <BreakEntry title={event.title} /> : <SessionEntry event={event} />}</CardContent>
-                {event.room && <CardFooter className={cn(textColorClass, "font-nunito justify-end text-sm font-bold")}>{event.room}</CardFooter>}
+                <CardContent className="p-3.5">{isBreakOrRegistration ? <BreakEntry title={event.title} /> : <SessionEntry event={event} />}</CardContent>
+                {event.room && (
+                  <CardFooter
+                    title={event.room}
+                    className="font-nunito justify-end text-sm font-semibold text-pycon-dark-blue pr-4 pb-3"
+                  >
+                    {event.room}
+                  </CardFooter>
+                )}
               </Card>
             );
           })}
         </div>
       </div>
 
-      <div className="hidden w-full overflow-hidden md:block">
-        <DayTabs days={dates} activeDay={selectedDayId} onDayChange={setSelectedDayId} />
+      <div className="hidden w-full md:block">
+        <DayTabs days={dates} activeDay={selectedDayId} onDayChange={handleDayChange} />
 
         {hasEventsForDay ? (
-          <div className="relative overflow-auto">
-            <div
-              className="z-1 grid min-w-fit gap-4"
-              style={{
-                gridTemplateColumns: `90px repeat(${availableRooms.length}, minmax(320px, 1fr))`,
-                gridTemplateRows: `auto repeat(${dayTimeSlots.length * 4}, minmax(25px, auto))`
-              }}
-            >
-              <RoomHeaders rooms={availableRooms} />
-              <TimeSlotLabels timeSlots={dayTimeSlots} />
+          <div ref={gridContainerRef} className="relative overflow-auto max-h-[calc(100vh-140px)] rounded-xl border border-pycon-orange/20 shadow-xs">
+            {(() => {
+              const rowsPerInterval = Math.max(1, Math.round(timeInterval / MINUTES_PER_ROW));
+              const totalGridRows = dayTimeSlots.length * rowsPerInterval;
 
-              {/* Event Cards Grid */}
-              {currentDayEvents.map((event, index) => {
-                const roomPosition = availableRooms.indexOf(event.room);
-                const gridRowStart = calculateGridRowStart(event.startTime, dayTimeSlots[0], timeInterval) + 1;
-                const gridRowSpan = calculateGridRowSpan(event.startTime, event.endTime, timeInterval);
+              return (
+                <div
+                  className="z-1 grid min-w-fit gap-4 p-2"
+                  style={{
+                    gridTemplateColumns: `90px repeat(${availableRooms.length}, minmax(320px, 1fr))`,
+                    gridTemplateRows: `auto repeat(${totalGridRows}, minmax(20px, auto))`
+                  }}
+                >
+                  {/* Sticky Top-Left Corner Intersection */}
+                  <div
+                    style={{ gridColumnStart: 1, gridRowStart: 1 }}
+                    className="bg-pycon-custard-light sticky top-0 left-0 z-30 flex items-center justify-center border-b border-pycon-orange/20 py-3 shadow-xs"
+                  >
+                    <span className="font-nunito text-pycon-orange text-xs font-bold uppercase tracking-wider">Time</span>
+                  </div>
 
-                return (
-                  <ProgramEntryCard
-                    key={`${event.title}-${index}`}
-                    event={event}
-                    roomIndex={roomPosition}
-                    gridRowStart={gridRowStart}
-                    gridRowSpan={gridRowSpan}
+                  <RoomHeaders rooms={availableRooms} />
+                  <TimeSlotLabels timeSlots={dayTimeSlots} rowsPerInterval={rowsPerInterval} />
+
+                  {/* Event Cards Grid */}
+                  {currentDayEvents.map((event, index) => {
+                    const roomPosition = availableRooms.indexOf(event.room);
+                    const gridRowStart = calculateGridRowStart(event.startTime, dayTimeSlots[0]) + 1;
+                    const gridRowSpan = calculateGridRowSpan(event.startTime, event.endTime);
+
+                    return (
+                      <ProgramEntryCard
+                        key={`${event.title}-${index}`}
+                        event={event}
+                        roomIndex={roomPosition}
+                        totalRooms={availableRooms.length}
+                        gridRowStart={gridRowStart}
+                        gridRowSpan={gridRowSpan}
+                      />
+                    );
+                  })}
+
+                  {/* Row/Column BG */}
+                  <div style={{ gridRowStart: 1, gridRowEnd: totalGridRows + 4 }} className="bg-pycon-custard-light pointer-events-none sticky left-0 z-0 col-start-1" />
+                  <div
+                    style={{ gridRowStart: 1, gridColumnStart: 1, gridColumnEnd: availableRooms.length + 2 }}
+                    className="bg-pycon-custard-light pointer-events-none sticky top-0 z-10 border-b border-pycon-orange/20"
                   />
-                );
-              })}
-
-              {/* Row/Column BG */}
-              <div style={{ gridRowStart: 1, gridRowEnd: dayTimeSlots.length * 4 + 4 }} className="bg-pycon-custard-light sticky left-0 z-8 col-start-1" />
-              <div
-                style={{ gridRowStart: 1, gridColumnStart: 1, gridColumnEnd: availableRooms.length + 2 }}
-                className="bg-pycon-custard-light sticky top-0 z-10"
-              />
-            </div>
+                </div>
+              );
+            })()}
           </div>
         ) : (
           <EmptyDayState />
