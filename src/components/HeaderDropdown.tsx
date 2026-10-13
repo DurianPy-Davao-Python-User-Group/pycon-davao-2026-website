@@ -9,9 +9,10 @@ export interface HeaderDropdownProps {
   label: string;
   options: SponsorshipOption[];
   className?: string;
+  buttonClassName?: string;
 }
 
-export default function HeaderDropdown({ label, options, className }: HeaderDropdownProps) {
+export default function HeaderDropdown({ label, options, className, buttonClassName }: HeaderDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -50,16 +51,17 @@ export default function HeaderDropdown({ label, options, className }: HeaderDrop
         aria-expanded={isOpen}
         aria-haspopup="true"
         className={cn(
-          'group focus-visible:outline-pycon-header-hover font-nav flex cursor-pointer items-center gap-1.5 rounded-md text-center text-sm leading-none font-bold whitespace-nowrap transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 lg:text-base xl:text-lg 2xl:text-xl',
+          'group focus-visible:outline-pycon-header-hover font-nav flex cursor-pointer items-center gap-1 rounded-md text-center text-xs leading-none font-bold whitespace-nowrap transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 lg:text-[13px] xl:text-sm 2xl:text-base',
           isOpen
             ? 'text-pycon-header-hover'
             : 'text-pycon-header-text hover:text-pycon-header-hover',
+          buttonClassName,
         )}
       >
         <span>{label}</span>
         <ChevronDown
           className={cn(
-            'size-4.5 transition-transform duration-200 xl:size-5',
+            'size-3.5 transition-transform duration-200 xl:size-4',
             isOpen
               ? 'text-pycon-header-hover rotate-180'
               : 'text-pycon-header-text group-hover:text-pycon-header-hover',

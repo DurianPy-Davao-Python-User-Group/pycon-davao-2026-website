@@ -44,8 +44,8 @@ export default function MobileMenu({
       <div className="overflow-hidden">
         <div className="border-pycon-header-text/10 bg-pycon-beige rounded-b-[20px] border-t px-6 py-6 shadow-lg">
           <nav className="flex flex-col gap-4 text-center" aria-label="Mobile Navigation">
-            {/* Buy Tickets option (first option, visible only at 350px and below) */}
-            <div className="max-[350px]:block max-[351px]:block min-[352px]:hidden">
+            {/* Buy Tickets option (visible when header CTA is hidden on screens < sm) */}
+            <div className="sm:hidden">
               <BuyTicketButton isVisible onClick={onClose} className="w-full py-2.5 text-sm" />
             </div>
 
