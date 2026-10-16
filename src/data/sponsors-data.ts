@@ -9,7 +9,7 @@ import DjangoGirlsCDOLogo from '@/assets/sponsors/django-girls-cdo.png';
 import GdgDavaoLogo from '@/assets/sponsors/gdg-davao.png';
 import InventiveLogo from '@/assets/sponsors/inventiv.png';
 import MinNaLprocRDLabLogo from '@/assets/sponsors/minna-lproc-r&d-laboratory.png';
-import OpsWerksLogo from '@/assets/sponsors/opswerks.png';
+import OpsWerksLogo from '@/assets/sponsors/opswerks.jpg';
 import PizzayPYLogo from '@/assets/sponsors/pizzapy.png';
 import PyBalanghayLogo from '@/assets/sponsors/pybalanghay.webp';
 import PythonAsiaOrgLogo from '@/assets/sponsors/python-asia-organization.png';
